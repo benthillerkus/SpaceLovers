@@ -22,7 +22,9 @@ jobs:
         pathInArchive: "processing-3.5.4/processing-java.exe"
 
     - name: List Directory
-      run: ls ${{ github.workspace }}
+      run: |
+        where processing-java
+        ls ${{ github.workspace }}
 
     - name: Build
       run: |
