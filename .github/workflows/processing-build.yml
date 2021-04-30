@@ -18,7 +18,7 @@ jobs:
       uses: engineerd/configurator@v0.0.6
       with:
         name: "processing-java.exe"
-        url: "https://download.processing.org/processing-3.5.4-linux64.zip"
+        url: "https://download.processing.org/processing-3.5.4-linux64.tgz"
         pathInArchive: "processing-3.5.4/processing-java"
 
     - name: List Directory
