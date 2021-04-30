@@ -21,10 +21,11 @@ jobs:
         url: "https://download.processing.org/processing-3.5.4-windows64.zip"
         pathInArchive: "processing-3.5.4/processing-java.exe"
 
+    - name: Print Path
+      run: where processing-java
+
     - name: List Directory
-      run: |
-        where processing-java
-        ls ${{ github.workspace }}
+      run: ls ${{ github.workspace }}
 
     - name: Build
       run: |
