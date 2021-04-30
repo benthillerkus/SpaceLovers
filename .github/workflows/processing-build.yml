@@ -10,16 +10,12 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
     - name: Setup Processing
-      uses: engineerd/configurator@v0.0.6
-      with:
-        name: "processing-java"
-        url: "https://download.processing.org/processing-3.5.4-linux64.tgz"
-        pathInArchive: "processing-3.5.4/processing-java"
+      run: choco install processing
 
     - name: List Directory
       run: ls ${{ github.workspace }}
