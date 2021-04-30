@@ -9,6 +9,8 @@ jobs:
   tagged-release:
     name: "Tagged Release"
     runs-on: "ubuntu-latest"
+    env:
+      version: processing-3.5.4
 
     steps:
       - uses: actions/checkout@v2
