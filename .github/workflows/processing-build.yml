@@ -1,0 +1,27 @@
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Try to build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: windows
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Processing
+    - uses: engineerd/configurator@v0.0.6
+      with:
+        name: "processing-java.exe"
+        url: "https://download.processing.org/processing-3.5.4-windows64.zip"
+        pathInArchive: "processing-3.5.4"
+        
+    - name: Build
+      run: |
+        processing-java --sketch="Asteroids" --build
