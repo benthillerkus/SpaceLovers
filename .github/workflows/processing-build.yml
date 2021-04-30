@@ -21,6 +21,9 @@ jobs:
         url: "https://download.processing.org/processing-3.5.4-windows64.zip"
         pathInArchive: "processing-3.5.4/processing-java.exe"
         
+    - name: List Directory
+      run: ls
+        
     - name: Build
       run: |
         processing-java --sketch="${{ github.workspace }}" --build
