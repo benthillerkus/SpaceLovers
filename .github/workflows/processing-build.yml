@@ -23,4 +23,4 @@ jobs:
         
     - name: Build
       run: |
-        processing-java --sketch="${{ GITHUB_WORKSPACE }}" --build
+        processing-java --sketch="${{ github.workspace }}" --build
