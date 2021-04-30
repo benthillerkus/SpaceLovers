@@ -20,6 +20,6 @@ jobs:
     - name: List Directory
       run: ls ${{ github.workspace }}
 
+    - uses: benthillerkus/processing-problem-matcher@master
     - name: Build
-      run: |
-        processing-java --sketch="${{ github.workspace }}" --build
+      run: processing-java --sketch="${{ github.workspace }}" --build
