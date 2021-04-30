@@ -4,9 +4,9 @@ name: Check Build
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
@@ -15,17 +15,17 @@ jobs:
       version: processing-3.5.4
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup Processing
-      uses: carlosperate/download-file-action@v1.0.3
-      with:
-        file-url: https://download.processing.org/${{ env.version }}-windows64.zip
-    - run: 7z x -y .\${{ env.version }}-windows64.zip
+      - uses: actions/checkout@v2
+      - name: Setup Processing
+        uses: carlosperate/download-file-action@v1.0.3
+        with:
+          file-url: https://download.processing.org/${{ env.version }}-windows64.zip
+      - run: 7z x -y .\${{ env.version }}-windows64.zip
 
-    - name: List Directory
-      run: ls ${{ github.workspace }}
+      - name: List Directory
+        run: ls ${{ github.workspace }}
 
-    - uses: benthillerkus/processing-problem-matcher@master
-    - name: Run Build
-      run: |
-        ${{ github.workspace }}\${{ env.version }}\processing-java.exe --sketch="${{ github.workspace }}" --build
+      - uses: benthillerkus/processing-problem-matcher@master
+      - name: Run Build
+        run: |
+          ${{ github.workspace }}\${{ env.version }}\processing-java.exe --sketch="${{ github.workspace }}" --build
