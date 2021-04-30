@@ -2,4 +2,4 @@ void setup() {
     println("Hiiiii UwU");
 }
 
-void draw() {}
+void draw(asdasda) {}
