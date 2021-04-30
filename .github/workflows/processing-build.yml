@@ -1,6 +1,6 @@
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Try to build
+name: Try Build
 
 on:
   push:
@@ -10,7 +10,6 @@ on:
 
 jobs:
   build:
-
     runs-on: windows-latest
 
     steps:
@@ -20,8 +19,8 @@ jobs:
       with:
         name: "processing-java.exe"
         url: "https://download.processing.org/processing-3.5.4-windows64.zip"
-        pathInArchive: "processing-3.5.4"
+        pathInArchive: "processing-3.5.4/processing-java.exe"
         
     - name: Build
       run: |
-        processing-java --sketch="Asteroids" --build
+        processing-java --sketch="${{ GITHUB_WORKSPACE }}" --build
