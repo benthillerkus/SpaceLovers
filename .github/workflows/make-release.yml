@@ -20,6 +20,17 @@ jobs:
           file-url: https://download.processing.org/${{ env.version }}-windows64.zip
       - run: 7z x -y .\${{ env.version }}-windows64.zip
 
+      - name: Download Sound Library
+        uses: MrOctopus/download-asset-action@main
+        with:
+          repository: processing/processing-sound
+          asset: sound.zip
+          target: .\code
+      - run: |
+          cd code
+          7z e -y sound.zip sound/library
+          cd..
+
       - name: Run Build
         run: |
           ${{ github.workspace }}\${{ env.version }}\processing-java.exe --sketch="${{ github.workspace }}" --output="${{ github.workspace }}\build" --export --platform 'windows'
