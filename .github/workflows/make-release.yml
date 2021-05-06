@@ -14,11 +14,24 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          lfs: true
       - name: Setup Processing
         uses: carlosperate/download-file-action@v1.0.3
         with:
           file-url: https://download.processing.org/${{ env.version }}-windows64.zip
       - run: 7z x -y .\${{ env.version }}-windows64.zip
+
+      - name: Download Sound Library
+        uses: MrOctopus/download-asset-action@main
+        with:
+          repository: processing/processing-sound
+          asset: sound.zip
+          target: .\code
+      - run: |
+          cd code
+          7z e -y sound.zip sound/library
+          cd..
 
       - name: Run Build
         run: |
