@@ -29,13 +29,20 @@ jobs:
           repository: processing/processing-sound
           asset: sound.zip
           target: .\code
+      - name: Unpack Sound Library
       - run: |
+          cd ${{ github.workspace }}
+          mkdir licenses
           cd code
           7z e -y sound.zip sound/library
-          cd..
+          cd ../licenses
+          mkdir sound
+          cd sound
+          7z e -y ../../code/sound.zip LICENSE README.md
+          cd ${{ github.workspace }}
 
       - name: List Directory
-        run: ls ${{ github.workspace }}
+        run: ls -R ${{ github.workspace }}
 
       - uses: benthillerkus/processing-problem-matcher@master
       - name: Run Build
