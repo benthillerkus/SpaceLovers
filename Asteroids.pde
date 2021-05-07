@@ -5,7 +5,6 @@ void settings() {
 }
 
 void setup() {
-    println("My name Jeff");
     manager = new LayerManager(width, height);
     manager.layers.add(new Layer(width, height) {
         protected void draw() {
