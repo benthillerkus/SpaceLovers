@@ -33,7 +33,7 @@ abstract class Layer {
         if (frameCount != this.frame) renderedThisFrame = false;
         if (renderedThisFrame) return canvas;
         // ⬆ make sure that everything below ⬆
-        // ⬇ is will only being run once a frame ⬇
+        // ⬇ is only being run once a frame. ⬇
         processLogic();
         if (needsRerendering() || !renderedOnce) {
             canvas.beginDraw();
