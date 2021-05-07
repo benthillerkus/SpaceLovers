@@ -37,7 +37,7 @@ jobs:
           cd ${{ github.workspace }}/licenses
           mkdir sound
           cd sound
-          7z e -y ${{ github.workspace }}\code\sound.zip LICENSE README.md
+          7z e -y ${{ github.workspace }}\code\sound.zip sound/LICENSE sound/README.md
           cd ${{ github.workspace }}
 
       - name: Run Build
