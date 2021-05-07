@@ -6,4 +6,6 @@ void setup() {
     sound.play();
 }
 
-void draw() {}
+void draw() {
+    println("Hallo");
+}
