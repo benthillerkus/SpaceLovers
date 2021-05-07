@@ -47,14 +47,15 @@ jobs:
       - name: Zip Build
         run: |
           cd ${{ github.workspace }}
-          XCopy /E /I ${{ github.workspace }}\licenses ${{ github.workspace }}\build 
+          mkdir build\licenses
+          XCopy /E /I ${{ github.workspace }}\licenses ${{ github.workspace }}\build\licenses
           7z a Asteroids-Win.zip ./build/*
           7z a Licenses.zip ./licenses/*
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
+          prerelease: true
           files: |
             Asteroids-Win.zip
             Licenses.zip
