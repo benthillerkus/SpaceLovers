@@ -86,42 +86,43 @@ void checkKeys() {
 
 
 void keyPressed() {
-    switch(keyCode) {
-       case UP:
-        keyUp = true;
-        break;
-       case DOWN:
-        keyDown = true;
-        break;
-       case LEFT:
-        keyLeft = true;
-        break;
-       case RIGHT:
-        keyRight= true;
-        break;
-    }
-    if (state == PLAY || state == PAUSE) {
-        if (key == 'p') {
-            if (state ==PLAY) {
-                state = PAUSE;
-        } else {
-                state = PLAY;
-            }
-        }
-    }
-    if (keyCode == ENTER) {
-        if (state == LOSE) {
-            initGame();
-        }
-    }
-    if (things.size() > 30) {
-        collectGarbage();
-    } 
-    
-    if (state == 0 && key == ' ') {
-        Bullet b= ship.fire();
-        things.add(b);
-    }
+switch (keyCode) {
+case UP:
+keyUp = true;
+break;
+case DOWN:
+keyDown = true;
+break;
+case LEFT:
+keyLeft = true;
+break;
+case RIGHT:
+keyRight = true;
+break;
+}
+if (state == PLAY || state == PAUSE) {
+if (key == 'p') {
+if (state == PLAY) {
+state = PAUSE;
+} else {
+state = PLAY;
+}
+}
+}
+if (keyCode == ENTER) {
+if (state == LOSE) {
+initGame();
+}
+}
+
+if (state == 0 && key == ' ') {
+Bullet b = ship.fire();
+things.add(b);
+if (things.size() > 30) {
+collectGarbage();
+}
+
+} 
 }
 
 void keyReleased() {
@@ -142,33 +143,33 @@ void keyReleased() {
 }
 
 void checkCollision() {
-    boolean coll = false;
-    for (FlyingThing thing : things) {
-        if (thing instanceof Asteroid) {
-            if (ship.checkCollision((Asteroid)thing)) {
-               coll = true;
-            }
-        }
-        if (thing instanceof Bullet) {
-            
-           // prüfe alle Asteroiden
-            for (FlyingThing thing2 : things) {
-                if (thing2.alive&&
-                    thing2 instanceof Asteroid) {
-                   Bullet b = (Bullet)thing;
-                  Asteroid a = (Asteroid)thing2;
-                    
-                   // bei Kollision denAsteroiden auf tot schalten
-                    if (b.pos.dist(a.pos) < a.size / 2) {
-                        a.alive = false;
-                    }
-                }
-            }
-        }
-    }
-    if (coll) {
-        state = LOSE;
-    }
+boolean coll = false;
+for (FlyingThing thing: things) {
+if (thing instanceof Asteroid) {
+if (ship.checkCollision((Asteroid)thing)) {
+coll = true;
+}
+}
+
+if (thing instanceof Bullet) {
+
+// prüfe alle Asteroiden
+for (FlyingThing thing2: things) {
+if (thing2.alive && thing2 instanceof Asteroid) {
+Bullet b = (Bullet)thing;
+Asteroid a = (Asteroid)thing2;
+
+// bei Kollision den Asteroiden auf tot schalten
+if (b.pos.dist(a.pos) < a.size/2) {
+  a.alive = false;
+}
+}
+}
+}
+}
+if (coll) {
+state = LOSE;
+}
 }
 
 void checkWin() {
