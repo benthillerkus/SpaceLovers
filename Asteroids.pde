@@ -18,8 +18,8 @@ void setup() {
 }
 
 void initGame() {
-    ship= new Ship(new PVector(width / 2, height / 2),
-          new PVector());
+    ship = new Ship(new PVector(width / 2, height / 2),
+         new PVector());
     things.add(ship);
     
     // generate asteroids
@@ -43,7 +43,7 @@ void draw() {
     }
     switch(state) {
         
-       case PLAY:
+        case PLAY:
         for (FlyingThing thing : things) {
             thing.update();
             thing.render();
@@ -53,13 +53,13 @@ void draw() {
         checkWin();
         break;
         
-       case PAUSE:
+        case PAUSE:
         for (FlyingThing thing : things) {
             thing.render();
         }
         break;
         
-       case LOSE:
+        case LOSE:
         textAlign(CENTER);
         textSize(40);
         text("GAME OVER!\n(press enter)", width / 2, height / 2);
@@ -80,96 +80,96 @@ void checkKeys() {
         ship.thrustForward(.1);
     }
     if (keyDown) {
-        ship.thrustForward( - .1);
+        ship.thrustForward(-.1);
     }
 }
 
 
 void keyPressed() {
-switch (keyCode) {
-case UP:
-keyUp = true;
-break;
-case DOWN:
-keyDown = true;
-break;
-case LEFT:
-keyLeft = true;
-break;
-case RIGHT:
-keyRight = true;
-break;
-}
-if (state == PLAY || state == PAUSE) {
-if (key == 'p') {
-if (state == PLAY) {
-state = PAUSE;
-} else {
-state = PLAY;
-}
-}
-}
-if (keyCode == ENTER) {
-if (state == LOSE) {
-initGame();
-}
-}
-
-if (state == 0 && key == ' ') {
-Bullet b = ship.fire();
-things.add(b);
-if (things.size() > 30) {
-collectGarbage();
-}
-
-} 
+    switch(keyCode) {
+       case UP:
+        keyUp = true;
+        break;
+       case DOWN:
+        keyDown = true;
+        break;
+       case LEFT:
+        keyLeft = true;
+        break;
+       case RIGHT:
+        keyRight= true;
+        break;
+    }
+    if (state == PLAY || state == PAUSE) {
+        if (key == 'p') {
+            if (state ==PLAY) {
+                state = PAUSE;
+        } else {
+                state = PLAY;
+            }
+        }
+    }
+    if (keyCode == ENTER) {
+        if (state == LOSE) {
+            initGame();
+        }
+    }
+    
+    if (state == 0 && key == ' ') {
+        Bullet b= ship.fire();
+        things.add(b);
+        if (things.size() > 30) {
+            collectGarbage();
+        }
+        
+    } 
 }
 
 void keyReleased() {
     switch(keyCode) {
-       case UP:
+        case UP:
         keyUp = false;
         break;
-       case DOWN:
+        case DOWN:
         keyDown = false;
         break;
-       case LEFT:
+        case LEFT:
         keyLeft = false;
         break;
-       case RIGHT:
-        keyRight= false;
+        case RIGHT:
+        keyRight = false;
         break;
     }
 }
 
 void checkCollision() {
-boolean coll = false;
-for (FlyingThing thing: things) {
-if (thing instanceof Asteroid) {
-if (ship.checkCollision((Asteroid)thing)) {
-coll = true;
-}
-}
-
-if (thing instanceof Bullet) {
-
-// prüfe alle Asteroiden
-for (FlyingThing thing2: things) {
-if (thing2.alive && thing2 instanceof Asteroid) {
-Bullet b = (Bullet)thing;
-Asteroid a = (Asteroid)thing2;
-
-// bei Kollision den Asteroiden auf tot schalten
-if (b.pos.dist(a.pos) < a.size/2) {
-  a.alive = false;
-}
-}
-}
-}
-}
-if (coll) {
-state = LOSE;
-}
+    boolean coll = false;
+    for (FlyingThing thing : things) {
+        if (thing instanceof Asteroid) {
+            if (ship.checkCollision((Asteroid)thing)) {
+               coll = true;
+            }
+        }
+        
+        if (thing instanceof Bullet) {
+            
+           // prüfe alle Asteroiden
+            for (FlyingThing thing2 : things) {
+                if (thing2.alive&& thing2 instanceof Asteroid) {
+                   Bullet b = (Bullet)thing;
+                  Asteroid a = (Asteroid)thing2;
+                    
+                   // bei Kollision denAsteroiden auf tot schalten
+                    if (b.pos.dist(a.pos) < a.size / 2) {
+                        a.alive = false;
+                    }
+                }
+            }
+        }
+    }
+    if (coll) {
+        state = LOSE;
+    }
 }
 
 void checkWin() {
