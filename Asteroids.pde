@@ -13,7 +13,7 @@ boolean keyLeft, keyRight, keyUp, keyDown;
 // Jetzt die Funktionen:
 
 void setup() {
-size(400, 400);
+size(1000, 800);
 initGame();
 }
 
