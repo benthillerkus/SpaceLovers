@@ -5,31 +5,34 @@ void settings() {
 }
 
 void setup() {
-    manager = new LayerManager(width, height);
-    manager.layers.add(new Layer(width, height) {
-        protected void draw() {
-            clear();
-            noStroke();
-            fill(21, 145, 180, 60);
-            rect(frameCount, 20, 250, 150);
-            fill(120, 145, 40, 30);
-            rect(frameCount, 60, 50, 50);
-        }
-    });
-    manager.layers.add(new Layer(width, height) {
-        protected void draw() {
-            stroke(0);
-            fill(int(random(255)), int(random(255)), int(random(255)), 100);
-            rect(50, 50, 150, 150);
+    manager = new LayerManager();
+    manager.layers.add(new Layer() {
+        color c = color(int(random(255)), int(random(255)), int(random(255)), 100);
+
+        protected void processLogic() {
+            if (mousePressed) {
+                c = color(int(random(255)), int(random(255)), int(random(255)), 100);
+            }
         }
 
-        protected boolean needsRerendering() {
-            return mousePressed;
+        protected void draw() {
+            stroke(0);
+            fill(c);
+            rect(50, 50, 150, 150);
+        }
+    });
+    manager.layers.add(new Layer() {
+        protected void draw() {
+            noStroke();
+            fill(21, 145, 180);
+            rect(frameCount, 20, 250, 150);
+            fill(120, 145, 40);
+            rect(frameCount, 60, 50, 100);
         }
     });
 }
 
 void draw() {
     background(255);
-    image(manager.render(), 0, 0);
+    manager.render();
 }
