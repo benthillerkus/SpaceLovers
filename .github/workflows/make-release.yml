@@ -28,10 +28,17 @@ jobs:
           repository: processing/processing-sound
           asset: sound.zip
           target: .\code
-      - run: |
+      - name: Unpack Sound Library
+        run: |
+          cd ${{ github.workspace }}
+          mkdir licenses
           cd code
           7z e -y sound.zip sound/library
-          cd..
+          cd ${{ github.workspace }}/licenses
+          mkdir sound
+          cd sound
+          7z e -y ${{ github.workspace }}\code\sound.zip sound/LICENSE sound/README.md
+          cd ${{ github.workspace }}
 
       - name: Run Build
         run: |
@@ -39,11 +46,17 @@ jobs:
 
       - name: Zip Build
         run: |
-          7z a Asteroids.zip ./build/*
+          cd ${{ github.workspace }}
+          mkdir build\licenses
+          XCopy /E /I ${{ github.workspace }}\licenses ${{ github.workspace }}\build\licenses
+          7z a Asteroids-Win.zip ./build/*
+          7z a Licenses.zip ./licenses/*
 
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
+          # prerelease: true
+          # automatic_release_tag: latest
           files: |
-            Asteroids.zip
+            Asteroids-Win.zip
+            Licenses.zip
