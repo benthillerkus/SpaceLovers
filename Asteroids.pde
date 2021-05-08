@@ -114,14 +114,15 @@ if (state == LOSE) {
 initGame();
 }
 }
-if (things.size() > 30) {
-collectGarbage();
-} 
 
 if (state == 0 && key == ' ') {
 Bullet b = ship.fire();
 things.add(b);
+if (things.size() > 30) {
+collectGarbage();
 }
+
+} 
 }
 
 void keyReleased() {
@@ -149,12 +150,12 @@ if (ship.checkCollision((Asteroid)thing)) {
 coll = true;
 }
 }
+
 if (thing instanceof Bullet) {
 
 // prüfe alle Asteroiden
 for (FlyingThing thing2: things) {
-if (thing2.alive &&
-thing2 instanceof Asteroid) {
+if (thing2.alive && thing2 instanceof Asteroid) {
 Bullet b = (Bullet)thing;
 Asteroid a = (Asteroid)thing2;
 
