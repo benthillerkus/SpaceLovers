@@ -118,7 +118,7 @@ initGame();
 if (state == 0 && key == ' ') {
 Bullet b = ship.fire();
 things.add(b);
-if (things.size() > 30) {
+if (things.size() > 10) {
 collectGarbage();
 }
 
@@ -188,7 +188,6 @@ state = WIN;
 }
 
 void collectGarbage() {
-println("+++ collecting garbage +++");
 ArrayList<FlyingThing> newThings =
 new ArrayList<FlyingThing>();
 for (FlyingThing thing: things) {
@@ -197,5 +196,4 @@ newThings.add(thing);
 }
 }
 things = newThings;
-println("+++ done +++");
 }
