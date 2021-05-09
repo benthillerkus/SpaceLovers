@@ -2,12 +2,11 @@ name: Make Release
 
 on:
   push:
-    tags:
-      - "v*"
+    branches: [master]
 
 jobs:
-  tagged-release:
-    name: "Tagged Release"
+  untagged-release:
+    name: "Untagged Release"
     runs-on: "windows-latest"
     env:
       version: processing-3.5.4
@@ -55,8 +54,8 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          # prerelease: true
-          # automatic_release_tag: latest
+          prerelease: true
+          automatic_release_tag: latest
           files: |
             Asteroids-Win.zip
             Licenses.zip
