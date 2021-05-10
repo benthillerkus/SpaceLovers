@@ -1,7 +1,10 @@
-class Bullet extends FlyingThing {
+class Bullet {
+
+    PVector pos, speed;
     
     Bullet(PVector pos, PVector speed) {
-        super(pos, speed);
+        this.pos = pos;
+        this.speed = speed;
     }
     
     void render() {
@@ -14,8 +17,7 @@ class Bullet extends FlyingThing {
     void update() {
         if (pos.x <= 0 || pos.x >= width ||
             pos.y <= 0 || pos.y >= height) {
-            alive = false;
+                // TODO: Kill
         }
-        super.update();
     }
 }

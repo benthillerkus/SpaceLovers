@@ -1,17 +1,19 @@
-class Ship extends FlyingThing {
+class Ship {
     
     float angle = 0; // ergänze Ausrichtung des Schiffs
     
-    Ship(PVector pos, PVector speed) {
-        super(pos, speed);
+    PVector position = new PVector(0,0);
+    PVector speed = new PVector(0,0);
+    
+    Ship() {
     }
     
     //Überschreibe Zeichenmethode:
     //Dreieck mit Ausrichtung
-    void render() {
+    void draw() {
         pushMatrix();
         
-        translate(pos.x, pos.y);
+        translate(position.x, position.y);
         rotate(angle);
         stroke(255);
         triangle( - 10, 10, 0, - 20, 10, 10);
@@ -19,11 +21,7 @@ class Ship extends FlyingThing {
         popMatrix();
     }
     
-    Bullet fire() {
-        PVector sp = new PVector(0, - 4); // Geschwindigkeit 4
-        sp.rotate(angle);
-        Bullet b = new Bullet(pos.get(), sp);
-        return b;
+    void fire() {
     }
     
     //Schub geben in Richtung des Schiffs (angle)
@@ -33,8 +31,5 @@ class Ship extends FlyingThing {
         thrust.rotate(angle);
         speed.add(thrust);
     }
-    
-    boolean checkCollision(Asteroid ast) {
-        return pos.dist(ast.pos) < (ast.size / 2 + 20);
-    }
 }
+
