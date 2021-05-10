@@ -188,7 +188,6 @@ void checkWon() {
 }
 
 void collectGarbage() {
-    println("+++ collecting garbage +++");
     ArrayList<FlyingThing> newThings =
     new ArrayList<FlyingThing>();
     for (FlyingThing thing : things) {
@@ -197,5 +196,4 @@ void collectGarbage() {
         }
     }
     things = newThings;
-    println("+++ done +++");
 }
