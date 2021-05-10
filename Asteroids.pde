@@ -1,5 +1,5 @@
 enum GameState {
-    Play, Pause, Lost, Won
+    Play, Pause, Lost, Won;
 }
 
 final int numAsteroids = 5;
@@ -65,6 +65,13 @@ void draw() {
         text("GAME OVER!\n(press enter)", width / 2, height / 2);
         things.clear();
         break;
+        
+        case Won:
+        textAlign(CENTER);
+        textSize(40);
+        text("YOU WON!\n(press enter)", width / 2, height / 2);
+        things.clear();
+        break;
     }
     
 }
@@ -80,7 +87,7 @@ void checkKeys() {
         ship.thrustForward(.1);
     }
     if (keyDown) {
-        ship.thrustForward(-.1);
+        ship.thrustForward( - .1);
     }
 }
 
@@ -101,13 +108,7 @@ void keyPressed() {
         break;
     }
     if (state == GameState.Play || state == GameState.Pause) {
-        if (key == 'p') {
-            if (state == GameState.Play) {
-                state = GameState.Pause;
-            } else {
-                state = GameState.Play;
-            }
-        }
+        if (key == 'p') state = state == GameState.Play ? GameState.Pause : GameState.Play;
     }
     if (keyCode == ENTER) {
         if (state == GameState.Lost) {
