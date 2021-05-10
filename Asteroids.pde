@@ -1,10 +1,10 @@
-final int PLAY = 0;
-final int PAUSE = 1;
-final int LOSE = 2; 
-final int WIN = 4;
+enum GameState {
+    Play, Pause, Lost, Won;
+}
+
 final int numAsteroids = 5;
 
-int state = PLAY;
+GameState state = GameState.Play;
 
 ArrayList<FlyingThing> things = new ArrayList<FlyingThing>();
 Ship ship;
@@ -27,7 +27,7 @@ void initGame() {
         things.add(new Asteroid());
     }
     
-    state = PLAY;
+    state = GameState.Play;
 }
 
 void draw() {
@@ -42,27 +42,33 @@ void draw() {
         }
     }
     switch(state) {
-        
-        case PLAY:
+        case Play:
         for (FlyingThing thing : things) {
             thing.update();
             thing.render();
         }
         checkKeys();
         checkCollision();
-        checkWin();
+        checkWon();
         break;
         
-        case PAUSE:
+        case Pause:
         for (FlyingThing thing : things) {
             thing.render();
         }
         break;
         
-        case LOSE:
+        case Lost:
         textAlign(CENTER);
         textSize(40);
         text("GAME OVER!\n(press enter)", width / 2, height / 2);
+        things.clear();
+        break;
+        
+        case Won:
+        textAlign(CENTER);
+        textSize(40);
+        text("YOU WON!\n(press enter)", width / 2, height / 2);
         things.clear();
         break;
     }
@@ -70,53 +76,37 @@ void draw() {
 }
 
 void checkKeys() {
-    if (keyLeft) {
-        ship.angle -= radians(2);
-    }
-    if (keyRight) {
-        ship.angle += radians(2);
-    }
-    if (keyUp) {
-        ship.thrustForward(.1);
-    }
-    if (keyDown) {
-        ship.thrustForward( - .1);
-    }
+    if (keyLeft) ship.angle -= radians(2);
+    if (keyRight) ship.angle += radians(2);
+    if (keyUp) ship.thrustForward(.1);
+    if (keyDown) ship.thrustForward(-.1);
 }
 
 
 void keyPressed() {
     switch(keyCode) {
-       case UP:
+        case UP:
         keyUp = true;
         break;
-       case DOWN:
+        case DOWN:
         keyDown = true;
         break;
-       case LEFT:
+        case LEFT:
         keyLeft = true;
         break;
-       case RIGHT:
-        keyRight= true;
+        case RIGHT:
+        keyRight = true;
         break;
     }
-    if (state == PLAY || state == PAUSE) {
-        if (key == 'p') {
-            if (state ==PLAY) {
-                state = PAUSE;
-        } else {
-                state = PLAY;
-            }
-        }
+    if (state == GameState.Play || state == GameState.Pause) {
+        if (key == 'p') state = state == GameState.Play ? GameState.Pause : GameState.Play;
     }
     if (keyCode == ENTER) {
-        if (state == LOSE) {
-            initGame();
-        }
+        if (state == GameState.Lost || state == GameState.Won) initGame();
     }
     
-    if (state == 0 && key == ' ') {
-        Bullet b= ship.fire();
+    if (state == GameState.Play && key == ' ') {
+        Bullet b = ship.fire();
         things.add(b);
         if (things.size() > 10) {
             collectGarbage();
@@ -168,27 +158,27 @@ void checkCollision() {
         }
     }
     if (coll) {
-        state = LOSE;
+        state = GameState.Lost;
     }
 }
 
-void checkWin() {
-    boolean win = true;
+void checkWon() {
+    boolean Won = true;
     
     // sobald ich einen lebenden Asteroiden finde,
     // bin ich noch nicht fertig
     for (FlyingThing thing : things) {
         if (thing instanceof Asteroid && thing.alive) {
-            win = false;
+            Won = false;
+            return;
         }
     }
-    if (win) {
-        state = WIN; 
+    if (Won) {
+        state = GameState.Won; 
     }
 }
 
 void collectGarbage() {
-    println("+++ collecting garbage +++");
     ArrayList<FlyingThing> newThings =
     new ArrayList<FlyingThing>();
     for (FlyingThing thing : things) {
@@ -197,5 +187,4 @@ void collectGarbage() {
         }
     }
     things = newThings;
-    println("+++ done +++");
 }
