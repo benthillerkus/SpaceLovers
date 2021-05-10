@@ -35,10 +35,6 @@ class Ship extends FlyingThing {
     }
     
     boolean checkCollision(Asteroid ast) {
-        if (pos.dist(ast.pos) < (ast.size / 2 + 20)) {
-            return true;
-        } else {
-            return false;
-        }
+        return pos.dist(ast.pos) < (ast.size / 2 + 20);
     }
 }
