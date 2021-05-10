@@ -25,12 +25,12 @@ abstract class Layer {
     }
 }
 
-class LayerManager extends Layer {
-    final ArrayList<Layer> layers = new ArrayList<Layer>();
+class LayerManager<L extends Layer> extends Layer {
+    final ArrayList<L> layers = new ArrayList<L>();
     
     @Override
     protected void draw() {
-        for (Layer layer : layers) {
+        for (L layer : layers) {
             layer.render();
         }
     }

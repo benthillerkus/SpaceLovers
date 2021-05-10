@@ -2,7 +2,7 @@ enum GameState {
     Play, Pause, Lost, Won;
 }
 
-LayerManager layerManager = new LayerManager();
+LayerManager<Layer> layerManager = new LayerManager<Layer>();
 GameWorld gameWorld = new GameWorld();
 
 Layer hud = new Layer() {
