@@ -2,7 +2,9 @@ enum GameState {
     Play, Pause, Lost, Won;
 }
 
-LayerManager layerManager;
+LayerManager layerManager = new LayerManager();
+GameWorld gameWorld = new GameWorld();
+
 Layer hud = new Layer() {
     @Override
     protected void draw() {
@@ -21,16 +23,15 @@ GameState gameState;
 
 void setup() {
     size(1000, 800);
-
-    layerManager = new LayerManager();
     layerManager.layers.add(backdrop);
+    layerManager.layers.add(gameWorld);
     layerManager.layers.add(hud);
-
     initGame();
 }
 
 void initGame() {
     gameState = GameState.Play;
+    gameWorld = new GameWorld();
 }
 
 void draw() {

@@ -26,11 +26,7 @@ abstract class Layer {
 }
 
 class LayerManager extends Layer {
-    final ArrayList<Layer> layers;
-    
-    LayerManager() {
-        layers = new ArrayList<Layer>();
-    }
+    final ArrayList<Layer> layers = new ArrayList<Layer>();
     
     @Override
     protected void draw() {
