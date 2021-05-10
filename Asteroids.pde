@@ -2,6 +2,7 @@ enum GameState {
     Play, Pause, Lost, Won;
 }
 
+GameState gameState;
 LayerManager<Layer> layerManager = new LayerManager<Layer>();
 GameWorld gameWorld = new GameWorld();
 
@@ -19,7 +20,6 @@ Layer backdrop = new Layer(true, false) {
         background(0);
     }
 };
-GameState gameState;
 
 void setup() {
     size(1000, 800);
