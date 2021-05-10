@@ -180,6 +180,7 @@ void checkWon() {
     for (FlyingThing thing : things) {
         if (thing instanceof Asteroid && thing.alive) {
             Won = false;
+            return;
         }
     }
     if (Won) {
