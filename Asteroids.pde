@@ -42,7 +42,6 @@ void draw() {
         }
     }
     switch(state) {
-        
         case Play:
         for (FlyingThing thing : things) {
             thing.update();
@@ -77,18 +76,10 @@ void draw() {
 }
 
 void checkKeys() {
-    if (keyLeft) {
-        ship.angle -= radians(2);
-    }
-    if (keyRight) {
-        ship.angle += radians(2);
-    }
-    if (keyUp) {
-        ship.thrustForward(.1);
-    }
-    if (keyDown) {
-        ship.thrustForward( - .1);
-    }
+    if (keyLeft) ship.angle -= radians(2);
+    if (keyRight) ship.angle += radians(2);
+    if (keyUp) ship.thrustForward(.1);
+    if (keyDown) ship.thrustForward(-.1);
 }
 
 
@@ -111,9 +102,7 @@ void keyPressed() {
         if (key == 'p') state = state == GameState.Play ? GameState.Pause : GameState.Play;
     }
     if (keyCode == ENTER) {
-        if (state == GameState.Lost) {
-            initGame();
-        }
+        if (state == GameState.Lost || state == GameState.Won) initGame();
     }
     
     if (state == GameState.Play && key == ' ') {
