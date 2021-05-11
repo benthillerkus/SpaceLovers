@@ -21,8 +21,12 @@ Layer backdrop = new Layer(true, false) {
     }
 };
 
+int referenceWidth = 1000;
+int referenceHeight = 800;
+
 void setup() {
     size(1000, 800);
+    surface.setResizable(true);
     initGame();
 }
 
