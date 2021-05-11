@@ -23,15 +23,17 @@ Layer backdrop = new Layer(true, false) {
 
 void setup() {
     size(1000, 800);
-    layerManager.layers.add(backdrop);
-    layerManager.layers.add(gameWorld);
-    layerManager.layers.add(hud);
     initGame();
 }
 
 void initGame() {
     gameState = GameState.Play;
+    layerManager.layers.clear();
+    layerManager.layers.add(backdrop);
     gameWorld = new GameWorld();
+    gameWorld.layers.add(new Ship());
+    layerManager.layers.add(gameWorld);
+    layerManager.layers.add(hud);
 }
 
 void draw() {

@@ -1,28 +1,20 @@
-class Ship {
+class Ship extends GameObject {
     
     float angle = 0; // ergänze Ausrichtung des Schiffs
-    
-    PVector position = new PVector(0,0);
     PVector speed = new PVector(0,0);
-    
-    Ship() {
-    }
     
     //Überschreibe Zeichenmethode:
     //Dreieck mit Ausrichtung
-    void draw() {
+    @Override
+    protected void draw() {
         pushMatrix();
-        
-        translate(position.x, position.y);
         rotate(angle);
         stroke(255);
         triangle( - 10, 10, 0, - 20, 10, 10);
-        
         popMatrix();
     }
     
-    void fire() {
-    }
+    void fire() {}
     
     //Schub geben in Richtung des Schiffs (angle)
     //der Parameter "amount" gibt die Größe des Schubs an
