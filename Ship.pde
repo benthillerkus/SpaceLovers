@@ -1,5 +1,4 @@
 class Ship extends FlyingThing {
-    
     float angle = 0; // ergänze Ausrichtung des Schiffs
     
     Ship(PVector pos, PVector speed) {

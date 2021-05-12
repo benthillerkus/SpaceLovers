@@ -1,3 +1,6 @@
+import processing.sound.*;
+//erstellen verschiedenster Soundvaraiblen
+SoundFile laserSound, thruster, asteroidHit, winSound, loseSound;
 enum GameState {
     Play, Pause, Lost, Won;
 }
@@ -15,6 +18,13 @@ boolean keyLeft, keyRight, keyUp, keyDown;
 void setup() {
     size(1000, 800);
     initGame();
+    laserSound = new SoundFile(this, "data/GameplaySound/bang.mp3");
+    asteroidHit = new SoundFile(this, "data/GameplaySound/asteroidHit.mp3");
+    asteroidHit.amp(0.5);
+    winSound = new SoundFile(this, "data/GameplaySound/win.mp3");
+    winSound.amp(0.2);
+    loseSound = new SoundFile(this, "data/GameplaySound/lose.mp3");
+    loseSound.amp(0.2);
 }
 
 void initGame() {
@@ -78,8 +88,9 @@ void draw() {
 void checkKeys() {
     if (keyLeft) ship.angle -= radians(2);
     if (keyRight) ship.angle += radians(2);
-    if (keyUp) ship.thrustForward(.1);
-    if (keyDown) ship.thrustForward(-.1);
+    if (keyUp) ship.thrustForward(.05);
+    if (keyDown) ship.thrustForward(-.05);
+    
 }
 
 
@@ -106,6 +117,7 @@ void keyPressed() {
     }
     
     if (state == GameState.Play && key == ' ') {
+        laserSound.play();
         Bullet b = ship.fire();
         things.add(b);
         if (things.size() > 10) {
@@ -152,6 +164,7 @@ void checkCollision() {
                     // bei Kollision denAsteroiden auf tot schalten
                     if (b.pos.dist(a.pos) < a.size / 2) {
                         a.alive = false;
+                        asteroidHit.play();
                     }
                 }
             }
@@ -159,6 +172,7 @@ void checkCollision() {
     }
     if (coll) {
         state = GameState.Lost;
+        loseSound.play();
     }
 }
 
@@ -174,7 +188,8 @@ void checkWon() {
         }
     }
     if (Won) {
-        state = GameState.Won; 
+        state = GameState.Won;
+        winSound.play();
     }
 }
 
