@@ -8,6 +8,7 @@ GameState state = GameState.Play;
 
 ArrayList<FlyingThing> things = new ArrayList<FlyingThing>();
 Ship ship;
+Shield shield;
 boolean keyLeft, keyRight, keyUp, keyDown;
 
 // Jetzt die Funktionen:
@@ -21,7 +22,7 @@ void initGame() {
     ship = new Ship(new PVector(width / 2, height / 2),
         new PVector());
     things.add(ship);
-    
+     
     // generate asteroids
     for (int i = 0; i < numAsteroids; i++) {
         things.add(new Asteroid());
