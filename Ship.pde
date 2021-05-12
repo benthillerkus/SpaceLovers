@@ -24,4 +24,3 @@ class Ship extends GameObject {
         speed.add(thrust);
     }
 }
-

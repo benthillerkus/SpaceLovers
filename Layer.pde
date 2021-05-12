@@ -13,20 +13,30 @@ abstract class Layer {
     // Runs once every frame before draw
     protected void update() {};
 
-    // Put your drawing code here
-    abstract protected void draw();
-
-    final void render() {
+    final void process() {
         if (!freeze && frameCount != lastProcessedFrame) {
             update();
             lastProcessedFrame = frameCount;
         }
+    }
+
+    // Put your drawing code here
+    abstract protected void draw();
+
+    final void render() {
         if (!hide) draw();
     }
 }
 
 class LayerManager<L extends Layer> extends Layer {
     final ArrayList<L> layers = new ArrayList<L>();
+
+    @Override
+    protected void update() {
+        for (L layer : layers) {
+            layer.process();
+        }
+    }
     
     @Override
     protected void draw() {
