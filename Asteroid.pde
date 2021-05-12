@@ -7,7 +7,7 @@ class Asteroid extends FlyingThing {
         // Übergebe Konstruktor der Oberklasse zufällige
         // Position und Geschwindigkeit
         super(new PVector(random(0,width), random(0,height)),
-            new PVector(random( - 1,1), random( - 1,1)));
+            new PVector(random(- 1,1), random(- 1,1)));
         
         size = random(10,30);
     }
