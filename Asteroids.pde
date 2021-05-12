@@ -187,5 +187,4 @@ void collectGarbage() {
         }
     }
     things = newThings;
->>>>>>> 7f0223b3318b389030fa85ee3451c755b65be4b6
 }
