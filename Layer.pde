@@ -23,7 +23,8 @@ abstract class Layer {
     // Put your drawing code here
     abstract protected void draw();
 
-    final void render() {
+    // Don't put it here, this is for internal usage
+    void render() {
         if (!hide) draw();
     }
 }

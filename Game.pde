@@ -7,7 +7,7 @@ enum State {
 
 State gameState;
 
-class Game extends LayerManager {
+class Game extends Layer {
     GameWorld world = new GameWorld();
     Ship ship = new Ship();
     State state;
@@ -20,12 +20,10 @@ class Game extends LayerManager {
     @Override
     protected void update() {
         if (state == State.Play) world.update();
-        super.update();
     }
     
     @Override
     protected void draw() {
         world.draw();
-        super.draw();
     }
 }
