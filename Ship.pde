@@ -4,6 +4,7 @@ class Ship extends GameObject {
     @Override
     protected void update() {
         position = position.add(speed);
+        speed = speed.mult(0.99);
     }
 
     @Override

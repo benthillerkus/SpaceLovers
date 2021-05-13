@@ -19,6 +19,7 @@ class GameObject extends Layer {
     
     @Override
     void render() {
+        if (hidden) return;
         pushMatrix();
         translate(position.x, position.y);
         rotate(angle);

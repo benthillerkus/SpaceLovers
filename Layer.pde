@@ -1,13 +1,13 @@
 class Layer {
     private int lastProcessedFrame = -1;
-    boolean freeze = false;
-    boolean hide = false;
+    boolean frozen = false;
+    boolean hidden = false;
 
     Layer() {}
 
-    Layer(boolean freeze, boolean hide) {
-        this.freeze = freeze;
-        this.hide = hide;
+    Layer(boolean frozen, boolean hidden) {
+        this.frozen = frozen;
+        this.hidden = hidden;
     }
 
     // Handle key input events here
@@ -26,18 +26,18 @@ class Layer {
     // === === === === === === === === === === ===
 
     final void processInput() {
-        if (!freeze) input();
+        if (!frozen) input();
     }
 
     final void process() {
-        if (!freeze && frameCount != lastProcessedFrame) {
+        if (!frozen && frameCount != lastProcessedFrame) {
             update();
             lastProcessedFrame = frameCount;
         }
     }
 
     void render() {
-        if (!hide) draw();
+        if (!hidden) draw();
     }
 }
 

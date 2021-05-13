@@ -12,6 +12,13 @@ void setup() {
     size(1000, 800);
     surface.setResizable(true);
     
+    // https://stackoverflow.com/a/20552347/5964129
+    // fullScreen(P2D);
+    // frameRate(1000);
+    // PJOGL pgl = (PJOGL)beginPGL();
+    // pgl.gl.setSwapInterval(1);
+    // endPGL();
+
     game = new Game();
     
     layerManager.layers.add(input);

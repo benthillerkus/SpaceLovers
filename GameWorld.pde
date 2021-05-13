@@ -1,5 +1,9 @@
 class GameWorld extends LayerManager<GameObject> {
-    GameObject camera = new GameObject(this);
+    Camera camera;
+
+    GameWorld(Camera camera) {
+        this.camera = camera;
+    }
 
     public void register(GameObject gameObject) {
         layers.add(gameObject);

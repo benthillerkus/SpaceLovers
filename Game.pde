@@ -10,12 +10,14 @@ State gameState;
 // This kinda is a manually managed LayerManager,
 // so make sure every event is passed on!
 class Game extends Layer {
-    GameWorld world = new GameWorld();
+    Camera camera = new Camera();
+    GameWorld world = new GameWorld(camera);
     Ship ship = new Ship();
     State state = State.Menu;
 
     void start() {
         world.register(ship);
+        world.register(camera);
         state = State.Play;
         noCursor();
     }
