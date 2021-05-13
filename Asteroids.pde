@@ -1,3 +1,5 @@
+import java.util.*;
+
 LayerManager<Layer> layerManager = new LayerManager<Layer>();
 
 Game game;
@@ -31,3 +33,13 @@ Layer hud = new Layer() {
         text(frameRate, width - 70, 25);
     }
 };
+
+Set<Character> pressedKeys = new HashSet<Character>(); // Does this have to be synchronized?
+
+void keyPressed() {
+    pressedKeys.add(key);
+}
+
+void keyReleased() {
+    pressedKeys.remove(key);
+}

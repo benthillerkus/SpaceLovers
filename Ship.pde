@@ -4,7 +4,7 @@ class Ship extends GameObject {
     
     @Override
     protected void update() {
-        if (keyPressed) {
+        for (char key : pressedKeys) {
             switch(key) {
                 case 'w':
                 case 's':
