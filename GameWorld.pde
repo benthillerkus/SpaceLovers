@@ -3,8 +3,8 @@ class Camera {
     float angle = 0.0;
     float zoom = 1.0;
 
-    void turn(float degrees) {
-        angle = (angle + degrees) % 360;
+    void turn(float radians) {
+        angle = (angle + radians) % TWO_PI;
     }
 }
 

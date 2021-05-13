@@ -2,7 +2,7 @@
 // This is supposed to be opinionated / non-generic
 
 enum State {
-    Play, Pause, Lost, Won; // TODO: StateMachine??
+    Menu, Play, Pause, Lost, Won; // TODO: StateMachine??
 }
 
 State gameState;
@@ -10,11 +10,12 @@ State gameState;
 class Game extends Layer {
     GameWorld world = new GameWorld();
     Ship ship = new Ship();
-    State state;
+    State state = State.Menu;
     
     void start() {
         world.layers.add(ship);
         state = State.Play;
+        noCursor();
     }
     
     @Override

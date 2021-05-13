@@ -4,8 +4,16 @@ class Ship extends GameObject {
     
     @Override
     protected void update() {
-        if (keyPressed && key == 'w') {
-            thrustForward(0.3);
+        if (keyPressed) {
+            switch(key) {
+                case 'w':
+                case 's':
+                    thrustForward((key == 'w' ? 1 : -1) * 0.3);
+                    break;
+                case 'a':
+                case 'd':
+                    angle = (angle + (key == 'd' ? 1 : -1) * .03) % TWO_PI;
+            }
         }
         position = position.add(speed);
     }
