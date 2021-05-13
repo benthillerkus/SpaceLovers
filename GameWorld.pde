@@ -1,15 +1,10 @@
-class Camera {
-    PVector position = new PVector(0, 0);
-    float angle = 0.0;
-    float zoom = 1.0;
-
-    void turn(float radians) {
-        angle = (angle + radians) % TWO_PI;
-    }
-}
-
 class GameWorld extends LayerManager<GameObject> {
-    Camera camera = new Camera();
+    GameObject camera = new GameObject(this);
+
+    public void register(GameObject gameObject) {
+        layers.add(gameObject);
+        gameObject.world = this;
+    }
 
     @Override
     protected void draw() {
@@ -18,7 +13,7 @@ class GameWorld extends LayerManager<GameObject> {
         scale(sqrt(float((width * height)) / (referenceWidth * referenceHeight)));
         translate(camera.position.x, camera.position.y);
         rotate(camera.angle);
-        scale(camera.zoom);
+        scale(camera.scale);
         super.draw();
         popMatrix();
     }

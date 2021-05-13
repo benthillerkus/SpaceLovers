@@ -15,7 +15,7 @@ class Game extends Layer {
     State state = State.Menu;
 
     void start() {
-        world.layers.add(ship);
+        world.register(ship);
         state = State.Play;
         noCursor();
     }

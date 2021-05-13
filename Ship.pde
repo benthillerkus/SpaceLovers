@@ -1,5 +1,4 @@
 class Ship extends GameObject {
-    float angle = 0; // ergänze Ausrichtung des Schiffs
     PVector speed = new PVector(0,0);
     
     @Override
@@ -16,18 +15,15 @@ class Ship extends GameObject {
                 break;
             case 'a':
             case 'd':
-                angle = (angle + (key == 'd' ? 1 : -1) * 0.03) % TWO_PI;
+                turn((key == 'd' ? 1 : -1) * 0.03);
         }
     }
     
     //Dreieck mit Ausrichtung
     @Override
     protected void draw() {
-        pushMatrix();
-        rotate(angle);
         stroke(255);
         triangle( -10, 10, 0, -20, 10, 10);
-        popMatrix();
     }
     
     void fire() {}
