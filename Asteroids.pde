@@ -13,6 +13,7 @@ void setup() {
     
     game = new Game();
     
+    layerManager.layers.add(input);
     layerManager.layers.add(game);
     layerManager.layers.add(hud);
     
@@ -20,7 +21,7 @@ void setup() {
 }
 
 void draw() {
-    layerManager.update();
+    layerManager.process();
     background(0);
     layerManager.render();
 }
@@ -34,13 +35,4 @@ Layer hud = new Layer() {
     }
 };
 
-Set<String> pressedKeys = new HashSet<String>(); // Does this have to be synchronized?
-
-//https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html#:~:text=a%20KeyEvent%20object.-,Method%20Summary,-Methods
-void keyPressed() {
-    pressedKeys.add(java.awt.event.KeyEvent.getKeyText(keyCode));
-}
-
-void keyReleased() {
-    pressedKeys.remove(java.awt.event.KeyEvent.getKeyText(keyCode));
-}
+InputHelper input = new InputHelper();

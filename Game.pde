@@ -7,17 +7,24 @@ enum State {
 
 State gameState;
 
+// This kinda is a manually managed LayerManager,
+// so make sure every event is passed on!
 class Game extends Layer {
     GameWorld world = new GameWorld();
     Ship ship = new Ship();
     State state = State.Menu;
-    
+
     void start() {
         world.layers.add(ship);
         state = State.Play;
         noCursor();
     }
     
+    @Override
+    void input() {
+        world.processInput();
+    }
+
     @Override
     protected void update() {
         if (state == State.Play) world.update();
