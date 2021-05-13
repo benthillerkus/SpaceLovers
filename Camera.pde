@@ -1,10 +1,11 @@
 class Camera extends GameObject {
+
     Camera() {
         this.hidden = true;
     }
 
     @Override
     void update() {
-        position = game.ship.position; // BUG: WHY THE ACTUAL FUCK IS THIS NOT WORKING?????? 👿
+        position = PVector.add(game.ship.position, PVector.mult(game.ship.speed, 12));
     }
 }
