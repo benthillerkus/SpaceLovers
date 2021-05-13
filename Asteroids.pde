@@ -34,12 +34,13 @@ Layer hud = new Layer() {
     }
 };
 
-Set<Character> pressedKeys = new HashSet<Character>(); // Does this have to be synchronized?
+Set<String> pressedKeys = new HashSet<String>(); // Does this have to be synchronized?
 
+//https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html#:~:text=a%20KeyEvent%20object.-,Method%20Summary,-Methods
 void keyPressed() {
-    pressedKeys.add(key);
+    pressedKeys.add(java.awt.event.KeyEvent.getKeyText(keyCode));
 }
 
 void keyReleased() {
-    pressedKeys.remove(key);
+    pressedKeys.remove(java.awt.event.KeyEvent.getKeyText(keyCode));
 }
