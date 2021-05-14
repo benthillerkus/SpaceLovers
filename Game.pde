@@ -17,6 +17,7 @@ class Game extends Layer {
     State state = State.Menu;
 
     void start() {
+        noiseSeed(187);
         world.register(asteroids);
         world.register(ship);
         world.register(camera);
