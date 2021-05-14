@@ -12,10 +12,12 @@ State gameState;
 class Game extends Layer {
     Camera camera = new Camera();
     GameWorld world = new GameWorld(camera);
+    AsteroidField asteroids = new AsteroidField();
     Ship ship = new Ship();
     State state = State.Menu;
 
     void start() {
+        world.register(asteroids);
         world.register(ship);
         world.register(camera);
         state = State.Play;
@@ -23,7 +25,7 @@ class Game extends Layer {
     }
     
     @Override
-    void input() {
+    protected void input() {
         world.processInput();
     }
 

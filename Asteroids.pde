@@ -18,7 +18,7 @@ void setup() {
     // PJOGL pgl = (PJOGL)beginPGL();
     // pgl.gl.setSwapInterval(1);
     // endPGL();
-
+    
     game = new Game();
     
     layerManager.layers.add(input);
@@ -41,10 +41,10 @@ Layer hud = new Layer() {
         textSize(15);
         text(frameRate, width - 15, 25);
         text(frameCount, width - 15, 25 + 15 + 5);
-
+        
         textAlign(LEFT);
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<Integer, Character> k : input.getPressedKeys()) {
+        for (Map.Entry < Integer, Character > k : input.getPressedKeys()) {
             sb.append(KeyEvent.getKeyText(k.getKey())).append("  ");
         }
         text(sb.toString(), 15, 25);
