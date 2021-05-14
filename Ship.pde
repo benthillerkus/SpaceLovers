@@ -1,10 +1,19 @@
 class Ship extends GameObject {
     PVector speed = new PVector(0,0);
+    boolean boost = false;
     
     @Override
     protected void update() {
         position.add(speed);
         speed.mult(0.99);
+        if (!boost) {
+            if (!thrusterHigh.isPlaying()) thrusterHigh.loop();
+            if (thrusterLow.isPlaying()) thrusterLow.pause();
+        } else {
+            if (!thrusterLow.isPlaying()) thrusterLow.loop();
+            if (thrusterHigh.isPlaying()) thrusterHigh.pause();
+        }
+        boost = false;
     }
 
     @Override
@@ -13,6 +22,7 @@ class Ship extends GameObject {
             case 'w':
             case 's':
                 thrustForward((key == 'w' ? 1 : -1) * 0.3);
+                boost = true;
                 break;
             case 'a':
             case 'd':

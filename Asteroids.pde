@@ -1,13 +1,10 @@
 import java.util.*;
 import java.awt.event.KeyEvent;
+import processing.sound.*;
 
-LayerManager<Layer> layerManager = new LayerManager<Layer>();
-
+SoundFile thrusterHigh, thrusterLow;
 Game game;
-
-final int referenceWidth = 1000;
-final int referenceHeight = 800;
-float pixelFactor = 1.0;
+LayerManager<Layer> layerManager = new LayerManager<Layer>();
 
 void setup() {
     size(1000, 800);
@@ -19,7 +16,12 @@ void setup() {
     // PJOGL pgl = (PJOGL)beginPGL();
     // pgl.gl.setSwapInterval(1);
     // endPGL();
-    
+
+    thrusterHigh = new SoundFile(this, "data/GameplaySound/thrusterHigh.mp3");
+    thrusterHigh.amp(0.6);
+    thrusterLow = new SoundFile(this, "data/GameplaySound/thrusterLow.mp3");
+    thrusterLow.amp(0.6);
+
     game = new Game();
     
     layerManager.layers.add(input);
@@ -28,6 +30,10 @@ void setup() {
     
     game.start();
 }
+
+final int referenceWidth = 1000;
+final int referenceHeight = 800;
+float pixelFactor = 1.0;
 
 void draw() {
     pixelFactor = sqrt(float((width * height)) / (referenceWidth * referenceHeight));
