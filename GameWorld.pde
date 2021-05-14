@@ -14,7 +14,7 @@ class GameWorld extends LayerManager<GameObject> {
     protected void draw() {
         pushMatrix();
         translate(width / 2, height / 2);
-        scale(sqrt(float((width * height)) / (referenceWidth * referenceHeight)));
+        scale(pixelFactor);
         translate( -camera.position.x, -camera.position.y);
         rotate(camera.angle);
         scale(camera.scale);

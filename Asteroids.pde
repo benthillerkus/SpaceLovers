@@ -5,8 +5,9 @@ LayerManager<Layer> layerManager = new LayerManager<Layer>();
 
 Game game;
 
-int referenceWidth = 1000;
-int referenceHeight = 800;
+final int referenceWidth = 1000;
+final int referenceHeight = 800;
+float pixelFactor = 1.0;
 
 void setup() {
     size(1000, 800);
@@ -29,25 +30,37 @@ void setup() {
 }
 
 void draw() {
+    pixelFactor = sqrt(float((width * height)) / (referenceWidth * referenceHeight));
     layerManager.process();
     background(0);
     layerManager.render();
 }
 
 Layer hud = new Layer() {
+    int size = 15;
+
+    @Override
+    protected void update() {
+        size = int(15 * (pixelFactor * 0.5 + 0.5)); // Scale more conservatively
+    }
+    
     @Override
     protected void draw() {
         textAlign(RIGHT);
-        textSize(15);
-        text(frameRate, width - 15, 25);
-        text(frameCount, width - 15, 25 + 15 + 5);
+        textSize(size);
+        text(frameRate, width - size, 25);
+        text(frameCount, width - size, 25 + size + 5);
         
         textAlign(LEFT);
         StringBuilder sb = new StringBuilder();
         for (Map.Entry < Integer, Character > k : input.getPressedKeys()) {
             sb.append(KeyEvent.getKeyText(k.getKey())).append("  ");
         }
-        text(sb.toString(), 15, 25);
+        text(sb.toString(), size, 25);
+        
+        text(String.format("%06d | %06d",
+            int(game.ship.position.x), int(game.ship.position.y)),
+            size, height - size);
     }
 };
 
