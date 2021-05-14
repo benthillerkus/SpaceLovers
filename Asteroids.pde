@@ -18,9 +18,9 @@ void setup() {
     // endPGL();
 
     thrusterHigh = new SoundFile(this, "data/GameplaySound/thrusterHigh.mp3");
-    thrusterHigh.amp(0.6);
+    thrusterHigh.amp(0.6 * 1.5);
     thrusterLow = new SoundFile(this, "data/GameplaySound/thrusterLow.mp3");
-    thrusterLow.amp(0.6);
+    thrusterLow.amp(0.6 * 1.5);
 
     game = new Game();
     

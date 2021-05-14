@@ -1,54 +1,55 @@
-class AsteroidField extends GameObject {
-    ArrayList<SpaceRock> visibleAsteroids = new ArrayList<SpaceRock>(64);
-    // TODO: Use some datastructure that lets me index & search by coordinates
-
+class AsteroidField extends LayerManager<SpaceRock> {
+    final HashMap<Integer, HashSet<Integer>> freedPositions = new HashMap<Integer, HashSet<Integer>>();
     final int tileSize = 128;
-    
-    AsteroidField() {
-        // for (int i = 0; i < 25; i++) {
-        //     asteroids.add(new SpaceRock(PVector.random2D().mult(random(100, 1500)), 1.0, random(0.2, 1.2)));
-        // }
-        for (int i = 0; i < 64; i++) {
-            visibleAsteroids.add(new SpaceRock());
-        }
-    }
 
-    @Override
-    protected void draw() {
-        for (SpaceRock rock : visibleAsteroids) {
-            rock.render();
+    AsteroidField() {
+        layers = new ArrayList<SpaceRock>(64);
+        for (int i = 0; i < 64; i++) {
+            layers.add(new SpaceRock());
         }
     }
     
     @Override
     protected void update() {
-        // TODO: Actual spawning etc
         int index = 0;
         SpaceRock current;
-        PVector upperLeft = PVector.sub(this.world.camera.position, new PVector(width / 2, height / 2));
+        PVector upperLeft = PVector.sub(game.world.camera.position, new PVector(width / 2, height / 2));
         for (int x = int(upperLeft.x - upperLeft.x % tileSize) - tileSize; x < int(upperLeft.x + width) + tileSize; x += tileSize) {
             for (int y = int(upperLeft.y - upperLeft.y % tileSize) - tileSize; y < int(upperLeft.y + height) + tileSize; y += tileSize) {
+                if (freedPositions.containsKey(x) && freedPositions.get(x).contains(y)) continue;
                 float likelihood = noise(512 + x * 0.05, -1024 + y * 0.05);
                 if (likelihood < 0.6) continue;
-                float offsetx = noise(256+ x * 0.125, y * 0.25, -30.0) * tileSize;
-                float offsety = noise(x * 0.125, y * 0.125, 50.0) * tileSize;
-                current = visibleAsteroids.get(index);
-                current.position.x = x + offsetx;
-                current.position.y = y + offsety;
-                current.scale = pow(likelihood, 4) * 3; // TODO: Find a better formula
+                float offsetX = noise(256 + x * 0.125, y * 0.25, -30.0) * tileSize;
+                float offsetY = noise(x * 0.125, y * 0.125, 50.0) * tileSize;
+                current = layers.get(index);
+                current.position.x = x + offsetX;
+                current.position.y = y + offsetY;
+                current.x = x;
+                current.y = y;
+                current.scale = pow(likelihood, 4) * 4; // TODO: Find a better formula
                 current.hidden = false;
+                current.frozen = false;
                 index++;
             }
         }
-        for (; index < visibleAsteroids.size(); index++) {
-            current = visibleAsteroids.get(index);
+        for (; index < layers.size(); index++) {
+            current = layers.get(index);
             current.hidden = true;
             current.frozen = true;
         }
+        super.update();
+    }
+
+    @Override
+    protected void draw() {
+        super.draw();
     }
 }
 
 class SpaceRock extends GameObject {
+    int x = 0;
+    int y = 0;
+
     SpaceRock() {
         super();
     }
@@ -63,5 +64,19 @@ class SpaceRock extends GameObject {
         noFill();
         strokeWeight(1);
         ellipse(0, 0, 50, 50);
+    }
+    
+    @Override
+    protected void update() {
+        PVector dir = PVector.sub(game.ship.position, this.position);
+        if (dir.mag() < (this.scale * 50)) {
+            if (game.asteroids.freedPositions.containsKey(x)) {
+                game.asteroids.freedPositions.get(x).add(y);
+            } else {
+                game.asteroids.freedPositions.put(x, new HashSet<Integer>());
+            }
+            this.hidden = true;
+            this.frozen = true;
+        }
     }
 }

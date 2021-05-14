@@ -18,9 +18,9 @@ class Game extends Layer {
 
     void start() {
         noiseSeed(187);
-        world.register(asteroids);
-        world.register(ship);
-        world.register(camera);
+        world.layers.add(asteroids);
+        world.layers.add(ship);
+        world.layers.add(camera);
         state = State.Play;
         noCursor();
     }

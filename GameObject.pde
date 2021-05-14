@@ -3,14 +3,8 @@ class GameObject extends Layer {
     float angle = 0.0;
     float scale = 1.0;
     
-    GameWorld world = null;
-    
     GameObject() {
         super();
-    }
-    
-    GameObject(GameWorld world) {
-        this.world = world;
     }
 
     GameObject(PVector position, float angle, float scale) {

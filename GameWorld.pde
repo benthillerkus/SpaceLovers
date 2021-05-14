@@ -1,13 +1,8 @@
-class GameWorld extends LayerManager<GameObject> {
+class GameWorld extends LayerManager<Layer> {
     Camera camera;
     
     GameWorld(Camera camera) {
         this.camera = camera;
-    }
-    
-    public void register(GameObject gameObject) {
-        layers.add(gameObject);
-        gameObject.world = this;
     }
     
     @Override
