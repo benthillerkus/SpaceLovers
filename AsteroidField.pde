@@ -1,9 +1,10 @@
 class AsteroidField extends GameObject {
     Collection<SpaceRock> asteroids = new ArrayList<SpaceRock>();
+    // TODO: Use some datastructure that lets me index & search by coordinates
     
     AsteroidField() {
         for (int i = 0; i < 25; i++) {
-            asteroids.add(new SpaceRock(PVector.random2D().mult(500), 1.0, 1.0));
+            asteroids.add(new SpaceRock(PVector.random2D().mult(random(100, 1500)), 1.0, random(0.2, 1.2)));
         }
     }
 
@@ -16,7 +17,7 @@ class AsteroidField extends GameObject {
     
     @Override
     protected void update() {
-        
+        // TODO: Actual spawning etc
     }
 }
 
@@ -32,7 +33,8 @@ class SpaceRock extends GameObject {
     @Override
     protected void draw() {
         stroke(255);
+        noFill();
         strokeWeight(1);
-        ellipse(0, 0, 10, 10);
+        ellipse(0, 0, 50, 50);
     }
 }
