@@ -1,10 +1,10 @@
 import java.util.*;
 import java.awt.event.KeyEvent;
-import processing.sound.*;
 
-SoundFile thrusterHigh, thrusterLow;
 Game game;
 LayerManager<Layer> layerManager = new LayerManager<Layer>();
+SoundAssets sounds;
+ImageAssets images;
 
 void setup() {
     size(1000, 800);
@@ -17,10 +17,8 @@ void setup() {
     // pgl.gl.setSwapInterval(1);
     // endPGL();
 
-    thrusterHigh = new SoundFile(this, "data/GameplaySound/thrusterHigh.mp3");
-    thrusterHigh.amp(0.6 * 1.5);
-    thrusterLow = new SoundFile(this, "data/GameplaySound/thrusterLow.mp3");
-    thrusterLow.amp(0.6 * 1.5);
+    sounds = new SoundAssets(this);
+    images = new ImageAssets(this);
 
     game = new Game();
     

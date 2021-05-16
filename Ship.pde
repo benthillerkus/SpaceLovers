@@ -7,11 +7,11 @@ class Ship extends GameObject {
         position.add(speed);
         speed.mult(0.99);
         if (!boost) {
-            if (!thrusterHigh.isPlaying()) thrusterHigh.loop();
-            if (thrusterLow.isPlaying()) thrusterLow.pause();
+            if (!sounds.thrusterHigh.isPlaying()) sounds.thrusterHigh.loop();
+            if (sounds.thrusterLow.isPlaying()) sounds.thrusterLow.pause();
         } else {
-            if (!thrusterLow.isPlaying()) thrusterLow.loop();
-            if (thrusterHigh.isPlaying()) thrusterHigh.pause();
+            if (!sounds.thrusterLow.isPlaying()) sounds.thrusterLow.loop();
+            if (sounds.thrusterHigh.isPlaying()) sounds.thrusterHigh.pause();
         }
         boost = false;
         gun.process();
