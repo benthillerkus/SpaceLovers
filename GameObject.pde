@@ -1,10 +1,16 @@
 class GameObject extends Layer {
     PVector position = new PVector(0, 0);
+    PVector speed = new PVector(0, 0);
     float angle = 0.0;
     float scale = 1.0;
+    GameObject parent = null;
     
     GameObject() {
         super();
+    }
+
+    GameObject(GameObject parent) {
+        this.parent = parent;
     }
 
     GameObject(PVector position, float angle, float scale) {

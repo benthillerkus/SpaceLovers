@@ -19,8 +19,8 @@ class AsteroidField extends LayerManager<SpaceRock> {
                 if (freedPositions.containsKey(x) && freedPositions.get(x).contains(y)) continue;
                 float likelihood = noise(512 + x * 0.05, -1024 + y * 0.05);
                 if (likelihood < 0.6) continue;
-                float offsetX = noise(256 + x * 0.125, y * 0.25, -30.0) * tileSize;
-                float offsetY = noise(x * 0.125, y * 0.125, 50.0) * tileSize;
+                float offsetX = noise(256 + x * 0.125, y * 0.25, -30.0) * tileSize * 2;
+                float offsetY = noise(x * 0.125, y * 0.125, 50.0) * tileSize * 2;
                 current = layers.get(index);
                 current.position.x = x + offsetX;
                 current.position.y = y + offsetY;

@@ -13,12 +13,14 @@ class Game extends Layer {
     Camera camera = new Camera();
     GameWorld world = new GameWorld(camera);
     AsteroidField asteroids = new AsteroidField();
+    BulletManager bullets = new BulletManager();
     Ship ship = new Ship();
     State state = State.Menu;
 
     void start() {
         noiseSeed(187);
         world.layers.add(asteroids);
+        world.layers.add(bullets);
         world.layers.add(ship);
         world.layers.add(camera);
         state = State.Play;

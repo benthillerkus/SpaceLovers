@@ -1,6 +1,6 @@
 class Ship extends GameObject {
-    PVector speed = new PVector(0,0);
     boolean boost = false;
+    Gun gun = new Gun(this);
     
     @Override
     protected void update() {
@@ -14,6 +14,7 @@ class Ship extends GameObject {
             if (thrusterHigh.isPlaying()) thrusterHigh.pause();
         }
         boost = false;
+        gun.process();
     }
 
     @Override
@@ -26,7 +27,11 @@ class Ship extends GameObject {
                 break;
             case 'a':
             case 'd':
-                turn((key == 'd' ? 1 : -1) * 0.03);
+                turn((key == 'd' ? 1 : -1) * 0.05);
+                break;
+            case ' ':
+                gun.shoot();
+                // speed.sub(1, 1);
         }
     }
     
@@ -35,6 +40,7 @@ class Ship extends GameObject {
     protected void draw() {
         stroke(255);
         triangle( -10, 10, 0, -20, 10, 10);
+        gun.render();
     }
     
     void fire() {}
