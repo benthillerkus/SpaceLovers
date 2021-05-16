@@ -23,8 +23,9 @@ void setup() {
     game = new Game();
     
     layerManager.layers.add(input);
+    layerManager.layers.add(backdrop);
     layerManager.layers.add(game);
-    layerManager.layers.add(hud);
+    layerManager.layers.add(overlay);
     
     game.start();
 }
@@ -36,11 +37,19 @@ float pixelFactor = 1.0;
 void draw() {
     pixelFactor = sqrt(float((width * height)) / (referenceWidth * referenceHeight));
     layerManager.process();
-    image(images.background, 0, 0);
     layerManager.render();
 }
 
-Layer hud = new Layer() {
+Layer backdrop = new Layer() {
+    @Override
+    protected void draw() {
+        image(images.background, 0, 0);
+        if (width > images.background.width)
+            image(images.background, images.background.width, 0);
+    }
+};
+
+Layer overlay = new Layer() {
     int size = 15;
 
     @Override
