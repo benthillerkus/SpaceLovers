@@ -14,8 +14,8 @@ class AsteroidField extends LayerManager<SpaceRock> {
         int index = 0;
         SpaceRock current;
         PVector upperLeft = PVector.sub(game.world.camera.position, new PVector(width / 2, height / 2));
-        for (int x = int(upperLeft.x - upperLeft.x % tileSize) - tileSize; x < int(upperLeft.x + width) + tileSize; x += tileSize) {
-            for (int y = int(upperLeft.y - upperLeft.y % tileSize) - tileSize; y < int(upperLeft.y + height) + tileSize; y += tileSize) {
+        for (int x = int(upperLeft.x - upperLeft.x % tileSize) - tileSize * 2; x < int(upperLeft.x + width) + tileSize * 2; x += tileSize) {
+            for (int y = int(upperLeft.y - upperLeft.y % tileSize) - tileSize * 2; y < int(upperLeft.y + height) + tileSize * 2; y += tileSize) {
                 if (freedPositions.containsKey(x) && freedPositions.get(x).contains(y)) continue;
                 float likelihood = noise(512 + x * 0.05, -1024 + y * 0.05);
                 if (likelihood < 0.6) continue;
