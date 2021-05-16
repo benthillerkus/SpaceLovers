@@ -31,7 +31,7 @@ class Ship extends GameObject {
                 break;
             case ' ':
                 gun.shoot();
-                // speed.sub(1, 1);
+                speed.sub(PVector.fromAngle(angle - PI / 2).mult(0.025));
         }
     }
     
