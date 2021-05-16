@@ -5,11 +5,14 @@ class Gun extends GameObject {
 
     @Override
     protected void draw() {
-        image(images.gun, -8, -8, 16, 16);
+        image(images.gun, -8, -2, 16, 16);
     }
 
     void shoot() {
-        game.bullets.shoot(parent.position, parent.speed, parent.scale, parent.angle);
+        PVector gunOffset = position.copy();
+        gunOffset.rotate(parent.angle);
+        gunOffset.add(parent.position);
+        game.bullets.shoot(gunOffset, parent.speed, parent.scale, parent.angle);
     }
 }
 
@@ -25,7 +28,7 @@ class BulletManager extends LayerManager<Bullet> {
 
     void shoot(PVector position, PVector speed, float scale, float angle) {
         Bullet current = layers.get(bulletIndex);
-        current.position = position.copy();
+        current.position = position;
         current.speed = speed.copy();
         current.speed.add(PVector.fromAngle(angle - PI / 2).mult(4.0));
         current.angle = angle;
