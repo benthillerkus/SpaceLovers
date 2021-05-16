@@ -26,6 +26,7 @@ class AsteroidField extends LayerManager<SpaceRock> {
                 current.position.y = y + offsetY;
                 current.x = x;
                 current.y = y;
+                current.angle = offsetX;
                 current.scale = pow(likelihood, 4) * 4; // TODO: Find a better formula
                 current.hidden = false;
                 current.frozen = false;
