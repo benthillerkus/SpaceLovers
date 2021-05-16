@@ -36,7 +36,7 @@ float pixelFactor = 1.0;
 void draw() {
     pixelFactor = sqrt(float((width * height)) / (referenceWidth * referenceHeight));
     layerManager.process();
-    background(0);
+    image(images.background, 0, 0);
     layerManager.render();
 }
 

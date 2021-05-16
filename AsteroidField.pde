@@ -60,10 +60,7 @@ class SpaceRock extends GameObject {
     
     @Override
     protected void draw() {
-        stroke(255);
-        noFill();
-        strokeWeight(1);
-        ellipse(0, 0, 50, 50);
+        image(images.asteroidLarge, -25, -25, 50, 50);
     }
     
     @Override
