@@ -3,6 +3,11 @@ class Gun extends GameObject {
         this.parent = parent;
     }
 
+    @Override
+    protected void draw() {
+        image(images.gun, -8, -8, 16, 16);
+    }
+
     void shoot() {
         game.bullets.shoot(parent.position, parent.speed, parent.scale, parent.angle);
     }
@@ -40,10 +45,7 @@ class Bullet extends GameObject {
 
     @Override
     void draw() {
-        strokeWeight(3);
-        stroke(255,255,0);
-        point(0, 0);
-        strokeWeight(1);
+        image(images.effectProjectileTiny, -2, -2, 4, 4);
     }
 
     @Override

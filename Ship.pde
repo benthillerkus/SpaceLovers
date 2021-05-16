@@ -1,6 +1,10 @@
 class Ship extends GameObject {
     boolean boost = false;
     Gun gun = new Gun(this);
+
+    Ship() {
+        gun.position = new PVector(0, -24);
+    }
     
     @Override
     protected void update() {
