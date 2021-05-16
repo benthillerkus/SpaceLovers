@@ -3,8 +3,8 @@ class AsteroidField extends LayerManager<SpaceRock> {
     final int tileSize = 128;
 
     AsteroidField() {
-        layers = new ArrayList<SpaceRock>(64);
-        for (int i = 0; i < 64; i++) {
+        layers = new ArrayList<SpaceRock>(72);
+        for (int i = 0; i < 72; i++) {
             layers.add(new SpaceRock());
         }
     }
