@@ -3,8 +3,8 @@ class AsteroidField extends LayerManager<SpaceRock> {
     final int tileSize = 128;
 
     AsteroidField() {
-        layers = new ArrayList<SpaceRock>(72);
-        for (int i = 0; i < 72; i++) {
+        layers = new ArrayList<SpaceRock>(48);
+        for (int i = 0; i < 48; i++) {
             layers.add(new SpaceRock());
         }
     }
@@ -13,9 +13,9 @@ class AsteroidField extends LayerManager<SpaceRock> {
     protected void update() {
         int index = 0;
         SpaceRock current;
-        PVector upperLeft = PVector.sub(game.world.camera.position, new PVector(width / 2, height / 2));
-        for (int x = int(upperLeft.x - upperLeft.x % tileSize) - tileSize * 2; x < int(upperLeft.x + width) + tileSize * 2; x += tileSize) {
-            for (int y = int(upperLeft.y - upperLeft.y % tileSize) - tileSize * 2; y < int(upperLeft.y + height) + tileSize * 2; y += tileSize) {
+        PVector upperLeft = PVector.sub(game.world.camera.position, new PVector(width / 2, height / 2).div(pixelFactor));
+        for (int x = int(upperLeft.x - upperLeft.x % tileSize) - tileSize * 2; x < int(upperLeft.x + width / pixelFactor) + tileSize * 2; x += tileSize) {
+            for (int y = int(upperLeft.y - upperLeft.y % tileSize) - tileSize * 2; y < int(upperLeft.y + height / pixelFactor) + tileSize * 2; y += tileSize) {
                 if (freedPositions.containsKey(x) && freedPositions.get(x).contains(y)) continue;
                 float likelihood = noise(512 + x * 0.05, -1024 + y * 0.05);
                 if (likelihood < 0.6) continue;
@@ -40,7 +40,7 @@ class AsteroidField extends LayerManager<SpaceRock> {
         }
         super.update();
     }
-
+    
     @Override
     protected void draw() {
         super.draw();

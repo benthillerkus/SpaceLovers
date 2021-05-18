@@ -16,13 +16,14 @@ class Game extends Layer {
     BulletManager bullets = new BulletManager();
     Ship ship = new Ship();
     State state = State.Menu;
-
+    
     void start() {
         noiseSeed(187);
         world.layers.add(asteroids);
         world.layers.add(bullets);
         world.layers.add(ship);
         world.layers.add(camera);
+        // world.layers.add(debugUpperLeft);
         state = State.Play;
         noCursor();
     }
@@ -31,7 +32,7 @@ class Game extends Layer {
     protected void input() {
         world.processInput();
     }
-
+    
     @Override
     protected void update() {
         if (state == State.Play) world.update();
@@ -41,4 +42,18 @@ class Game extends Layer {
     protected void draw() {
         world.draw();
     }
+
+    GameObject debugUpperLeft = new GameObject() {
+        @Override
+        protected void update() {
+            position = PVector.sub(game.world.camera.position, new PVector(width / 2, height / 2).div(pixelFactor));
+        }
+    
+        @Override
+        protected void draw() {
+            stroke(255, 211, 45);
+            strokeWeight(12);
+            point(0, 0);
+        }
+    };
 }
