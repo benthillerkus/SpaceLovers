@@ -7,7 +7,7 @@ SoundAssets sounds;
 ImageAssets images;
 
 void setup() {
-    size(1000, 800);
+    size(1000, 800, P2D);
     surface.setResizable(true);
     
     // https://stackoverflow.com/a/20552347/5964129
@@ -43,9 +43,11 @@ void draw() {
 Layer backdrop = new Layer() {
     @Override
     protected void draw() {
-        image(images.background, 0, 0);
-        if (width > images.background.width)
-            image(images.background, images.background.width, 0);
+        for (int x = 0; x < width; x += images.background.width) {
+            for (int y = 0; y < height; y += images.background.height) {
+                image(images.background, x, y);
+            }
+        }
     }
 };
 
