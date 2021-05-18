@@ -42,7 +42,7 @@ class Ship extends GameObject {
     //Dreieck mit Ausrichtung
     @Override
     protected void draw() {
-        stroke(255);
+        noStroke();
         triangle( -10, 10, 0, -20, 10, 10);
         gun.render();
     }
