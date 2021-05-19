@@ -23,7 +23,7 @@ public class ImageAssets {
 }
 
 public class SoundAssets {
-    SoundFile thrusterHigh, thrusterLow;
+    SoundFile thrusterHigh, thrusterLow, menuForward, menuBack;
 
     SoundAssets(PApplet parent) {
         // TODO: In theory loading could be deferred
@@ -31,5 +31,7 @@ public class SoundAssets {
         thrusterHigh.amp(0.6 * 1.5);
         thrusterLow = new SoundFile(parent, "data/GameplaySound/thrusterLow.mp3");
         thrusterLow.amp(0.6 * 1.5);
+        menuForward = new SoundFile(parent, "data/MenuSound/MenuForwardTines.mp3");
+        menuBack = new SoundFile(parent, "data/MenuSound/MenuBackTines.mp3");
     }
 }

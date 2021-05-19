@@ -44,8 +44,8 @@ class Ship extends GameObject {
     protected void draw() {
         noStroke();
         gun.render();
-        imageMode(CENTER);
-        image( images.ship , 0 , 0 , 60, 60 );
+        
+        image( images.ship , -30 , -30 , 60, 60 );
         
     }
     
