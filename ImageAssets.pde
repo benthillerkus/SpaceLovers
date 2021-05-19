@@ -14,7 +14,7 @@ public class ImageAssets {
         thruster = loadImage("data/Art/Thruster.png");
         //shieldInactive = loadImage("data/Art/Shield-Active.png");
         //shieldActive = loadImage("data/Art/Shield-Inactive.png");
-        shiel = loadImage("data/Art/Shield.png");
+        //shield = loadImage("data/Art/Shield.png");
 
         effectProjectileTiny = loadImage("data/Art/Effect-Projectile-Tiny.png");
 
