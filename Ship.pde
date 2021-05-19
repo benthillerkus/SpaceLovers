@@ -39,11 +39,11 @@ class Ship extends GameObject {
         }
     }
     
-    //Dreieck mit Ausrichtung
+    //Schiff
     @Override
     protected void draw() {
         noStroke();
-        triangle( -10, 10, 0, -20, 10, 10);
+        image( images.ship , -13 , -10 , 60, 60);
         gun.render();
     }
     
