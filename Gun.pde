@@ -1,18 +1,35 @@
 class Gun extends GameObject {
+    float orbitspeed;
+
     Gun(GameObject parent) {
         this.parent = parent;
+        orbitspeed = .09;
+
     }
 
     @Override
     protected void draw() {
-        image(images.gun, 0, -7, 16, 16);
+        image(images.gun, -7 , 0, 16, 16);
     }
 
     void shoot() {
         PVector gunOffset = position.copy();
         gunOffset.rotate(parent.angle);
         gunOffset.add(parent.position);
-        game.bullets.shoot(gunOffset, parent.speed, parent.scale, parent.angle);
+        game.bullets.shoot(gunOffset, parent.speed, parent.scale, parent.angle + angle);
+    }
+
+    void input() {
+        if (key == 'f'){
+           angle += - orbitspeed;
+           position.rotate(-orbitspeed);
+        }
+        else if(key == 'h'){
+           angle += orbitspeed;
+            position.rotate(orbitspeed);
+        }
+        angle %= TWO_PI; 
+        
     }
 }
 
@@ -54,5 +71,6 @@ class Bullet extends GameObject {
     @Override
     void update() {
         position.add(speed);
+        angle += .09;
     }
 }

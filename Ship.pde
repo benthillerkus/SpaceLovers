@@ -1,9 +1,11 @@
 class Ship extends GameObject {
     boolean boost = false;
     Gun gun = new Gun(this);
+    Shield shield = new Shield(this);
 
     Ship() {
-        gun.position = new PVector(0, -24);
+        gun.position = new PVector(0, -40);
+        shield.position = new PVector(0, -40);
     }
     
     @Override
@@ -19,10 +21,13 @@ class Ship extends GameObject {
         }
         boost = false;
         gun.process();
+        shield.process();
     }
 
     @Override
     protected void input() {
+        gun.processInput();
+        shield.processInput();
         switch(key) {
             case 'w':
             case 's':
@@ -44,8 +49,8 @@ class Ship extends GameObject {
     protected void draw() {
         noStroke();
         gun.render();
-        imageMode(CENTER);
-        image( images.ship , 0 , 0 , 60, 60 );
+        shield.render();
+        image( images.ship , -30 , -30 , 60, 60 );
         
     }
     
