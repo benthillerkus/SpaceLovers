@@ -43,8 +43,10 @@ class Ship extends GameObject {
     @Override
     protected void draw() {
         noStroke();
-        image( images.ship , -13 , -10 , 60, 60 );
         gun.render();
+        imageMode(CENTER);
+        image( images.ship , 0 , 0 , 60, 60 );
+        
     }
     
     void fire() {}

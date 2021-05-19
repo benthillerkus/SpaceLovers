@@ -2,7 +2,7 @@ import processing.sound.*;
 
 public class ImageAssets {
     PImage asteroidLarge;
-    PImage ship, gun, thruster, shieldInactive, shieldActive;
+    PImage ship, gun, thruster, shieldInactive, shieldActive, shield;
     PImage effectProjectileTiny;
     PImage background;
 
@@ -14,7 +14,7 @@ public class ImageAssets {
         thruster = loadImage("data/Art/Thruster.png");
         //shieldInactive = loadImage("data/Art/Shield-Active.png");
         //shieldActive = loadImage("data/Art/Shield-Inactive.png");
-        //shield = loadImage("data/Art/Shield.png");
+        shield = loadImage("data/Art/Shield.png");
 
         effectProjectileTiny = loadImage("data/Art/Effect-Projectile-Tiny.png");
 
