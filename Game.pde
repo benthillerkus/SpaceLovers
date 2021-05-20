@@ -16,6 +16,7 @@ class Game extends Layer {
     AsteroidField asteroids = new AsteroidField();
     BulletManager bullets = new BulletManager();
     Ship ship = new Ship();
+    GameMenu menu = new GameMenu();
     State state = State.Menu;
     
     void start() {
@@ -31,23 +32,26 @@ class Game extends Layer {
         collisions.b.add(ship);
 
         // world.layers.add(debugUpperLeft);
-        state = State.Play;
-        noCursor();
     }
     
     @Override
     protected void input() {
-        world.processInput();
+        if(state == State.Play)world.processInput();
+        if(state == State.Menu)menu.processInput();
     }
     
     @Override
     protected void update() {
         if (state == State.Play) world.update();
+        if (state == State.Menu) menu.process();
     }
     
     @Override
     protected void draw() {
-        world.draw();
+      world.draw();
+      if(state == State.Menu)menu.render();
+       
+        
     }
 
     GameObject debugUpperLeft = new GameObject() {

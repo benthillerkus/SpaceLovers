@@ -47,12 +47,14 @@ class Ship extends GameObject {
         }
     }
     
-    //Dreieck mit Ausrichtung
+    //Schiff
     @Override
     protected void draw() {
         noStroke();
-        triangle( -10, 10, 0, -20, 10, 10);
         gun.render();
+        
+        image( images.ship , -30 , -30 , 60, 60 );
+        
     }
     
     //Schub geben in Richtung des Schiffs (angle)
