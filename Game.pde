@@ -12,6 +12,7 @@ State gameState;
 class Game extends Layer {
     Camera camera = new Camera();
     GameWorld world = new GameWorld(camera);
+    CollisionLayer collisions = new CollisionLayer(48, 256);
     AsteroidField asteroids = new AsteroidField();
     BulletManager bullets = new BulletManager();
     Ship ship = new Ship();
@@ -20,9 +21,15 @@ class Game extends Layer {
     void start() {
         noiseSeed(187);
         world.layers.add(asteroids);
+        world.layers.add(collisions);
         world.layers.add(bullets);
         world.layers.add(ship);
         world.layers.add(camera);
+
+        collisions.a = (ArrayList<GameObject>) (ArrayList<?>) asteroids.layers;
+        collisions.b = (ArrayList<GameObject>) (ArrayList<?>) bullets.layers.clone();
+        collisions.b.add(ship);
+
         // world.layers.add(debugUpperLeft);
         state = State.Play;
         noCursor();

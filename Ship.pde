@@ -4,6 +4,14 @@ class Ship extends GameObject {
 
     Ship() {
         gun.position = new PVector(0, -24);
+        size = 15;
+    }
+
+    @Override
+    protected void collision(GameObject enemy) {
+        if (enemy instanceof SpaceRock) {
+            game.state = State.Menu;
+        }
     }
     
     @Override
@@ -46,8 +54,6 @@ class Ship extends GameObject {
         triangle( -10, 10, 0, -20, 10, 10);
         gun.render();
     }
-    
-    void fire() {}
     
     //Schub geben in Richtung des Schiffs (angle)
     //der Parameter "amount" gibt die Größe des Schubs an

@@ -3,6 +3,7 @@ class GameObject extends Layer {
     PVector speed = new PVector(0, 0);
     float angle = 0.0;
     float scale = 1.0;
+    float size = 1.0; // Used for collision
     GameObject parent = null;
     
     GameObject() {
@@ -33,4 +34,6 @@ class GameObject extends Layer {
         super.render();
         popMatrix();
     }
+    
+    protected void collision(GameObject enemy) {}
 }

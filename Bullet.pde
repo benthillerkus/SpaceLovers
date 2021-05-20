@@ -44,6 +44,7 @@ class Bullet extends GameObject {
     Bullet() {
         hidden = true;
         frozen = true;
+        size = 0;
     }
 
     @Override
@@ -54,5 +55,11 @@ class Bullet extends GameObject {
     @Override
     void update() {
         position.add(speed);
+    }
+
+    @Override
+    void collision(GameObject enemy) {
+        this.hidden = true;
+        this.frozen = true;
     }
 }

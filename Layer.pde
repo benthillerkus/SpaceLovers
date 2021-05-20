@@ -42,7 +42,7 @@ class Layer {
 }
 
 class LayerManager<L extends Layer> extends Layer {
-    List<L> layers = new ArrayList<L>();
+    ArrayList<L> layers = new ArrayList<L>();
 
     @Override
     protected void input() {

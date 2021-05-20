@@ -53,28 +53,22 @@ class SpaceRock extends GameObject {
 
     SpaceRock() {
         super();
-    }
-    
-    SpaceRock(PVector position, float angle, float scale) {
-        super(position, angle, scale);
+        size = 35;
     }
     
     @Override
     protected void draw() {
         image(images.asteroidLarge, -25, -25, 50, 50);
     }
-    
+
     @Override
-    protected void update() {
-        PVector dir = PVector.sub(game.ship.position, this.position);
-        if (dir.mag() < (this.scale * 50)) {
-            if (game.asteroids.freedPositions.containsKey(x)) {
-                game.asteroids.freedPositions.get(x).add(y);
-            } else {
-                game.asteroids.freedPositions.put(x, new HashSet<Integer>());
-            }
-            this.hidden = true;
-            this.frozen = true;
+    protected void collision(GameObject enemy) {
+        if (game.asteroids.freedPositions.containsKey(x)) {
+            game.asteroids.freedPositions.get(x).add(y);
+        } else {
+            game.asteroids.freedPositions.put(x, new HashSet<Integer>());
         }
+        this.hidden = true;
+        this.frozen = true;
     }
 }
