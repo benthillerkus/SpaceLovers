@@ -4,7 +4,7 @@ class Ship extends GameObject {
 
     Ship() {
         gun.position = new PVector(0, -24);
-        size = 15;
+        size = 24;
     }
 
     @Override
