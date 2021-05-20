@@ -80,25 +80,26 @@ int menuState = 0;
 }
 
     void credits(){
+      
       //Bent Hillerkus
       textSize(40*pixelFactor);
       textAlign(CENTER);
-      text("Bent Hillerkus", width/2, height*0.4);
+      text("Bent Hillerkus", width/2, height*0.5);
       
       //Joshua Lasse Einhoff
       textSize(40*pixelFactor);
       textAlign(CENTER);
-      text("Joshua Lasse Einhoff", width/2, height*0.45);
+      text("Joshua Lasse Einhoff", width/2, height*0.55);
       
       //Kevin Kader
       textSize(40*pixelFactor);
       textAlign(CENTER);
-      text("Kevin Kader", width/2, height*0.5);
+      text("Kevin Kader", width/2, height*0.45);
       
       //Natalie Ruth Turek
       textSize(40*pixelFactor);
       textAlign(CENTER);
-      text("Natalie Ruth Turek", width/2, height*0.55);
+      text("Natalie Ruth Turek", width/2, height*0.4);
       
       //back
       textSize(20*pixelFactor);
