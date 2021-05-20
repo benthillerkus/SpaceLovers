@@ -36,8 +36,8 @@ class Game extends Layer {
     
     @Override
     protected void input() {
-        if(state == State.Play)world.processInput();
-        if(state == State.Menu)menu.processInput();
+        if(state == State.Play) world.processInput();
+        if(state == State.Menu) menu.processInput();
     }
     
     @Override
