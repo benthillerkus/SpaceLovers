@@ -50,6 +50,7 @@ class Ship extends GameObject {
         noStroke();
         gun.render();
         shield.render();
+        image( images.thruster , 0, 20 , 16, 16);
         image( images.ship , -30 , -30 , 60, 60 );
         
     }
