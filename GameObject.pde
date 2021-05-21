@@ -1,13 +1,24 @@
 class GameObject extends Layer {
-    PVector position = new PVector(0, 0);
-    PVector speed = new PVector(0, 0);
-    float angle = 0.0;
-    float scale = 1.0;
-    float size = 1.0; // Used for collision
-    GameObject parent = null;
+    PVector position;
+    PVector speed;
+    float angle;
+    float scale;
+    float size; // Used for collision
+    GameObject parent;
     
     GameObject() {
         super();
+        reset();
+    }
+
+    @Override
+    protected void reset() {
+        super.reset();
+        position = new PVector(0, 0);
+        speed = new PVector(0, 0);
+        angle = 0.0;
+        scale = 1.0;
+        size = 1.0;
     }
 
     GameObject(GameObject parent) {

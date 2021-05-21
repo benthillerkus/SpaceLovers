@@ -32,7 +32,7 @@ int menuState = 0;
         text("Play", width/2, height/2);
         if(mousePressed == true & (width*0.45<mouseX& mouseX<width*0.55 & height*0.45<mouseY & mouseY < height*0.55)){
           sounds.menuForward.play();
-          game.state = State.Play;
+          game.start();
         }
         
         //Options

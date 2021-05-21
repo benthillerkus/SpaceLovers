@@ -8,6 +8,12 @@ class AsteroidField extends LayerManager<SpaceRock> {
             layers.add(new SpaceRock());
         }
     }
+
+    @Override
+    protected void reset() {
+        super.reset();
+        freedPositions.clear();
+    }
     
     @Override
     protected void update() {
@@ -48,11 +54,13 @@ class AsteroidField extends LayerManager<SpaceRock> {
 }
 
 class SpaceRock extends GameObject {
-    int x = 0;
-    int y = 0;
+    int x, y;
 
-    SpaceRock() {
-        super();
+    @Override
+    protected void reset() {
+        super.reset();
+        x = 0;
+        y = 0;
         size = 35;
     }
     
@@ -79,13 +87,20 @@ class SpaceRock extends GameObject {
 
 // For reference: BulletManager in Gun
 class DebrisManager extends LayerManager<Debris> {
-    int debrisIndex = 0;
+    int debrisIndex;
 
     DebrisManager() {
         layers = new ArrayList<Debris>(128);
         for (int i = 0; i < 128; i++) {
             layers.add(new Debris());
         }
+        reset();
+    }
+
+    @Override
+    protected void reset() {
+        super.reset();
+        debrisIndex = 0;
     }
 
     void spawn(PVector position, PVector speed) {
@@ -100,7 +115,9 @@ class DebrisManager extends LayerManager<Debris> {
 
 class Debris extends GameObject {
 
-    Debris() {
+    @Override
+    protected void reset() {
+        super.reset();
         hidden = true;
         frozen = true;
         size = 16;

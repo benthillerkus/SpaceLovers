@@ -27,8 +27,6 @@ void setup() {
     layerManager.layers.add(backdrop);
     layerManager.layers.add(game);
     layerManager.layers.add(overlay);
-    
-    game.start();
 }
 
 final int referenceWidth = 1000;
