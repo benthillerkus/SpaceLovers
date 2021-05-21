@@ -17,10 +17,7 @@ class Gun extends GameObject {
     }
 
     void shoot() {
-        PVector gunOffset = position.copy();
-        gunOffset.rotate(parent.angle);
-        gunOffset.add(parent.position);
-        game.bullets.shoot(gunOffset, parent.speed, parent.scale, parent.angle + angle);
+        game.bullets.shoot(absolutePosition(), parent.speed, parent.scale, parent.angle + angle);
     }
 
     void input() {

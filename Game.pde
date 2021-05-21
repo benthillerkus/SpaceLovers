@@ -38,7 +38,7 @@ class Game extends Layer {
         world.layers.add(debris);
         world.layers.add(bullets);
         world.layers.add(ship);
-        // world.layers.add(debugUpperLeft);
+        world.layers.add(debugUpperLeft);
         world.layers.add(camera);
 
         collisions.a = (ArrayList<GameObject>) (ArrayList<?>) debris.layers.clone();
@@ -76,13 +76,14 @@ class Game extends Layer {
     GameObject debugUpperLeft = new GameObject() {
         @Override
         protected void update() {
-            position = PVector.sub(game.world.camera.position, new PVector(width / 2, height / 2).div(pixelFactor));
+            // position = PVector.sub(game.world.camera.position, new PVector(width / 2, height / 2).div(pixelFactor));
+            position = game.ship.shield.absolutePosition();
         }
     
         @Override
         protected void draw() {
             stroke(255, 211, 45);
-            strokeWeight(12);
+            strokeWeight(game.ship.shield.size * 2);
             point(0, 0);
         }
     };

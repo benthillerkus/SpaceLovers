@@ -61,12 +61,12 @@ class SpaceRock extends GameObject {
         super.reset();
         x = 0;
         y = 0;
-        size = 35;
+        size = 25;
     }
     
     @Override
     protected void draw() {
-        image(images.asteroidLarge, -25, -25, 50, 50);
+        image(images.asteroidLarge, -size, -size, size * 2, size * 2);
     }
 
     @Override

@@ -9,7 +9,12 @@ class Shield extends GameObject {
     protected void reset() {
         super.reset();
         orbitspeed = .09;
-        size = 40;
+        size = 20;
+    }
+
+    @Override
+    protected void collision(GameObject enemy) {
+        println("Schild funktioniert: " + frameCount);
     }
 
     @Override

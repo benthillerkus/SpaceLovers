@@ -11,6 +11,18 @@ class GameObject extends Layer {
         reset();
     }
 
+    // FIXME: Incorporate scale?
+    PVector absolutePosition() {
+        if (parent == null) {
+            return position;
+        } else {
+            PVector offset = position.copy();
+            offset.rotate(parent.angle);
+            offset.add(parent.absolutePosition());
+            return offset;
+        }
+    }
+
     @Override
     protected void reset() {
         super.reset();
