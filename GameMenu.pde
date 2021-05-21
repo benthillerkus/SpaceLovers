@@ -69,7 +69,7 @@ int menuState = 0;
       // menuVolume
       textAlign(CENTER);
       textSize(50*pixelFactor);
-      text("Menu Volume", width/2, height*0.25);
+      text("Volume Control", width/2, height*0.25);
       
       //-
       textAlign(CENTER);
@@ -96,13 +96,13 @@ int menuState = 0;
         
       if(mousePressed == true & (width*0.18<mouseX& mouseX<width*0.38 & height*0.18<mouseY & mouseY < height*0.38)){
           if(sounds.vol >= 0.05){
-            sounds.menuVolume.volume(sounds.vol += -0.05);
+            sounds.menuVolume.volume(sounds.vol += -0.005);
           }
       }
         
       if(mousePressed == true & (width*0.68<mouseX& mouseX<width*0.85 & height*0.18<mouseY & mouseY < height*0.38)){
           if(sounds.vol <= 0.95){
-            sounds.menuVolume.volume(sounds.vol += 0.05);
+            sounds.menuVolume.volume(sounds.vol += 0.005);
           }
       }
         
