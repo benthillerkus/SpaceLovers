@@ -17,7 +17,7 @@ class Gun extends GameObject {
     }
 
     void shoot() {
-        game.bullets.shoot(absolutePosition(), parent.speed, parent.scale, parent.angle + angle);
+        game.bullets.shoot(absolutePosition(), parent.speed, parent.scale, absoluteAngle());
     }
 
     void input() {

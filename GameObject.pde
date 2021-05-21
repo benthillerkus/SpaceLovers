@@ -23,6 +23,10 @@ class GameObject extends Layer {
         }
     }
 
+    float absoluteAngle() {
+        return parent == null ? angle : parent.absoluteAngle() + angle;
+    }
+
     @Override
     protected void reset() {
         super.reset();
