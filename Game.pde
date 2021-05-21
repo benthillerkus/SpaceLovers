@@ -10,37 +10,67 @@ State gameState;
 // This kinda is a manually managed LayerManager,
 // so make sure every event is passed on!
 class Game extends Layer {
-    Camera camera = new Camera();
-    GameWorld world = new GameWorld(camera);
-    AsteroidField asteroids = new AsteroidField();
-    BulletManager bullets = new BulletManager();
-    Ship ship = new Ship();
-    State state = State.Menu;
-    
-    void start() {
+    Camera camera;
+    GameWorld world;
+    CollisionLayer collisions;
+    AsteroidField asteroids;
+    DebrisManager debris;
+    BulletManager bullets;
+    Ship ship;
+    GameMenu menu;
+    State state;
+
+    Game() {
+        camera = new Camera();
+        world = new GameWorld(camera);
+        collisions = new CollisionLayer(48, 256);
+        asteroids = new AsteroidField();
+        debris = new DebrisManager();
+        bullets = new BulletManager();
+        ship = new Ship();
+        menu = new GameMenu();
+        state = State.Menu;
+
         noiseSeed(187);
+        world.layers.clear();
         world.layers.add(asteroids);
+        world.layers.add(collisions);
+        world.layers.add(debris);
         world.layers.add(bullets);
         world.layers.add(ship);
-        world.layers.add(camera);
         // world.layers.add(debugUpperLeft);
+        world.layers.add(camera);
+
+        collisions.a = (ArrayList<GameObject>) (ArrayList<?>) debris.layers.clone();
+        for (SpaceRock asteroid : asteroids.layers) {
+            collisions.a.add(asteroid);
+        }
+        collisions.b = (ArrayList<GameObject>) (ArrayList<?>) bullets.layers.clone();
+        collisions.b.add(ship);
+        collisions.b.add(ship.shield);
+    }
+    
+    void start() {
+        world.reset();
         state = State.Play;
-        noCursor();
     }
     
     @Override
     protected void input() {
-        world.processInput();
+        if (state == State.Play) world.processInput();
+        if (state == State.Menu) menu.processInput();
     }
     
     @Override
     protected void update() {
         if (state == State.Play) world.update();
+        if (state == State.Menu) menu.process();
     }
     
     @Override
     protected void draw() {
         world.draw();
+        if (state == State.Menu) menu.render();
     }
 
     GameObject debugUpperLeft = new GameObject() {

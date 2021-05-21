@@ -1,13 +1,12 @@
 class Layer {
-    private int lastProcessedFrame = -1;
-    boolean frozen = false;
-    boolean hidden = false;
+    private int lastProcessedFrame;
+    boolean frozen;
+    boolean hidden;
 
     Layer() {}
 
     Layer(boolean frozen, boolean hidden) {
-        this.frozen = frozen;
-        this.hidden = hidden;
+        reset();
     }
 
     // Handle key input events here
@@ -18,6 +17,12 @@ class Layer {
 
     // Put your drawing code here
     protected void draw() {};
+
+    protected void reset() {
+        lastProcessedFrame = -1;
+        frozen = false;
+        hidden = false;
+    }
 
     // === === === === === === === === === === ===
     // Only override the methods above ⬆
@@ -39,11 +44,23 @@ class Layer {
     void render() {
         if (!hidden) draw();
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getName();
+    }
 }
 
 class LayerManager<L extends Layer> extends Layer {
-    List<L> layers = new ArrayList<L>();
-
+    ArrayList<L> layers = new ArrayList<L>();
+    
+    @Override
+    protected void reset() {
+        for (L layer : layers) {
+            layer.reset();
+        }
+    }
+    
     @Override
     protected void input() {
         for (L layer : layers) {

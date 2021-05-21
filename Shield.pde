@@ -2,9 +2,14 @@ class Shield extends GameObject {
     float orbitspeed;
 
     Shield(GameObject parent) {
-        this.parent = parent;
-        orbitspeed = .09;
+        super(parent);
+    }
 
+    @Override
+    protected void reset() {
+        super.reset();
+        orbitspeed = .09;
+        size = 40;
     }
 
     @Override
@@ -14,14 +19,13 @@ class Shield extends GameObject {
 
     void input() {
         if (key == 'r'){
-           angle += - orbitspeed;
-           position.rotate(-orbitspeed);
+            angle += - orbitspeed;
+            position.rotate(-orbitspeed);
         }
-        else if(key == 't'){
-           angle += orbitspeed;
+        else if (key == 't'){
+            angle += orbitspeed;
             position.rotate(orbitspeed);
         }
         angle %= TWO_PI; 
-        
     }
 }

@@ -16,7 +16,7 @@ void setup() {
     // PJOGL pgl = (PJOGL)beginPGL();
     // pgl.gl.setSwapInterval(1);
     // endPGL();
-
+    
     sounds = new SoundAssets(this);
     images = new ImageAssets(this);
 
@@ -26,8 +26,6 @@ void setup() {
     layerManager.layers.add(backdrop);
     layerManager.layers.add(game);
     layerManager.layers.add(overlay);
-    
-    game.start();
 }
 
 final int referenceWidth = 1000;

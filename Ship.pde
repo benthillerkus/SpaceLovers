@@ -1,11 +1,23 @@
+// TODO: Turn into LayerManager for each part
 class Ship extends GameObject {
     boolean boost = false;
-    Gun gun = new Gun(this);
-    Shield shield = new Shield(this);
+    Gun gun;
+    Shield shield;
 
-    Ship() {
+    @Override
+    protected void reset() {
+        super.reset();
+        gun = new Gun(this);
+        shield = new Shield(this);
         gun.position = new PVector(0, -40);
         shield.position = new PVector(0, -40);
+        size = 24;
+        boost = false;
+    }
+
+    @Override
+    protected void collision(GameObject enemy) {
+        game.state = State.Menu;
     }
     
     @Override
@@ -25,7 +37,7 @@ class Ship extends GameObject {
     }
 
     @Override
-    protected void input() {    
+    protected void input() {
         gun.processInput();
         shield.processInput();
         switch(key) {
@@ -40,22 +52,18 @@ class Ship extends GameObject {
                 break;
             case ' ':
                 gun.shoot();
-                speed.sub(PVector.fromAngle(angle - PI / 2).mult(0.025));
+                speed.sub(PVector.fromAngle(angle + gun.angle - PI / 2).mult(0.025));
         }
     }
     
     //Schiff
     @Override
     protected void draw() {
-        noStroke();
         gun.render();
         shield.render();
-        image( images.thruster , -8, -40 , 16, 16);
-        image( images.ship , -30 , -30 , 60, 60 );
-        
+        image(images.thruster , -8, -40 , 16, 16);
+        image(images.ship , -30 , -30 , 60, 60);
     }
-    
-    void fire() {}
     
     //Schub geben in Richtung des Schiffs (angle)
     //der Parameter "amount" gibt die Größe des Schubs an

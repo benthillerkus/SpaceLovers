@@ -2,9 +2,13 @@ class Gun extends GameObject {
     float orbitspeed;
 
     Gun(GameObject parent) {
-        this.parent = parent;
-        orbitspeed = .09;
+        super(parent);
+    }
 
+    @Override
+    protected void reset() {
+        super.reset();
+        orbitspeed = .09;
     }
 
     @Override
@@ -34,13 +38,20 @@ class Gun extends GameObject {
 }
 
 class BulletManager extends LayerManager<Bullet> {
-    int bulletIndex = 0;
+    int bulletIndex;
 
     BulletManager() {
         layers = new ArrayList<Bullet>(256);
         for (int i = 0; i < 256; i++) {
             layers.add(new Bullet());
         }
+        reset();
+    }
+
+    @Override
+    protected void reset() {
+        super.reset();
+        bulletIndex = 0;
     }
 
     void shoot(PVector position, PVector speed, float scale, float angle) {
@@ -58,9 +69,12 @@ class BulletManager extends LayerManager<Bullet> {
 
 class Bullet extends GameObject {
 
-    Bullet() {
+    @Override
+    protected void reset() {
+        super.reset();
         hidden = true;
         frozen = true;
+        size = 0;
     }
 
     @Override
@@ -71,6 +85,11 @@ class Bullet extends GameObject {
     @Override
     void update() {
         position.add(speed);
-        angle += .09;
+    }
+
+    @Override
+    void collision(GameObject enemy) {
+        this.hidden = true;
+        this.frozen = true;
     }
 }
