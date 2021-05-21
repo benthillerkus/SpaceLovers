@@ -30,7 +30,7 @@ int menuState = 0;
         textAlign(CENTER);
         textSize(55*pixelFactor);
         text("Play", width/2, height/2);
-        if(mousePressed == true & (width*0.45<mouseX& mouseX<width*0.55 & height*0.45<mouseY & mouseY < height*0.55)){
+        if(mouseClicked & (width*0.45<mouseX& mouseX<width*0.55 & height*0.45<mouseY & mouseY < height*0.55)){
           sounds.menuForward.play();
           game.state = State.Play;
         }
@@ -47,13 +47,13 @@ int menuState = 0;
         text("Credits", width*0.75, height*0.75);
         
         //"Button"-condition -- Options
-        if(mousePressed == true & (width*0.1<mouseX& mouseX<width*0.35 & height*0.65<mouseY & mouseY<height*0.9)){
+        if(mouseClicked & (width*0.1<mouseX& mouseX<width*0.35 & height*0.65<mouseY & mouseY<height*0.9)){
           clear();
           sounds.menuForward.play();
           menuState = 1;
         }
         //"Button"-condition -- Credits
-        if(mousePressed == true & (width*0.7<mouseX& mouseX<width*0.9 & height*0.65<mouseY & mouseY < height*0.9)){
+        if(mouseClicked & (width*0.7<mouseX& mouseX<width*0.9 & height*0.65<mouseY & mouseY < height*0.9)){
           clear();
           sounds.menuForward.play();
           menuState = 2;
@@ -72,7 +72,7 @@ int menuState = 0;
       text("BACK", width/2, height*0.8);
       
       //"Button"-condition
-      if(mousePressed == true & (width*0.45<mouseX& mouseX<width*0.55 & height*0.7<mouseY & mouseY < height*0.9)){
+      if(mouseClicked & (width*0.45<mouseX& mouseX<width*0.55 & height*0.7<mouseY & mouseY < height*0.9)){
         clear();
         sounds.menuBack.play();
         menuState = 0;
@@ -107,7 +107,7 @@ int menuState = 0;
       text("BACK", width/2, height*0.8);
       
       //"Button"-condition
-      if(mousePressed == true & (width*0.45<mouseX& mouseX<width*0.55 & height*0.7<mouseY & mouseY < height*0.9)){
+      if(mouseClicked & (width*0.45<mouseX& mouseX<width*0.55 & height*0.7<mouseY & mouseY < height*0.9)){
         clear();
         sounds.menuBack.play();
         menuState = 0;

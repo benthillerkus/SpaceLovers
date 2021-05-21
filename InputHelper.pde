@@ -1,3 +1,5 @@
+boolean mouseReleased = false;
+boolean mouseClicked = false;
 
 //https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html#:~:text=a%20KeyEvent%20object.-,Method%20Summary,-Methods
 void keyPressed() {
@@ -6,6 +8,20 @@ void keyPressed() {
 
 void keyReleased() {
     input.pressedKeys.remove(keyCode);
+}
+
+void mouseReleased() {
+    mouseReleased = true;
+    mouseClicked = false;
+}
+
+void mousePressed() {
+    mouseReleased = false;
+    mouseClicked = false;
+}
+
+void mouseClicked() {
+    mouseClicked = true;
 }
 
 // Defers the key handling to be just before or just after upate(),
