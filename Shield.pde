@@ -9,7 +9,7 @@ class Shield extends GameObject {
 
     @Override
     protected void draw() {
-        image(images.shield, -15 , 0, 40, 20);
+        image(images.shield, -23 , 4 , 46, 20);
     }
 
     void input() {
@@ -17,7 +17,7 @@ class Shield extends GameObject {
            angle += - orbitspeed;
            position.rotate(-orbitspeed);
         }
-        else if(key == 'z'){
+        else if(key == 't'){
            angle += orbitspeed;
             position.rotate(orbitspeed);
         }

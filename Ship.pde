@@ -25,7 +25,7 @@ class Ship extends GameObject {
     }
 
     @Override
-    protected void input() {
+    protected void input() {    
         gun.processInput();
         shield.processInput();
         switch(key) {
@@ -50,7 +50,7 @@ class Ship extends GameObject {
         noStroke();
         gun.render();
         shield.render();
-        image( images.thruster , 0, 20 , 16, 16);
+        image( images.thruster , -8, -40 , 16, 16);
         image( images.ship , -30 , -30 , 60, 60 );
         
     }

@@ -9,7 +9,7 @@ class Gun extends GameObject {
 
     @Override
     protected void draw() {
-        image(images.gun, -7 , 0, 16, 16);
+        image(images.gun, -8 , 2, 16, 16);
     }
 
     void shoot() {
@@ -24,7 +24,7 @@ class Gun extends GameObject {
            angle += - orbitspeed;
            position.rotate(-orbitspeed);
         }
-        else if(key == 'h'){
+        else if(key == 'g'){
            angle += orbitspeed;
             position.rotate(orbitspeed);
         }
