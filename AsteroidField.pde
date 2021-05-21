@@ -99,6 +99,7 @@ class DebrisManager extends LayerManager<Debris> {
 
     @Override
     protected void reset() {
+        super.reset();
         debrisIndex = 0;
     }
 
@@ -116,6 +117,7 @@ class Debris extends GameObject {
 
     @Override
     protected void reset() {
+        super.reset();
         hidden = true;
         frozen = true;
         size = 16;

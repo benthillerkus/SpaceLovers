@@ -44,6 +44,11 @@ class Layer {
     void render() {
         if (!hidden) draw();
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getName();
+    }
 }
 
 class LayerManager<L extends Layer> extends Layer {

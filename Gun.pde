@@ -29,6 +29,7 @@ class BulletManager extends LayerManager<Bullet> {
 
     @Override
     protected void reset() {
+        super.reset();
         bulletIndex = 0;
     }
 
