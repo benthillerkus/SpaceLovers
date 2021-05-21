@@ -14,6 +14,7 @@ class Game extends Layer {
     GameWorld world = new GameWorld(camera);
     CollisionLayer collisions = new CollisionLayer(48, 256);
     AsteroidField asteroids = new AsteroidField();
+    DebrisManager debris = new DebrisManager();
     BulletManager bullets = new BulletManager();
     Ship ship = new Ship();
     GameMenu menu = new GameMenu();
@@ -21,13 +22,18 @@ class Game extends Layer {
     
     void start() {
         noiseSeed(187);
+        world.layers.clear();
         world.layers.add(asteroids);
         world.layers.add(collisions);
+        world.layers.add(debris);
         world.layers.add(bullets);
         world.layers.add(ship);
         world.layers.add(camera);
 
-        collisions.a = (ArrayList<GameObject>) (ArrayList<?>) asteroids.layers;
+        collisions.a = (ArrayList<GameObject>) (ArrayList<?>) debris.layers.clone();
+        for (SpaceRock asteroid : asteroids.layers) {
+            collisions.a.add(asteroid);
+        }
         collisions.b = (ArrayList<GameObject>) (ArrayList<?>) bullets.layers.clone();
         collisions.b.add(ship);
 
@@ -36,8 +42,8 @@ class Game extends Layer {
     
     @Override
     protected void input() {
-        if(state == State.Play) world.processInput();
-        if(state == State.Menu) menu.processInput();
+        if (state == State.Play) world.processInput();
+        if (state == State.Menu) menu.processInput();
     }
     
     @Override
@@ -49,9 +55,7 @@ class Game extends Layer {
     @Override
     protected void draw() {
       world.draw();
-      if(state == State.Menu)menu.render();
-       
-        
+      if (state == State.Menu) menu.render();
     }
 
     GameObject debugUpperLeft = new GameObject() {
