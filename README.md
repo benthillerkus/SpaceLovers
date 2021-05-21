@@ -17,4 +17,6 @@ Es müssen dafür vorher folgende Libraries heruntergeladen werden:
 ## Steuerung
 
 1. Bewegung mit WASD
-2. Leertaste zum Schießen
+2. Schild mit RT
+3. Waffe mit FG
+4. Leertaste zum Schießen
