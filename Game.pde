@@ -37,6 +37,7 @@ class Game extends Layer {
         collisions.b = (ArrayList<GameObject>) (ArrayList<?>) bullets.layers.clone();
         collisions.b.add(ship);
 
+        state = State.Play;
         // world.layers.add(debugUpperLeft);
     }
     
@@ -54,8 +55,8 @@ class Game extends Layer {
     
     @Override
     protected void draw() {
-      world.draw();
-      if (state == State.Menu) menu.render();
+        world.draw();
+        if (state == State.Menu) menu.render();
     }
 
     GameObject debugUpperLeft = new GameObject() {
