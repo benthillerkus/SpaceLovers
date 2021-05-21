@@ -61,10 +61,26 @@ int menuState = 0;
     }
     
     void options(){
-      //Here be Dragons
+      //Volume
       textAlign(CENTER);
       textSize(50*pixelFactor);
-      text("Here be Dragons", width/2, height/2);
+      text("Volume: " + int(sounds.vol*100),width/2, height/2);
+      
+      // menuVolume
+      textAlign(CENTER);
+      textSize(50*pixelFactor);
+      text("Menu Volume", width/2, height*0.25);
+      
+      //-
+      textAlign(CENTER);
+      textSize(50*pixelFactor);
+      text("-", width*0.25, height*0.25);
+      
+      //+
+      textAlign(CENTER);
+      textSize(50*pixelFactor);
+      text("+", width*0.75, height*0.25);
+      
       
       //back
       textSize(20*pixelFactor);
@@ -76,8 +92,22 @@ int menuState = 0;
         clear();
         sounds.menuBack.play();
         menuState = 0;
+      }
+        
+      if(mousePressed == true & (width*0.18<mouseX& mouseX<width*0.38 & height*0.18<mouseY & mouseY < height*0.38)){
+          if(sounds.vol >= 0.05){
+            sounds.menuVolume.volume(sounds.vol += -0.05);
+          }
+      }
+        
+      if(mousePressed == true & (width*0.68<mouseX& mouseX<width*0.85 & height*0.18<mouseY & mouseY < height*0.38)){
+          if(sounds.vol <= 0.95){
+            sounds.menuVolume.volume(sounds.vol += 0.05);
+          }
+      }
+        
   }
-}
+
 
     void credits(){
       
