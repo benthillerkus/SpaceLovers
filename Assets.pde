@@ -3,7 +3,7 @@ import processing.sound.*;
 public class ImageAssets {
     PImage asteroidLarge;
     PImage ship, gun, thruster, shieldInactive, shieldActive, shield;
-    PImage effectProjectileTiny;
+    PImage effectProjectileTiny, asteroidTiny1;
     PImage background;
 
     ImageAssets(PApplet parent) {
@@ -12,11 +12,10 @@ public class ImageAssets {
         ship = loadImage("data/Art/Ship.png");
         gun = loadImage("data/Art/Gun.png");
         thruster = loadImage("data/Art/Thruster.png");
-        //shieldInactive = loadImage("data/Art/Shield-Active.png");
-        //shieldActive = loadImage("data/Art/Shield-Inactive.png");
         shield = loadImage("data/Art/Shield.png");
 
         effectProjectileTiny = loadImage("data/Art/Effect-Projectile-Tiny.png");
+        asteroidTiny1 = loadImage("data/Art/Asteroid-Tiny-1.png");
 
         this.background = loadImage("data/Art/Background.png");
     }
