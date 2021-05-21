@@ -1,6 +1,6 @@
 class Gun extends GameObject {
     Gun(GameObject parent) {
-        this.parent = parent;
+        super(parent);
     }
 
     @Override
@@ -17,13 +17,19 @@ class Gun extends GameObject {
 }
 
 class BulletManager extends LayerManager<Bullet> {
-    int bulletIndex = 0;
+    int bulletIndex;
 
     BulletManager() {
         layers = new ArrayList<Bullet>(256);
         for (int i = 0; i < 256; i++) {
             layers.add(new Bullet());
         }
+        reset();
+    }
+
+    @Override
+    protected void reset() {
+        bulletIndex = 0;
     }
 
     void shoot(PVector position, PVector speed, float scale, float angle) {
@@ -41,7 +47,9 @@ class BulletManager extends LayerManager<Bullet> {
 
 class Bullet extends GameObject {
 
-    Bullet() {
+    @Override
+    protected void reset() {
+        super.reset();
         hidden = true;
         frozen = true;
         size = 0;
