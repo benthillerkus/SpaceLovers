@@ -1,205 +1,83 @@
-import processing.sound.*;
-//erstellen verschiedenster Soundvaraiblen
-SoundFile laserSound, thruster, asteroidHit, winSound, loseSound;
-enum GameState {
-    Play, Pause, Lost, Won;
-}
+import java.util.*;
+import java.awt.event.KeyEvent;
 
-final int numAsteroids = 5;
-
-GameState state = GameState.Play;
-
-ArrayList<FlyingThing> things = new ArrayList<FlyingThing>();
-Ship ship;
-boolean keyLeft, keyRight, keyUp, keyDown;
-
-// Jetzt die Funktionen:
+Game game;
+LayerManager<Layer> layerManager = new LayerManager<Layer>();
+SoundAssets sounds;
+ImageAssets images;
 
 void setup() {
-    size(1000, 800);
-    initGame();
-    laserSound = new SoundFile(this, "data/GameplaySound/bang.mp3");
-    asteroidHit = new SoundFile(this, "data/GameplaySound/asteroidHit.mp3");
-    asteroidHit.amp(0.5);
-    winSound = new SoundFile(this, "data/GameplaySound/win.mp3");
-    winSound.amp(0.2);
-    loseSound = new SoundFile(this, "data/GameplaySound/lose.mp3");
-    loseSound.amp(0.2);
+    size(1000, 800, P2D);
+    surface.setResizable(true);
+    
+    // https://stackoverflow.com/a/20552347/5964129
+    // fullScreen(P2D);
+    // frameRate(1000);
+    // PJOGL pgl = (PJOGL)beginPGL();
+    // pgl.gl.setSwapInterval(1);
+    // endPGL();
+    
+
+    sounds = new SoundAssets(this);
+    images = new ImageAssets(this);
+
+    game = new Game();
+    
+    layerManager.layers.add(input);
+    layerManager.layers.add(backdrop);
+    layerManager.layers.add(game);
+    layerManager.layers.add(overlay);
+    
+    game.start();
 }
 
-void initGame() {
-    ship = new Ship(new PVector(width / 2, height / 2),
-        new PVector());
-    things.add(ship);
-    
-    // generate asteroids
-    for (int i = 0; i < numAsteroids; i++) {
-        things.add(new Asteroid());
-    }
-    
-    state = GameState.Play;
-}
+final int referenceWidth = 1000;
+final int referenceHeight = 800;
+float pixelFactor = 1.0;
 
 void draw() {
-    background(0);
-    noFill();
-    stroke(255);
-    
-    for (FlyingThing thing : things) {
-        if (thing.alive) {
-            thing.update();
-            thing.render();
-        }
-    }
-    switch(state) {
-        case Play:
-        for (FlyingThing thing : things) {
-            thing.update();
-            thing.render();
-        }
-        checkKeys();
-        checkCollision();
-        checkWon();
-        break;
-        
-        case Pause:
-        for (FlyingThing thing : things) {
-            thing.render();
-        }
-        break;
-        
-        case Lost:
-        textAlign(CENTER);
-        textSize(40);
-        text("GAME OVER!\n(press enter)", width / 2, height / 2);
-        things.clear();
-        break;
-        
-        case Won:
-        textAlign(CENTER);
-        textSize(40);
-        text("YOU WON!\n(press enter)", width / 2, height / 2);
-        things.clear();
-        break;
-    }
-    
+    pixelFactor = sqrt(float((width * height)) / (referenceWidth * referenceHeight));
+    layerManager.process();
+    layerManager.render();
 }
 
-void checkKeys() {
-    if (keyLeft) ship.angle -= radians(2);
-    if (keyRight) ship.angle += radians(2);
-    if (keyUp) ship.thrustForward(.05);
-    if (keyDown) ship.thrustForward(-.05);
-    
-}
-
-
-void keyPressed() {
-    switch(keyCode) {
-        case UP:
-        keyUp = true;
-        break;
-        case DOWN:
-        keyDown = true;
-        break;
-        case LEFT:
-        keyLeft = true;
-        break;
-        case RIGHT:
-        keyRight = true;
-        break;
-    }
-    if (state == GameState.Play || state == GameState.Pause) {
-        if (key == 'p') state = state == GameState.Play ? GameState.Pause : GameState.Play;
-    }
-    if (keyCode == ENTER) {
-        if (state == GameState.Lost || state == GameState.Won) initGame();
-    }
-    
-    if (state == GameState.Play && key == ' ') {
-        laserSound.play();
-        Bullet b = ship.fire();
-        things.add(b);
-        if (things.size() > 10) {
-            collectGarbage();
-        }
-        
-    } 
-}
-
-void keyReleased() {
-    switch(keyCode) {
-        case UP:
-        keyUp = false;
-        break;
-        case DOWN:
-        keyDown = false;
-        break;
-        case LEFT:
-        keyLeft = false;
-        break;
-        case RIGHT:
-        keyRight = false;
-        break;
-    }
-}
-
-void checkCollision() {
-    boolean coll = false;
-    for (FlyingThing thing : things) {
-        if (thing instanceof Asteroid) {
-            if (ship.checkCollision((Asteroid)thing)) {
-                coll = true;
-            }
-        }
-        
-        if (thing instanceof Bullet) {
-            
-            // prüfe alle Asteroiden
-            for (FlyingThing thing2 : things) {
-                if (thing2.alive && thing2 instanceof Asteroid) {
-                    Bullet b = (Bullet)thing;
-                    Asteroid a = (Asteroid)thing2;
-                    
-                    // bei Kollision denAsteroiden auf tot schalten
-                    if (b.pos.dist(a.pos) < a.size / 2) {
-                        a.alive = false;
-                        asteroidHit.play();
-                    }
-                }
+Layer backdrop = new Layer() {
+    @Override
+    protected void draw() {
+        for (int x = 0; x < width; x += images.background.width) {
+            for (int y = 0; y < height; y += images.background.height) {
+                image(images.background, x, y);
             }
         }
     }
-    if (coll) {
-        state = GameState.Lost;
-        loseSound.play();
-    }
-}
+};
 
-void checkWon() {
-    boolean Won = true;
+Layer overlay = new Layer() {
+    int size = 15;
+
+    @Override
+    protected void update() {
+        size = int(15 * (pixelFactor * 0.5 + 0.5)); // Scale more conservatively
+    }
     
-    // sobald ich einen lebenden Asteroiden finde,
-    // bin ich noch nicht fertig
-    for (FlyingThing thing : things) {
-        if (thing instanceof Asteroid && thing.alive) {
-            Won = false;
-            return;
+    @Override
+    protected void draw() {
+        textAlign(RIGHT);
+        textSize(size);
+        text(frameRate, width - size, 25);
+        text(frameCount, width - size, 25 + size + 5);
+        
+        textAlign(LEFT);
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry < Integer, Character > k : input.getPressedKeys()) {
+            sb.append(KeyEvent.getKeyText(k.getKey())).append("  ");
         }
+        text(sb.toString(), size, 25);
+        
+        text(String.format("%06d | %06d",
+            int(game.ship.position.x), int(game.ship.position.y)),
+            size, height - size);
     }
-    if (Won) {
-        state = GameState.Won;
-        winSound.play();
-    }
-}
+};
 
-void collectGarbage() {
-    ArrayList<FlyingThing> newThings =
-    new ArrayList<FlyingThing>();
-    for (FlyingThing thing : things) {
-        if (thing.alive) {
-            newThings.add(thing);
-        }
-    }
-    things = newThings;
-}
+InputHelper input = new InputHelper();
