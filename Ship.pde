@@ -9,9 +9,7 @@ class Ship extends GameObject {
 
     @Override
     protected void collision(GameObject enemy) {
-        if (enemy instanceof SpaceRock) {
-            game.state = State.Menu;
-        }
+        game.state = State.Menu;
     }
     
     @Override
