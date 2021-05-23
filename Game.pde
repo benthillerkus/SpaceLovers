@@ -15,6 +15,7 @@ class Game extends LayerManager<Layer> {
     DebrisManager debris = new DebrisManager();
     BulletManager bullets = new BulletManager();
     Ship ship = new Ship();
+    Hud hud  = new Hud();
     GameMenu menu = new GameMenu();
     State state;
 
@@ -37,6 +38,7 @@ class Game extends LayerManager<Layer> {
         collisions.b.add(ship.shield);
 
         layers.add(world);
+        layers.add(hud);
         layers.add(menu);
 
         menu();
@@ -49,6 +51,8 @@ class Game extends LayerManager<Layer> {
         menu.frozen = true;
         world.frozen = false;
         world.hidden = false;
+        hud.frozen = false;
+        hud.hidden = false;
     }
 
     void menu() {
@@ -57,6 +61,8 @@ class Game extends LayerManager<Layer> {
         menu.frozen = false;
         world.hidden = false;
         world.frozen = true;
+        hud.hidden = true;
+        hud.frozen = true;
     }
     
     GameObject debugUpperLeft = new GameObject() {
