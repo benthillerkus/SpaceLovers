@@ -1,10 +1,6 @@
 class Shield extends GameObject {
     float orbitspeed;
 
-    Shield(GameObject parent) {
-        super(parent);
-    }
-
     @Override
     protected void reset() {
         super.reset();
@@ -14,17 +10,17 @@ class Shield extends GameObject {
 
     @Override
     protected void collision(GameObject enemy) {
-        println("Schild funktioniert: " + frameCount);
+        // println("Schild funktioniert: " + frameCount);
     }
 
     @Override
     protected void draw() {
-        image(images.shield, -23 , 4 , 46, 20);
+        image(images.shield, -23, 4, 46, 20);
     }
 
     void input() {
         if (key == 'r'){
-            angle += - orbitspeed;
+            angle -= orbitspeed;
             position.rotate(-orbitspeed);
         }
         else if (key == 't'){

@@ -38,7 +38,7 @@ class Game extends Layer {
         world.layers.add(debris);
         world.layers.add(bullets);
         world.layers.add(ship);
-        world.layers.add(debugUpperLeft);
+        // world.layers.add(debugUpperLeft);
         world.layers.add(camera);
 
         collisions.a = (ArrayList<GameObject>) (ArrayList<?>) debris.layers.clone();

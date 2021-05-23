@@ -1,10 +1,6 @@
 class Gun extends GameObject {
     float orbitspeed;
 
-    Gun(GameObject parent) {
-        super(parent);
-    }
-
     @Override
     protected void reset() {
         super.reset();
