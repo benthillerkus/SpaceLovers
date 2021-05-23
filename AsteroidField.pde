@@ -111,9 +111,8 @@ class DebrisManager extends LayerManager<Debris> {
         current.hidden = false;
         current.frozen = false;
         current.size *= random(0.5, 1.8);
-        // FIXME: Why tf is this not working?
         current.angle = random(TWO_PI);
-        current.angularSpeed = random(-0.1, 0.1);
+        current.angularSpeed = random(-0.05, 0.05);
         debrisIndex = (debrisIndex + 1) % layers.size();
     }
 }
@@ -137,7 +136,7 @@ class Debris extends GameObject {
     void update() {
         position.add(speed);
         angle += angularSpeed;
-        angle %= angle;
+        angle %= TWO_PI;
     }
 
     @Override
