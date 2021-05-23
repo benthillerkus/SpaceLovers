@@ -17,8 +17,9 @@ class Game extends LayerManager<Layer> {
     Ship ship = new Ship();
     Hud hud  = new Hud();
     GameMenu menu = new GameMenu();
+    MissionManager missions = new MissionManager();
+    Stats stats = new Stats();
     State state;
-    ArrayList<Mission> missions = new ArrayList<Mission>();
 
     Game() {
         noiseSeed(187);
@@ -39,6 +40,7 @@ class Game extends LayerManager<Layer> {
         collisions.b.add(ship.shield);
 
         layers.add(world);
+        layers.add(missions);
         layers.add(hud);
         layers.add(menu);
 
@@ -47,17 +49,20 @@ class Game extends LayerManager<Layer> {
     
     void start() {
         world.reset();
+        missions.reset();
+        stats.reset();
         state = State.Play;
         menu.hidden = true;
         menu.frozen = true;
+        missions.hidden = false;
+        missions.frozen = false;
         world.frozen = false;
         world.hidden = false;
         hud.frozen = false;
         hud.hidden = false;
-        missions.clear();
-        missions.add(new Mission());
-        missions.add(new Mission());
-        missions.add(new Mission());
+        missions.generate();
+        missions.generate();
+        missions.generate();
     }
 
     void menu() {
@@ -66,6 +71,8 @@ class Game extends LayerManager<Layer> {
         menu.frozen = false;
         world.hidden = false;
         world.frozen = true;
+        missions.hidden = true;
+        missions.frozen = true;
         hud.hidden = true;
         hud.frozen = true;
     }
