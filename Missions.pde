@@ -15,12 +15,26 @@ class MissionManager extends LayerManager<Mission> {
         int missionSize = int(16 * pixelFactor);
         int marginLeft = int(25 * pixelFactor);
         int marginTop = int(50 * pixelFactor);
+        int strikeThroughOverdraw = int(2 * pixelFactor);
+        int strikeThroughSize = int(2 * pixelFactor);
         textSize(headingSize);
         text("Missions", marginLeft, marginTop);
 
         textSize(missionSize);
+        strokeWeight(strikeThroughSize);
+        stroke(255);
+
         for (int i = 0; i < layers.size(); i++) {
-            text(layers.get(i).toString(), marginLeft, marginTop + headingSize + (5 + missionSize) * i);
+            String txt = layers.get(i).toString();
+            int offsetY = marginTop + headingSize + (5 + missionSize) * i;
+            
+            text(txt, marginLeft, offsetY);
+            if (layers.get(i).done) {
+                line(marginLeft - strikeThroughOverdraw,
+                    offsetY - missionSize / 2 + strikeThroughSize,
+                    marginLeft + textWidth(txt) + strikeThroughOverdraw,
+                    offsetY - missionSize / 2 + strikeThroughSize);
+            }
         }
     }
 }
@@ -29,6 +43,7 @@ class Mission extends Layer {
     String description;
     float progress;
     int goal;
+    boolean done = false;
 
     Mission() {
         super();
@@ -39,6 +54,7 @@ class Mission extends Layer {
     protected void reset() {
         progress = 0;
         goal = 15;
+        done = false;
         description = String.format("Clear up %d pieces of Debris with your shield", goal);
     }
 
@@ -49,5 +65,6 @@ class Mission extends Layer {
     @Override
     protected void update() {
         progress = float(game.stats.catchedDebris);
+        done = (progress >= goal);
     }
 }
