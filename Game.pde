@@ -8,28 +8,18 @@ enum State {
 // This kinda is a manually managed LayerManager,
 // so make sure every event is passed on!
 class Game extends LayerManager<Layer> {
-    Camera camera;
-    GameWorld world;
-    CollisionLayer collisions;
-    AsteroidField asteroids;
-    DebrisManager debris;
-    BulletManager bullets;
-    Ship ship;
-    GameMenu menu;
+    Camera camera = new Camera();
+    GameWorld world = new GameWorld(camera);
+    CollisionLayer collisions = new CollisionLayer(48, 256);
+    AsteroidField asteroids = new AsteroidField();
+    DebrisManager debris = new DebrisManager();
+    BulletManager bullets = new BulletManager();
+    Ship ship = new Ship();
+    GameMenu menu = new GameMenu();
     State state;
 
     Game() {
-        camera = new Camera();
-        world = new GameWorld(camera);
-        collisions = new CollisionLayer(48, 256);
-        asteroids = new AsteroidField();
-        debris = new DebrisManager();
-        bullets = new BulletManager();
-        ship = new Ship();
-        menu = new GameMenu();
-
         noiseSeed(187);
-        world.layers.clear();
         world.layers.add(asteroids);
         world.layers.add(collisions);
         world.layers.add(debris);
