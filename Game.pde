@@ -18,6 +18,7 @@ class Game extends LayerManager<Layer> {
     Hud hud  = new Hud();
     GameMenu menu = new GameMenu();
     State state;
+    ArrayList<Mission> missions = new ArrayList<Mission>();
 
     Game() {
         noiseSeed(187);
@@ -53,6 +54,10 @@ class Game extends LayerManager<Layer> {
         world.hidden = false;
         hud.frozen = false;
         hud.hidden = false;
+        missions.clear();
+        missions.add(new Mission());
+        missions.add(new Mission());
+        missions.add(new Mission());
     }
 
     void menu() {
