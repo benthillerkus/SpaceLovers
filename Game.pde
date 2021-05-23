@@ -5,11 +5,9 @@ enum State {
     Menu, Play, Pause, Lost, Won; // TODO: StateMachine??
 }
 
-State gameState;
-
 // This kinda is a manually managed LayerManager,
 // so make sure every event is passed on!
-class Game extends Layer {
+class Game extends LayerManager<Layer> {
     Camera camera;
     GameWorld world;
     CollisionLayer collisions;
@@ -29,7 +27,6 @@ class Game extends Layer {
         bullets = new BulletManager();
         ship = new Ship();
         menu = new GameMenu();
-        state = State.Menu;
 
         noiseSeed(187);
         world.layers.clear();
@@ -48,31 +45,30 @@ class Game extends Layer {
         collisions.b = (ArrayList<GameObject>) (ArrayList<?>) bullets.layers.clone();
         collisions.b.add(ship);
         collisions.b.add(ship.shield);
+
+        layers.add(world);
+        layers.add(menu);
+
+        menu();
     }
     
     void start() {
         world.reset();
         state = State.Play;
-    }
-    
-    @Override
-    protected void input() {
-        if (state == State.Play) world.processInput();
-        if (state == State.Menu) menu.processInput();
-    }
-    
-    @Override
-    protected void update() {
-        if (state == State.Play) world.update();
-        if (state == State.Menu) menu.process();
-    }
-    
-    @Override
-    protected void draw() {
-        world.draw();
-        if (state == State.Menu) menu.render();
+        menu.hidden = true;
+        menu.frozen = true;
+        world.frozen = false;
+        world.hidden = false;
     }
 
+    void menu() {
+        state = State.Menu;
+        menu.hidden = false;
+        menu.frozen = false;
+        world.hidden = false;
+        world.frozen = true;
+    }
+    
     GameObject debugUpperLeft = new GameObject() {
         @Override
         protected void update() {
