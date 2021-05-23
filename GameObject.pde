@@ -2,6 +2,7 @@ class GameObject extends Layer {
     PVector position;
     PVector speed;
     float angle;
+    float angularSpeed;
     float scale;
     float size; // Used for collision
     GameObject parent;
@@ -33,6 +34,7 @@ class GameObject extends Layer {
         position = new PVector(0, 0);
         speed = new PVector(0, 0);
         angle = 0.0;
+        angularSpeed = 0.0;
         scale = 1.0;
         size = 1.0;
     }
