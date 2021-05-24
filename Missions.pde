@@ -1,4 +1,5 @@
 class MissionManager extends LayerManager<Mission> {
+    GameWorld overlay = null;
     
     void generate() {
         boolean hasDebris = false;
@@ -9,31 +10,47 @@ class MissionManager extends LayerManager<Mission> {
             }
         }
         if (!hasDebris) {
-            layers.add(new PickUpDebrisMission());
+            layers.add(new PickUpDebrisMission(overlay));
         } else {
-            layers.add(new GoToLocationMission());
+            layers.add(new GoToLocationMission(overlay));
         }
     }
     
     @Override
     protected void reset() {
         layers.clear();
+        if (overlay == null) {
+            overlay = new GameWorld(game.camera);
+        } else {
+            overlay.layers.clear();
+            overlay.reset();
+        }
+    }
+
+    @Override
+    protected void update() {
+        super.update();
+        overlay.process();
     }
 
     @Override
     protected void draw() {
+        overlay.render();
+
         int headingSize = int(25 * pixelFactor);
         int missionSize = int(16 * pixelFactor);
         int marginLeft = int(25 * pixelFactor);
         int marginTop = int(50 * pixelFactor);
         int strikeThroughOverdraw = int(2 * pixelFactor);
         int strikeThroughSize = int(2 * pixelFactor);
+        stroke(255);
+        fill(255);
+
         textSize(headingSize);
         text("Missions", marginLeft, marginTop);
 
         textSize(missionSize);
         strokeWeight(strikeThroughSize);
-        stroke(255);
 
         for (int i = 0; i < layers.size(); i++) {
             String txt = layers.get(i).toString();
@@ -50,12 +67,25 @@ class MissionManager extends LayerManager<Mission> {
     }
 }
 
+class Beacon extends GameObject {
+    @Override
+    protected void draw() {
+        strokeWeight(3 * pixelFactor);
+        stroke(230, 125, 245, 50);
+        fill(230, 125, 245, 10);
+        ellipseMode(CENTER);
+        ellipse(position.x, position.y, size * 2, size * 2);
+    }
+}
+
 class Mission extends Layer {
     boolean done = false;
+    GameWorld world = null;
 
-    Mission() {
+    Mission(GameWorld world) {
         super();
         done = false;
+        this.world = world;
         reset();
     }
 }
@@ -64,12 +94,21 @@ class GoToLocationMission extends Mission {
     PVector location;
     float radius;
     int progress;
+    Beacon myBeacon;
+
+    GoToLocationMission(GameWorld world) {
+        super(world);
+    }
 
     @Override
     protected void reset() {
         location = new PVector(0, 0);
-        radius = 450;
+        radius = 150;
         progress = 0;
+        myBeacon = new Beacon();
+        myBeacon.size = radius;
+        myBeacon.position = location;
+        world.layers.add(myBeacon);
     }
 
     @Override
@@ -87,6 +126,10 @@ class PickUpDebrisMission extends Mission {
     String description;
     int progress;
     int goal;
+
+    PickUpDebrisMission(GameWorld world) {
+        super(world);
+    }
 
     @Override
     protected void reset() {

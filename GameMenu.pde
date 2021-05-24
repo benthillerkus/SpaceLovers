@@ -6,6 +6,8 @@ int menuState = 0;
   
     @Override
     protected void draw() {
+      stroke(255);
+      fill(255);
           if(menuState == 0){
               mainMenu();
           }
