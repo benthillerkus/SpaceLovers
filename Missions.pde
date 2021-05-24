@@ -177,7 +177,7 @@ class PickUpDebrisMission extends Mission {
     @Override
     protected void reset() {
         progress = 0;
-        goal = 15;
+        goal = random(15, 50);
         description = String.format("Clear up %d pieces of Debris with your shield", goal);
     }
 
