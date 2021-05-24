@@ -53,11 +53,14 @@ class MissionManager extends LayerManager<Mission> {
         strokeWeight(strikeThroughSize);
 
         for (int i = 0; i < layers.size(); i++) {
-            String txt = layers.get(i).toString();
+            Mission current = layers.get(i);
+            String txt = current.toString();
             int offsetY = marginTop + headingSize + (5 + missionSize) * i;
+
+            fill(current.missionColor);
             
             text(txt, marginLeft, offsetY);
-            if (layers.get(i).done) {
+            if (current.done) {
                 line(marginLeft - strikeThroughOverdraw,
                     offsetY - missionSize / 2 + strikeThroughSize,
                     marginLeft + textWidth(txt) + strikeThroughOverdraw,
@@ -68,11 +71,13 @@ class MissionManager extends LayerManager<Mission> {
 }
 
 class Beacon extends GameObject {
+    color missionColor;
+
     @Override
     protected void draw() {
         strokeWeight(3 * pixelFactor);
-        stroke(230, 125, 245, 50);
-        fill(230, 125, 245, 10);
+        stroke(missionColor, 50);
+        fill(missionColor, 10);
         ellipseMode(RADIUS);
         ellipse(0, 0, size, size);
     }
@@ -80,6 +85,7 @@ class Beacon extends GameObject {
 
 class Arrow extends GameObject {
     PVector target;
+    color missionColor;
 
     @Override
     protected void update() {
@@ -91,7 +97,7 @@ class Arrow extends GameObject {
     protected void draw() {
         strokeWeight(3 * pixelFactor);
         noStroke();
-        fill(230, 125, 245, 60);
+        fill(missionColor, 60);
         rectMode(CORNERS);
 
         int arrowLength = int(18 * pixelFactor);
@@ -108,11 +114,13 @@ class Arrow extends GameObject {
 class Mission extends Layer {
     boolean done = false;
     GameWorld world = null;
+    color missionColor;
 
     Mission(GameWorld world) {
         super();
         done = false;
         this.world = world;
+        missionColor = color(random(125, 255), random(125, 255), random(125, 255));
         reset();
     }
 }
@@ -135,7 +143,9 @@ class GoToLocationMission extends Mission {
         progress = 0;
         diagShip = new Arrow();
         diagShip.target = location;
+        diagShip.missionColor = missionColor;
         myBeacon = new Beacon();
+        myBeacon.missionColor = missionColor;
         myBeacon.size = radius;
         myBeacon.position = location;
         world.layers.add(myBeacon);
