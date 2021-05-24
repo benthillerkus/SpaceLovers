@@ -1,7 +1,18 @@
 class MissionManager extends LayerManager<Mission> {
     
     void generate() {
-        layers.add(new Mission());
+        boolean hasDebris = false;
+        for (Mission mission : layers) {
+            if (mission instanceof PickUpDebrisMission) {
+                hasDebris = true;
+                break;
+            }
+        }
+        if (!hasDebris) {
+            layers.add(new PickUpDebrisMission());
+        } else {
+            layers.add(new GoToLocationMission());
+        }
     }
     
     @Override
@@ -40,31 +51,57 @@ class MissionManager extends LayerManager<Mission> {
 }
 
 class Mission extends Layer {
-    String description;
-    float progress;
-    int goal;
     boolean done = false;
 
     Mission() {
         super();
+        done = false;
         reset();
     }
+}
+
+class GoToLocationMission extends Mission {
+    PVector location;
+    float radius;
+    int progress;
+
+    @Override
+    protected void reset() {
+        location = new PVector(0, 0);
+        radius = 450;
+        progress = 0;
+    }
+
+    @Override
+    protected void update() {
+        progress = max(0, int(PVector.dist(game.ship.position, location) - radius));
+        done = progress < 1;
+    }
+
+    public String toString() {
+        return String.format("Go to %d / %d! Only %d meters left.", int(location.x), int(location.y), progress);
+    }
+}
+
+class PickUpDebrisMission extends Mission {
+    String description;
+    int progress;
+    int goal;
 
     @Override
     protected void reset() {
         progress = 0;
         goal = 15;
-        done = false;
         description = String.format("Clear up %d pieces of Debris with your shield", goal);
     }
 
     public String toString() {
-        return String.format("%s: %d/%d", description, int(progress), 15);
+        return String.format("%s: %d/%d", description, progress, 15);
     }
 
     @Override
     protected void update() {
-        progress = float(game.stats.catchedDebris);
+        progress = game.stats.catchedDebris;
         done = (progress >= goal);
     }
 }
