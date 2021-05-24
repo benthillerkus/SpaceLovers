@@ -1,5 +1,6 @@
 class MissionManager extends LayerManager<Mission> {
     GameWorld overlay = null;
+    boolean revealedEndPosition = false;
     
     void generate() {
         boolean hasDebris = false;
@@ -25,12 +26,29 @@ class MissionManager extends LayerManager<Mission> {
             overlay.reset();
         }
         overlay.layers.clear();
+        revealedEndPosition = false;
     }
 
     @Override
     protected void update() {
         super.update();
         overlay.process();
+
+        // lol java 7 lol kein filter
+        boolean allMissionsDone = true;
+        for (Mission mission : layers) {
+            if (!mission.done) {
+                allMissionsDone = false;
+                break;
+            }
+        }
+
+        if (allMissionsDone && !revealedEndPosition) {
+            layers.add(new GoToLocationMission(overlay));
+            revealedEndPosition = true;
+        } else if(allMissionsDone && revealedEndPosition) {
+            game.menu(); // TODO: Goto game over won screen
+        }
     }
 
     @Override
@@ -58,6 +76,7 @@ class MissionManager extends LayerManager<Mission> {
             int offsetY = marginTop + headingSize + (5 + missionSize) * i;
 
             fill(current.missionColor);
+            stroke(current.missionColor);
             
             text(txt, marginLeft, offsetY);
             if (current.done) {
@@ -177,12 +196,12 @@ class PickUpDebrisMission extends Mission {
     @Override
     protected void reset() {
         progress = 0;
-        goal = random(15, 50);
+        goal = int(random(15, 50));
         description = String.format("Clear up %d pieces of Debris with your shield", goal);
     }
 
     public String toString() {
-        return String.format("%s: %d/%d", description, progress, 15);
+        return String.format("%s: %d/%d", description, progress, goal);
     }
 
     @Override

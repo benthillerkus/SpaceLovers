@@ -36,7 +36,7 @@ class Ship extends GameObject {
 
     @Override
     protected void collision(GameObject enemy) {
-        game.menu();
+        game.menu(); // TODO: Goto game over lost screen
     }
     
     @Override
