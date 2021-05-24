@@ -22,9 +22,9 @@ class MissionManager extends LayerManager<Mission> {
         if (overlay == null) {
             overlay = new GameWorld(game.camera);
         } else {
-            overlay.layers.clear();
             overlay.reset();
         }
+        overlay.layers.clear();
     }
 
     @Override
@@ -73,8 +73,35 @@ class Beacon extends GameObject {
         strokeWeight(3 * pixelFactor);
         stroke(230, 125, 245, 50);
         fill(230, 125, 245, 10);
-        ellipseMode(CENTER);
-        ellipse(position.x, position.y, size * 2, size * 2);
+        ellipseMode(RADIUS);
+        ellipse(0, 0, size, size);
+    }
+}
+
+class Arrow extends GameObject {
+    PVector target;
+
+    @Override
+    protected void update() {
+        position = game.ship.position;
+        angle = PVector.sub(position, target).heading();
+    }
+
+    @Override
+    protected void draw() {
+        strokeWeight(3 * pixelFactor);
+        noStroke();
+        fill(230, 125, 245, 60);
+        rectMode(CORNERS);
+
+        int arrowLength = int(18 * pixelFactor);
+        int arrowHeight = int(8 * pixelFactor);
+        int distance = int(-game.ship.size - 35 * pixelFactor);
+        int triangleHeight = int(12 * pixelFactor);
+        int triangleWidth = int(16 * pixelFactor);
+
+        rect(distance - arrowLength, -arrowHeight / 2, distance, arrowHeight / 2);
+        triangle(distance - arrowLength - triangleWidth, 0, distance - arrowLength, -triangleHeight, distance - arrowLength, triangleHeight);
     }
 }
 
@@ -95,6 +122,7 @@ class GoToLocationMission extends Mission {
     float radius;
     int progress;
     Beacon myBeacon;
+    Arrow diagShip;
 
     GoToLocationMission(GameWorld world) {
         super(world);
@@ -102,19 +130,24 @@ class GoToLocationMission extends Mission {
 
     @Override
     protected void reset() {
-        location = new PVector(0, 0);
-        radius = 150;
+        location = PVector.random2D().mult(4000);
+        radius = 180;
         progress = 0;
+        diagShip = new Arrow();
+        diagShip.target = location;
         myBeacon = new Beacon();
         myBeacon.size = radius;
         myBeacon.position = location;
         world.layers.add(myBeacon);
+        world.layers.add(diagShip);
     }
 
     @Override
     protected void update() {
         progress = max(0, int(PVector.dist(game.ship.position, location) - radius));
-        done = progress < 1;
+        done = done ? done : progress < 1;
+        diagShip.hidden = done;
+        diagShip.frozen = done;
     }
 
     public String toString() {
