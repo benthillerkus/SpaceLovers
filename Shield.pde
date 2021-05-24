@@ -1,36 +1,34 @@
-class Shield  {
-    float theta;
-    float distance;
+class Shield extends GameObject {
     float orbitspeed;
-    
-    Shield() {
-        distance = 100;
-        theta = 0;
+
+    @Override
+    protected void reset() {
+        super.reset();
         orbitspeed = .09;
+        size = 20;
     }
-    
-    //läst das schild nach links bei a oder rechts bei d drehen 
-    void moveAroundOrbit() {
-        if (keyPressed && key == 'a')
-           theta += - orbitspeed;
-        else if(keyPressed && key == 'd')
-           theta += orbitspeed;
-        else
-           theta += 0;
-        
-        theta %= TWO_PI; 
-        
+
+    @Override
+    protected void collision(GameObject enemy) {
+        if (enemy instanceof  Debris) {
+            game.stats.catchedDebris++;
+        }
     }
-    
-    void render() {
-        pushMatrix();
-        rotate(theta);
-        //verschiebung sodass sich das schild ums schiff dreht
-        translate(distance, 0);
-        stroke(0);
-        fill(175);
-        image( images.shield , 0,0,15,30);
-        popMatrix();
-        moveAroundOrbit();
+
+    @Override
+    protected void draw() {
+        image(images.shield, -23, 4, 46, 20);
+    }
+
+    void input() {
+        if (key == 'r'){
+            angle -= orbitspeed;
+            position.rotate(-orbitspeed);
+        }
+        else if (key == 't'){
+            angle += orbitspeed;
+            position.rotate(orbitspeed);
+        }
+        angle %= TWO_PI; 
     }
 }

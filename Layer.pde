@@ -3,10 +3,18 @@ class Layer {
     boolean frozen;
     boolean hidden;
 
-    Layer() {}
+    Layer() {
+        // I just wanna call reset here
+        // Fuck Java 😍
+        lastProcessedFrame = -1;
+        frozen = false;
+        hidden = false;
+    }
 
     Layer(boolean frozen, boolean hidden) {
-        reset();
+        lastProcessedFrame = -1;
+        this.frozen = frozen;
+        this.hidden = hidden;
     }
 
     // Handle key input events here
@@ -56,6 +64,7 @@ class LayerManager<L extends Layer> extends Layer {
     
     @Override
     protected void reset() {
+        super.reset();
         for (L layer : layers) {
             layer.reset();
         }

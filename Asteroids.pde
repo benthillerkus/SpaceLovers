@@ -17,7 +17,6 @@ void setup() {
     // pgl.gl.setSwapInterval(1);
     // endPGL();
     
-
     sounds = new SoundAssets(this);
     images = new ImageAssets(this);
 
@@ -62,6 +61,7 @@ Layer overlay = new Layer() {
     protected void draw() {
         textAlign(RIGHT);
         textSize(size);
+        fill(255);
         text(frameRate, width - size, 25);
         text(frameCount, width - size, 25 + size + 5);
         
