@@ -39,6 +39,7 @@ class Ship extends GameObject {
 
     @Override
     protected void collision(GameObject enemy) {
+        sounds.collisionSound.play();
         // TODO: Incorporate speed in damage calculation
         int damage = int(enemy.size);
 
@@ -51,6 +52,7 @@ class Ship extends GameObject {
     protected void update() {
         if (health < 0) {
             game.gameOver();
+            return;
         }
         position.add(speed);
         speed.mult(0.99);

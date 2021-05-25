@@ -154,9 +154,49 @@ class MainPage extends LayerManager<Layer> {
 
 class OptionsPage extends LayerManager<Layer> {
 
+    Button volumeUpButton = new Button() {
+        @Override
+        protected void reset() {
+            super.reset();
+            label = "+";
+            boxHeight = 60;
+            boxWidth = 50;
+            padding = 10;
+            x = 0.75;
+            y = 0.25;
+        }
+
+        @Override
+        protected void onClick() {
+            // sounds.menuForward.play(); FIXME: Enable once mouseClicked works
+            sounds.menuVolume.volume(sounds.vol = min(1, sounds.vol + 0.005));
+        }
+    };
+
+    Button volumeDownButton = new Button() {
+        @Override
+        protected void reset() {
+            super.reset();
+            label = "-";
+            boxHeight = 60;
+            boxWidth = 50;
+            padding = 10;
+            x = 0.25;
+            y = 0.25;
+        }
+
+        @Override
+        protected void onClick() {
+            // sounds.menuBack.play(); FIXME: Enable once mouseClicked works
+            sounds.menuVolume.volume(sounds.vol = max(0, sounds.vol - 0.005));
+        }
+    };
+
     OptionsPage() {
         super();
         layers.add(backButton);
+        layers.add(volumeUpButton);
+        layers.add(volumeDownButton);
         reset();
     }
 
@@ -166,10 +206,13 @@ class OptionsPage extends LayerManager<Layer> {
         stroke(255);
         fill(255);
 
-        //Here be Dragons
+        // menuVolume
         textAlign(CENTER);
-        textSize(50*pixelFactor);
-        text("Here be Dragons", width/2, height/2);
+        textSize(50 * pixelFactor);
+        text("Volume Control", width / 2, height * 0.275);
+
+        //Volume
+        text("Volume: " + int(sounds.vol * 100), width / 2, height / 2);
     }
 }
 
