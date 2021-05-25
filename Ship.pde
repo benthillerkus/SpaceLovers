@@ -3,12 +3,15 @@ class Ship extends GameObject {
     boolean boost;
     Gun gun;
     Shield shield;
+    int health;
+    final int maxHealth = 500;
 
     @Override
     protected void reset() {
         super.reset();
         size = 24;
         boost = false;
+        health = maxHealth;
 
         // Initialization of components
         // this is necessary, because
@@ -36,11 +39,21 @@ class Ship extends GameObject {
 
     @Override
     protected void collision(GameObject enemy) {
-        game.gameOver();
+        sounds.collisionSound.play();
+        // TODO: Incorporate speed in damage calculation
+        int damage = int(enemy.size);
+
+        health -= damage;
+        game.stats.tankedDamage += damage;
+        // TODO: Hit reaction effects
     }
     
     @Override
     protected void update() {
+        if (health < 0) {
+            game.gameOver();
+            return;
+        }
         position.add(speed);
         speed.mult(0.99);
         if (!boost) {
@@ -60,19 +73,30 @@ class Ship extends GameObject {
     protected void input() {
         gun.processInput();
         shield.processInput();
-        switch(key) {
-            case 'w':
-            case 's':
-                thrustForward((key == 'w' ? 1 : -1) * 0.3);
-                boost = true;
-                break;
-            case 'a':
-            case 'd':
-                turn((key == 'd' ? 1 : -1) * 0.05);
-                break;
-            case ' ':
-                gun.shoot();
-                speed.sub(PVector.fromAngle(gun.absoluteAngle() - PI / 2).mult(0.025));
+        if (inputType == InputType.Pressed) {
+            switch(key) {
+                case 'w':
+                case 's':
+                    thrustForward((key == 'w' ? 1 : -1) * 0.3);
+                    boost = true;
+                    break;
+                case 'a':
+                case 'd':
+                    turn((key == 'd' ? 1 : -1) * 0.05);
+                    break;
+                case ' ':
+                    gun.shoot();
+                    speed.sub(PVector.fromAngle(gun.absoluteAngle() - PI / 2).mult(0.025));
+            }
+        } else if (inputType == InputType.Clicked) {
+            switch(key) {
+                case 'w':
+                    game.player1.mode = game.player1.mode.next();
+                    break;
+                case 's':
+                    game.player1.mode = game.player1.mode.previous();
+                    break;
+            }
         }
     }
     

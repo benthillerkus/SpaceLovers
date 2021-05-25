@@ -13,6 +13,7 @@ class Gun extends GameObject {
     }
 
     void shoot() {
+        //sounds.laser.play();
         game.stats.firedBullets++;
         game.bullets.shoot(absolutePosition(), parent.speed, parent.scale, absoluteAngle());
     }

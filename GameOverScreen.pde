@@ -52,7 +52,8 @@ class GameOverScreen extends LayerManager<Layer> {
             String.format("Completed Missions: %d", game.stats.completedMissions),
             String.format("Caught Debris: %d", game.stats.caughtDebris),
             String.format("Fired Bullets: %d", game.stats.firedBullets),
-            String.format("Time: %d:%02d", playedMinutes, playedSeconds)
+            String.format("Time: %d:%02d", playedMinutes, playedSeconds),
+            String.format("Tanked Damage: %d", game.stats.tankedDamage)
         };
 
         for (String stat : statTrack) {

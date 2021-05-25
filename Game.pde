@@ -20,6 +20,8 @@ class Game extends LayerManager<Layer> {
     MissionManager missions = new MissionManager();
     Stats stats = new Stats();
     State state;
+    Player player1 = new Player(color(255, 200, 200));
+    Player player2 = new Player(color(200, 200, 255));
 
     Game() {
         noiseSeed(187);
@@ -63,6 +65,7 @@ class Game extends LayerManager<Layer> {
         missions.generate();
         missions.generate();
         missions.generate();
+        sounds.menuMachinery.stop();
     }
 
     void menu() {
@@ -75,10 +78,13 @@ class Game extends LayerManager<Layer> {
         missions.frozen = true;
         hud.hidden = true;
         hud.frozen = true;
+        if(!sounds.menuMachinery.isPlaying()) sounds.menuMachinery.loop();
     }
 
     void gameOver() {
         state = State.Menu;
+        sounds.thrusterHigh.pause();
+        sounds.thrusterLow.pause();
         menu.gameOver();
         menu.hidden = false;
         menu.frozen = false;

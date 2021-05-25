@@ -5,6 +5,7 @@ class Stats {
     // Currently being incremented in ship
     int renderedFrames;
     int completedMissions;
+    int tankedDamage;
 
     Stats() {
         reset();
@@ -15,5 +16,6 @@ class Stats {
         firedBullets = 0;
         renderedFrames = 0;
         completedMissions = 0;
+        tankedDamage = 0;
     }
 }
