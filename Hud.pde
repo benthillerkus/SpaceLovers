@@ -2,30 +2,30 @@ class Hud extends Layer {
     @Override
     protected void draw() {
         pushMatrix(); // Offset Status Bar
-        translate(0, -30 * pixelFactor);
+        translate(0, -20 * pixelFactor);
 
         // Health
         noFill();
         stroke(235, 125, 125, 80);
         strokeWeight(1 * pixelFactor);
         rectMode(CENTER);
-        rect(width / 2, height - 70 * pixelFactor, width / 3, 20 * pixelFactor, 25 * pixelFactor);
+        rect(width / 2, height - 70 * pixelFactor, width / 2.75, 20 * pixelFactor, 25 * pixelFactor);
         noStroke();
         fill(255, 75, 75, 50);
-        rect(width / 2, height - 70 * pixelFactor, (width / 3) * game.ship.health / game.ship.maxHealth, 20 * pixelFactor, 25 * pixelFactor);
+        rect(width / 2, height - 70 * pixelFactor, (width / 2.75) * game.ship.health / game.ship.maxHealth, 20 * pixelFactor, 25 * pixelFactor);
 
         // Speed
         fill(255);
         textFont(fonts.display);
         textSize(50 * pixelFactor);
         textAlign(CENTER, BOTTOM);
-        text(int(game.ship.speed.mag() * 60), width * 0.82, height - 45 * pixelFactor);
+        text(int(game.ship.speed.mag() * 60), width * 0.89, height - 45 * pixelFactor);
         textSize(20 * pixelFactor);
-        text("m/s", width * 0.85, height - 35 * pixelFactor);
+        text("m/s", width * 0.93, height - 35 * pixelFactor);
 
         // Position
         pushMatrix(); // Move Minimap
-        translate(width * 0.15, height - 70 * pixelFactor);
+        translate(width * 0.12, height - 70 * pixelFactor);
         stroke(255);
         strokeWeight(1 * pixelFactor);
         noFill();
