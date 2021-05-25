@@ -72,6 +72,7 @@ class SpaceRock extends GameObject {
         game.debris.spawn(position, enemy.speed);
         game.debris.spawn(position, enemy.speed);
         game.debris.spawn(position, enemy.speed);
+        sounds.collisionSound.play();
         this.hidden = true;
         this.frozen = true;
     }

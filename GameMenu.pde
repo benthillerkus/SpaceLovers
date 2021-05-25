@@ -66,7 +66,7 @@ int menuState = 0;
       textSize(50*pixelFactor);
       text("Volume: " + int(sounds.vol*100),width/2, height/2);
       
-      // menuVolume
+      // Volume Control
       textAlign(CENTER);
       textSize(50*pixelFactor);
       text("Volume Control", width/2, height*0.25);
@@ -145,7 +145,8 @@ int menuState = 0;
     }
     
     void update(){
-      
+      if(game.state == State.Menu && !sounds.menuMachinery.isPlaying()) sounds.menuMachinery.loop();
+      if(game.state != State.Menu) sounds.menuMachinery.stop();
     }
 
 }

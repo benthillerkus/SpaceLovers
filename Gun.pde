@@ -13,6 +13,7 @@ class Gun extends GameObject {
         gunOffset.rotate(parent.angle);
         gunOffset.add(parent.position);
         game.bullets.shoot(gunOffset, parent.speed, parent.scale, parent.angle);
+        //sounds.laser.play();
     }
 }
 

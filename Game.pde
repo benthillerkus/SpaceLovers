@@ -20,6 +20,7 @@ class Game extends Layer {
     GameMenu menu = new GameMenu();
     State state = State.Menu;
     
+
     void start() {
         noiseSeed(187);
         world.layers.clear();
@@ -48,8 +49,15 @@ class Game extends Layer {
     
     @Override
     protected void update() {
-        if (state == State.Play) world.update();
-        if (state == State.Menu) menu.process();
+        if (state == State.Play){
+          world.update();
+          menu.update();
+        }
+        
+        if (state == State.Menu){
+          menu.update();
+          menu.process();
+        }
     }
     
     @Override

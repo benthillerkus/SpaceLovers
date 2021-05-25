@@ -9,6 +9,7 @@ class Ship extends GameObject {
 
     @Override
     protected void collision(GameObject enemy) {
+        sounds.collisionSound.play();
         game.state = State.Menu;
     }
     
