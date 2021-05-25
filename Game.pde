@@ -20,6 +20,8 @@ class Game extends LayerManager<Layer> {
     MissionManager missions = new MissionManager();
     Stats stats = new Stats();
     State state;
+    Player player1 = new Player(color(255, 200, 200));
+    Player player2 = new Player(color(200, 200, 255));
 
     Game() {
         noiseSeed(187);
