@@ -26,11 +26,11 @@ public class CollisionLayer extends Layer {
         // we are only storing pointers anyways, so this should be fine(?)
         // I never benchmarked this, but I'm assuming allocations are expensive
         // so we should try to only do them once!
-        tilesA = new ArrayList<ArrayList<GameObject>>(1200);
-        tilesB = new ArrayList<ArrayList<GameObject>>(1200);
+        tilesA = new ArrayList<ArrayList<GameObject>>(1250); // FIXME: Still not enough on super tiny window sizes
+        tilesB = new ArrayList<ArrayList<GameObject>>(1250);
         int loadPerTileA = loadA / 8;
         int loadPerTileB = loadB / 8;
-        for (int i = 0; i < 1200; i++) {
+        for (int i = 0; i < 1250; i++) {
             tilesA.add(new ArrayList<GameObject>(loadPerTileA));
             tilesB.add(new ArrayList<GameObject>(loadPerTileB));
         }

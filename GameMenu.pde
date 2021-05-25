@@ -147,8 +147,9 @@ class MainPage extends LayerManager<Layer> {
         fill(255);
         //Asteroids
         textAlign(CENTER, TOP);
-        textSize(80*pixelFactor);
-        text("ASTEROIDS", width/2, height*0.1);
+        textFont(fonts.display);
+        textSize(80 * pixelFactor);
+        text("ASTEROIDS", width / 2, height * 0.1);
     }
 }
 
@@ -208,7 +209,7 @@ class OptionsPage extends LayerManager<Layer> {
 
         // menuVolume
         textAlign(CENTER);
-        textSize(50 * pixelFactor);
+        textSize(40 * pixelFactor);
         text("Volume Control", width / 2, height * 0.275);
 
         //Volume
