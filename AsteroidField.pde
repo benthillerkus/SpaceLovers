@@ -79,6 +79,7 @@ class SpaceRock extends GameObject {
         } else {
             game.asteroids.freedPositions.put(x, new HashSet<Integer>());
         }
+        sounds.collisionSound.play();
         for (int i = 0; i < 5; i++) {
             game.debris.spawn(PVector.random2D().mult(size).add(position), enemy.speed);
         }

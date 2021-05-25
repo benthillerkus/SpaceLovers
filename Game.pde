@@ -65,6 +65,7 @@ class Game extends LayerManager<Layer> {
         missions.generate();
         missions.generate();
         missions.generate();
+        sounds.menuMachinery.stop();
     }
 
     void menu() {
@@ -77,10 +78,13 @@ class Game extends LayerManager<Layer> {
         missions.frozen = true;
         hud.hidden = true;
         hud.frozen = true;
+        if(!sounds.menuMachinery.isPlaying()) sounds.menuMachinery.loop();
     }
 
     void gameOver() {
         state = State.Menu;
+        sounds.thrusterHigh.pause();
+        sounds.thrusterLow.pause();
         menu.gameOver();
         menu.hidden = false;
         menu.frozen = false;

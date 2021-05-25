@@ -1,4 +1,4 @@
-import processing.sound.*;
+import processing.sound.SoundFile;
 
 public class ImageAssets {
     PImage asteroidLarge;
@@ -22,7 +22,9 @@ public class ImageAssets {
 }
 
 public class SoundAssets {
-    SoundFile thrusterHigh, thrusterLow, menuForward, menuBack;
+    SoundFile thrusterHigh, thrusterLow, menuForward, menuBack, laser, collisionSound, menuMachinery;
+    float vol = 1;
+    processing.sound.Sound menuVolume;
 
     SoundAssets(PApplet parent) {
         // TODO: In theory loading could be deferred
@@ -32,5 +34,11 @@ public class SoundAssets {
         thrusterLow.amp(0.6 * 1.5);
         menuForward = new SoundFile(parent, "data/MenuSound/MenuForwardTines.mp3");
         menuBack = new SoundFile(parent, "data/MenuSound/MenuBackTines.mp3");
+        laser = new SoundFile(parent, "data/GameplaySound/bang.mp3");
+        collisionSound = new SoundFile(parent, "data/GameplaySound/asteroidHit.mp3");
+        collisionSound.amp(0.3);
+        menuMachinery = new SoundFile(parent, "data/MenuSound/MachineryMenuSound.mp3");
+        menuMachinery.amp(0.3);
+        menuVolume = new processing.sound.Sound(parent);
     }
 }
