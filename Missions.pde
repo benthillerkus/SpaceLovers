@@ -187,6 +187,8 @@ class GoToLocationMission extends Mission {
         done = done ? done : progress < 1;
         diagShip.hidden = done;
         diagShip.frozen = done;
+        myBeacon.hidden = done;
+        myBeacon.frozen = done;
     }
 
     public String toString() {
