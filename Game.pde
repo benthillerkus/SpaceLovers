@@ -79,6 +79,7 @@ class Game extends LayerManager<Layer> {
 
     void gameOver() {
         state = State.Menu;
+        menu.gameOver();
         menu.hidden = false;
         menu.frozen = false;
         world.hidden = false;

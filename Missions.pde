@@ -47,7 +47,7 @@ class MissionManager extends LayerManager<Mission> {
             layers.add(new GoToLocationMission(overlay));
             revealedEndPosition = true;
         } else if(allMissionsDone && revealedEndPosition) {
-            game.menu(); // TODO: Goto game over won screen
+            game.gameOver();
         }
     }
 

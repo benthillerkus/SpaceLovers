@@ -68,6 +68,14 @@ class GameMenu extends LayerManager<Layer> {
         credits.hidden = false;
         credits.frozen = false;
     }
+
+    void gameOver() {
+        currentPage = GameMenuPage.GameOver;
+        hideAll();
+        freezeAll();
+        gameOver.hidden = false;
+        gameOver.frozen = false;
+    }
 }
 
 class MainPage extends LayerManager<Layer> {
