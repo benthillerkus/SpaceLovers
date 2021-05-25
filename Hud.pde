@@ -16,6 +16,7 @@ class Hud extends Layer {
 
         // Speed
         fill(255);
+        textFont(fonts.display);
         textSize(50 * pixelFactor);
         textAlign(CENTER, BOTTOM);
         text(int(game.ship.speed.mag() * 60), width * 0.82, height - 45 * pixelFactor);

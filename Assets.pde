@@ -22,7 +22,7 @@ public class ImageAssets {
 }
 
 public class FontAssets {
-    PFont display = createFont("data/Fonts/good_times_rg.ttf", 100);
+    PFont display = createFont("data/Fonts/Audiowide-Regular.ttf", 100);
     PFont pixel = createFont("data/Fonts/VT323-Regular.ttf", 25);
 }
 
