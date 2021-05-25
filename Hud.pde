@@ -32,9 +32,19 @@ class Hud extends Layer {
         float mapSize = 55 * pixelFactor;
         ellipse(0, 0, mapSize, mapSize);
         strokeWeight(8 * pixelFactor);
-        stroke(215, 145, 200);
+        stroke(255);
         PVector shipDrawPoint = game.ship.position.copy().div(175).limit(mapSize);
         point(shipDrawPoint.x, shipDrawPoint.y);
+
+        for (Layer layer : game.missions.overlay.layers) {
+            if (layer instanceof Beacon) {
+                if (layer.hidden) continue;
+                Beacon beacon = (Beacon) layer;
+                shipDrawPoint = beacon.position.copy().div(175).limit(mapSize);
+                stroke(beacon.missionColor);
+                point(shipDrawPoint.x, shipDrawPoint.y);
+            }
+        }
         popMatrix();
 
         popMatrix();
