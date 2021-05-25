@@ -1,15 +1,19 @@
 class Stats {
-    int catchedDebris;
+    int caughtDebris;
     int firedBullets;
+    // For calculating mission length (minutes)
+    // Currently being incremented in ship
     int renderedFrames;
+    int completedMissions;
 
     Stats() {
         reset();
     }
 
     void reset() {
-        catchedDebris = 0;
+        caughtDebris = 0;
         firedBullets = 0;
         renderedFrames = 0;
+        completedMissions = 0;
     }
 }

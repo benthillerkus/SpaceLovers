@@ -1,6 +1,11 @@
+enum MissionState {
+    NotDone, Done, Finished;
+}
+
 class MissionManager extends LayerManager<Mission> {
     GameWorld overlay = null;
     boolean revealedEndPosition = false;
+    MissionState state;
     
     void generate() {
         boolean hasDebris = false;
@@ -27,6 +32,7 @@ class MissionManager extends LayerManager<Mission> {
         }
         overlay.layers.clear();
         revealedEndPosition = false;
+        state = MissionState.NotDone;
     }
 
     @Override
@@ -34,6 +40,7 @@ class MissionManager extends LayerManager<Mission> {
         super.update();
         overlay.process();
 
+        game.stats.completedMissions = 0;
         // lol java 7 lol kein filter
         boolean allMissionsDone = true;
         for (Mission mission : layers) {
@@ -41,12 +48,15 @@ class MissionManager extends LayerManager<Mission> {
                 allMissionsDone = false;
                 break;
             }
+            game.stats.completedMissions++;
         }
 
         if (allMissionsDone && !revealedEndPosition) {
             layers.add(new GoToLocationMission(overlay));
             revealedEndPosition = true;
+            state = MissionState.Done;
         } else if(allMissionsDone && revealedEndPosition) {
+            state = MissionState.Finished;
             game.gameOver();
         }
     }
@@ -206,7 +216,7 @@ class PickUpDebrisMission extends Mission {
 
     @Override
     protected void update() {
-        progress = game.stats.catchedDebris;
+        progress = game.stats.caughtDebris;
         done = (progress >= goal);
     }
 }

@@ -11,7 +11,7 @@ class Shield extends GameObject {
     @Override
     protected void collision(GameObject enemy) {
         if (enemy instanceof  Debris) {
-            game.stats.catchedDebris++;
+            game.stats.caughtDebris++;
         }
     }
 
