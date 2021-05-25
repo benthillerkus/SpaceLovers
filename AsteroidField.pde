@@ -7,6 +7,13 @@ class AsteroidField extends LayerManager<SpaceRock> {
         for (int i = 0; i < 48; i++) {
             layers.add(new SpaceRock());
         }
+        reset();
+    }
+
+    @Override
+    protected void reset() {
+        super.reset();
+        freedPositions.clear();
     }
     
     @Override
@@ -48,17 +55,21 @@ class AsteroidField extends LayerManager<SpaceRock> {
 }
 
 class SpaceRock extends GameObject {
-    int x = 0;
-    int y = 0;
+    int x, y;
 
-    SpaceRock() {
-        super();
-        size = 35;
+    @Override
+    protected void reset() {
+        super.reset();
+        hidden = true;
+        frozen = true;
+        x = 0;
+        y = 0;
+        size = 25;
     }
     
     @Override
     protected void draw() {
-        image(images.asteroidLarge, -25, -25, 50, 50);
+        image(images.asteroidLarge, -size, -size, size * 2, size * 2);
     }
 
     @Override
@@ -68,39 +79,49 @@ class SpaceRock extends GameObject {
         } else {
             game.asteroids.freedPositions.put(x, new HashSet<Integer>());
         }
-        game.debris.spawn(position, enemy.speed);
-        game.debris.spawn(position, enemy.speed);
-        game.debris.spawn(position, enemy.speed);
-        game.debris.spawn(position, enemy.speed);
-        this.hidden = true;
-        this.frozen = true;
+        for (int i = 0; i < 5; i++) {
+            game.debris.spawn(PVector.random2D().mult(size).add(position), enemy.speed);
+        }
+        reset();
     }
 }
 
 // For reference: BulletManager in Gun
 class DebrisManager extends LayerManager<Debris> {
-    int debrisIndex = 0;
+    int debrisIndex;
 
     DebrisManager() {
         layers = new ArrayList<Debris>(128);
         for (int i = 0; i < 128; i++) {
             layers.add(new Debris());
         }
+        reset();
+    }
+
+    @Override
+    protected void reset() {
+        super.reset();
+        debrisIndex = 0;
     }
 
     void spawn(PVector position, PVector speed) {
         Debris current = layers.get(debrisIndex);
         current.position = PVector.sub(position, speed);
-        current.speed = speed.copy().add(PVector.random2D()).mult(-0.2);
+        current.speed = speed.copy().add(PVector.random2D().mult(2)).mult(-0.1);
         current.hidden = false;
         current.frozen = false;
+        current.size *= random(0.5, 1.8);
+        current.angle = random(TWO_PI);
+        current.angularSpeed = random(-0.05, 0.05);
         debrisIndex = (debrisIndex + 1) % layers.size();
     }
 }
 
 class Debris extends GameObject {
 
-    Debris() {
+    @Override
+    protected void reset() {
+        super.reset();
         hidden = true;
         frozen = true;
         size = 16;
@@ -108,19 +129,20 @@ class Debris extends GameObject {
 
     @Override
     void draw() {
-        image(images.asteroidTiny1, -size / 2, - size / 2, size, size);
+        image(images.asteroidTiny1, -size / 2, -size / 2, size, size);
     }
 
     @Override
     void update() {
         position.add(speed);
+        angle += angularSpeed;
+        angle %= TWO_PI;
     }
 
     @Override
     void collision(GameObject enemy) {
         if (!(enemy instanceof SpaceRock)) {
-            this.hidden = true;
-            this.frozen = true;
+            reset();
         }
     }
 }

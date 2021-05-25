@@ -57,11 +57,14 @@ public class CollisionLayer extends Layer {
         maxX -= tileSize;
         maxY -= tileSize;
 
+        PVector temp;
+
         for (GameObject obj : objs) {
             if (obj.frozen) continue;
             
-            int objX = int(obj.position.x);
-            int objY = int(obj.position.y);
+            temp = obj.absolutePosition();
+            int objX = int(temp.x);
+            int objY = int(temp.y);
             
             if (objX < x || objX > maxX || objY < y || objY > maxY) continue;
             
@@ -86,12 +89,14 @@ public class CollisionLayer extends Layer {
             ArrayList<GameObject> bTile = tilesB.get(i);
             if (aTile.isEmpty() || bTile.isEmpty()) continue;
 
+            PVector posA;
             for (GameObject aObj : aTile) {
                 if (aObj.frozen) continue;
+                posA = aObj.absolutePosition();
                 for (GameObject bObj : bTile) {
                     if (bObj.frozen) continue;
 
-                    float d = PVector.sub(aObj.position, bObj.position).mag();
+                    float d = PVector.sub(posA, bObj.absolutePosition()).mag();
                     if (d < (aObj.size * aObj.scale + bObj.size * bObj.scale)) {
                         aObj.collision(bObj);
                         bObj.collision(aObj);
