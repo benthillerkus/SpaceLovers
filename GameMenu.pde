@@ -108,9 +108,13 @@ class MainPage extends LayerManager<Layer> {
         @Override
         protected void reset() {
             super.reset();
-            label = "Play";
-            boxHeight = 100;
-            textOnly = true;
+            label = "";
+            boxHeight = 200;
+            boxWidth = 200;
+            roundCorners = 9999;
+            textOnly = false;
+            padding = 0;
+            buttonColor = color(246, 136, 240);
         }
 
         @Override

@@ -6,7 +6,7 @@ class Button extends Layer {
     color buttonColor;
     float actualWidth;
     float padding;
-    boolean roundCorners;
+    float roundCorners;
     boolean textOnly;
     float x;
     float y;
@@ -27,7 +27,7 @@ class Button extends Layer {
         position = new PVector(width / 2, height / 2);
         buttonColor = color(255);
         actualWidth = boxWidth * pixelFactor;
-        roundCorners = false;
+        roundCorners = 0;
         textOnly = false;
     }
 
@@ -36,7 +36,7 @@ class Button extends Layer {
         fill(buttonColor);
         textAlign(CENTER);
         textSize((boxHeight - padding) * pixelFactor);
-        text(label, position.x, position.y);
+        text(label, position.x, position.y + (boxHeight - padding) / 3 * pixelFactor);
         actualWidth = max(boxWidth * pixelFactor, textWidth(label)) + padding;
         
         if (textOnly) return;
@@ -50,10 +50,10 @@ class Button extends Layer {
         }
         rectMode(CENTER); 
         rect(position.x,
-            position.y - (boxHeight - padding) / 3 * pixelFactor,
+            position.y,
             actualWidth,
             boxHeight * pixelFactor,
-            roundCorners ? 999 : 0);
+            roundCorners);
     }
 
     boolean isMouseOver() {
