@@ -40,7 +40,7 @@ class Ship extends GameObject {
     @Override
     protected void collision(GameObject enemy) {
         // TODO: Incorporate speed in damage calculation
-        int damage = enemy.size;
+        int damage = int(enemy.size);
 
         health -= damage;
         game.stats.tankedDamage += damage;
