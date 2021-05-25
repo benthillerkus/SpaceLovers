@@ -52,18 +52,18 @@ Layer backdrop = new Layer() {
 };
 
 Layer overlay = new Layer() {
-    int size = 15;
+    int size;
 
     @Override
     protected void update() {
-        size = int(15 * (pixelFactor * 0.5 + 0.5)); // Scale more conservatively
+        size = int(10 * (pixelFactor * 0.5 + 0.5)); // Scale more conservatively
     }
     
     @Override
     protected void draw() {
         textAlign(RIGHT);
-        textSize(size);
         textFont(fonts.pixel);
+        textSize(size);
         fill(255);
         text(frameRate, width - size, 25);
         text(frameCount, width - size, 25 + size + 5);

@@ -9,10 +9,10 @@ class Hud extends Layer {
         stroke(235, 125, 125, 80);
         strokeWeight(1 * pixelFactor);
         rectMode(CENTER);
-        rect(width / 2, height - 70 * pixelFactor, width / 3, 20 * pixelFactor);
+        rect(width / 2, height - 70 * pixelFactor, width / 3, 20 * pixelFactor, 25 * pixelFactor);
         noStroke();
         fill(255, 75, 75, 50);
-        rect(width / 2, height - 70 * pixelFactor, (width / 3) * game.ship.health / game.ship.maxHealth, 20 * pixelFactor);
+        rect(width / 2, height - 70 * pixelFactor, (width / 3) * game.ship.health / game.ship.maxHealth, 20 * pixelFactor, 25 * pixelFactor);
 
         // Speed
         fill(255);
@@ -52,20 +52,21 @@ class Hud extends Layer {
         // Modes
         Player[] players = {game.player1, game.player2};
         for (int i = 0; i < 2; i++) {
-            textSize(35 * pixelFactor);
+            textFont(fonts.display);
+            textSize(28 * pixelFactor);
             textAlign(CENTER);
             fill(players[i].playerColor);
             pushMatrix();
             translate(width / 2, height / 2);
             rotate(HALF_PI);
             scale(i == 0 ? 1 : -1);
-            translate(0, width * 0.45);
+            translate(0, width * 0.48);
             text(players[i].mode.name, 0, 0);
             fill(players[i].playerColor, 50);
             textAlign(LEFT);
-            text(players[i].mode.previous().name, -220 * pixelFactor, 0);
+            text(players[i].mode.previous().name, -180 * pixelFactor, 0);
             textAlign(RIGHT);
-            text(players[i].mode.next().name, 220 * pixelFactor, 0);
+            text(players[i].mode.next().name, 180 * pixelFactor, 0);
             popMatrix();
         }
     }

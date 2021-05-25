@@ -65,8 +65,8 @@ class MissionManager extends LayerManager<Mission> {
     protected void draw() {
         overlay.render();
 
-        int headingSize = int(25 * pixelFactor);
-        int missionSize = int(16 * pixelFactor);
+        int headingSize = int(20 * (pixelFactor / 2 + 0.5));
+        int missionSize = int(11 * (pixelFactor / 2 + 0.5));
         int marginLeft = int(25 * pixelFactor);
         int marginTop = int(50 * pixelFactor);
         int strikeThroughOverdraw = int(2 * pixelFactor);
@@ -74,6 +74,7 @@ class MissionManager extends LayerManager<Mission> {
         stroke(255);
         fill(255);
 
+        textFont(fonts.pixel);
         textSize(headingSize);
         text("Missions", marginLeft, marginTop);
 

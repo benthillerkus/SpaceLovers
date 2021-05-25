@@ -22,8 +22,9 @@ public class ImageAssets {
 }
 
 public class FontAssets {
-    PFont display = createFont("data/Fonts/Audiowide-Regular.ttf", 100);
-    PFont pixel = createFont("data/Fonts/VT323-Regular.ttf", 25);
+    PFont display = createFont("data/Fonts/Audiowide-Regular.ttf", 80);
+    PFont pixel = createFont("data/Fonts/PressStart2P-Regular.ttf", 25);
+    PFont body = createFont("data/Fonts/ProstoOne-Regular.ttf", 50);
 }
 
 public class SoundAssets {
