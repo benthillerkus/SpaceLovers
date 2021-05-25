@@ -67,7 +67,7 @@ class Button extends Layer {
     protected void update() {
         position.x = width * x;
         position.y = height * y;
-        if (mousePressed && isMouseOver()) {
+        if (mouseClicked && isMouseOver()) {
             onClick();
         }
     }
