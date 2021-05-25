@@ -61,10 +61,10 @@ class Hud extends Layer {
             translate(0, width * 0.45);
             text(players[i].mode.name, 0, 0);
             fill(players[i].playerColor, 50);
-            textAlign(RIGHT);
-            text(players[i].mode.previous().name, -90 * pixelFactor, 0);
             textAlign(LEFT);
-            text(players[i].mode.next().name, 90 * pixelFactor, 0);
+            text(players[i].mode.previous().name, -220 * pixelFactor, 0);
+            textAlign(RIGHT);
+            text(players[i].mode.next().name, 220 * pixelFactor, 0);
             popMatrix();
         }
     }
