@@ -36,7 +36,7 @@ class Ship extends GameObject {
 
     @Override
     protected void collision(GameObject enemy) {
-        game.state = State.Menu;
+        game.gameOver();
     }
     
     @Override
@@ -53,6 +53,7 @@ class Ship extends GameObject {
         boost = false;
         gun.process();
         shield.process();
+        game.stats.renderedFrames++;
     }
 
     @Override

@@ -2,37 +2,27 @@
 // This is supposed to be opinionated / non-generic
 
 enum State {
-    Menu, Play, Pause, Lost, Won; // TODO: StateMachine??
+    Menu, Play, Pause; // TODO: StateMachine??
 }
-
-State gameState;
 
 // This kinda is a manually managed LayerManager,
 // so make sure every event is passed on!
-class Game extends Layer {
-    Camera camera;
-    GameWorld world;
-    CollisionLayer collisions;
-    AsteroidField asteroids;
-    DebrisManager debris;
-    BulletManager bullets;
-    Ship ship;
-    GameMenu menu;
+class Game extends LayerManager<Layer> {
+    Camera camera = new Camera();
+    GameWorld world = new GameWorld(camera);
+    CollisionLayer collisions = new CollisionLayer(48, 256);
+    AsteroidField asteroids = new AsteroidField();
+    DebrisManager debris = new DebrisManager();
+    BulletManager bullets = new BulletManager();
+    Ship ship = new Ship();
+    Hud hud  = new Hud();
+    GameMenu menu = new GameMenu();
+    MissionManager missions = new MissionManager();
+    Stats stats = new Stats();
     State state;
 
     Game() {
-        camera = new Camera();
-        world = new GameWorld(camera);
-        collisions = new CollisionLayer(48, 256);
-        asteroids = new AsteroidField();
-        debris = new DebrisManager();
-        bullets = new BulletManager();
-        ship = new Ship();
-        menu = new GameMenu();
-        state = State.Menu;
-
         noiseSeed(187);
-        world.layers.clear();
         world.layers.add(asteroids);
         world.layers.add(collisions);
         world.layers.add(debris);
@@ -48,31 +38,58 @@ class Game extends Layer {
         collisions.b = (ArrayList<GameObject>) (ArrayList<?>) bullets.layers.clone();
         collisions.b.add(ship);
         collisions.b.add(ship.shield);
+
+        layers.add(world);
+        layers.add(missions);
+        layers.add(hud);
+        layers.add(menu);
+
+        menu();
     }
     
     void start() {
         world.reset();
+        missions.reset();
+        stats.reset();
         state = State.Play;
-    }
-    
-    @Override
-    protected void input() {
-        if (state == State.Play) world.processInput();
-        if (state == State.Menu) menu.processInput();
-    }
-    
-    @Override
-    protected void update() {
-        if (state == State.Play) world.update();
-        if (state == State.Menu) menu.process();
-    }
-    
-    @Override
-    protected void draw() {
-        world.draw();
-        if (state == State.Menu) menu.render();
+        menu.hidden = true;
+        menu.frozen = true;
+        missions.hidden = false;
+        missions.frozen = false;
+        world.frozen = false;
+        world.hidden = false;
+        hud.frozen = false;
+        hud.hidden = false;
+        missions.generate();
+        missions.generate();
+        missions.generate();
     }
 
+    void menu() {
+        state = State.Menu;
+        menu.hidden = false;
+        menu.frozen = false;
+        world.hidden = false;
+        world.frozen = true;
+        missions.hidden = true;
+        missions.frozen = true;
+        hud.hidden = true;
+        hud.frozen = true;
+    }
+
+    void gameOver() {
+        state = State.Menu;
+        menu.gameOver();
+        menu.hidden = false;
+        menu.frozen = false;
+        world.hidden = false;
+        world.frozen = true;
+        missions.hidden = true;
+        missions.frozen = true;
+        hud.hidden = true;
+        hud.frozen = true;
+    }
+    
     GameObject debugUpperLeft = new GameObject() {
         @Override
         protected void update() {

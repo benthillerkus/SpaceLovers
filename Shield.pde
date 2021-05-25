@@ -10,7 +10,9 @@ class Shield extends GameObject {
 
     @Override
     protected void collision(GameObject enemy) {
-        // println("Schild funktioniert: " + frameCount);
+        if (enemy instanceof  Debris) {
+            game.stats.caughtDebris++;
+        }
     }
 
     @Override
