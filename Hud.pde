@@ -1,7 +1,7 @@
 class Hud extends Layer {
     @Override
     protected void draw() {
-        pushMatrix();
+        pushMatrix(); // Offset Status Bar
         translate(0, -30 * pixelFactor);
 
         // Health
@@ -23,7 +23,7 @@ class Hud extends Layer {
         text("m/s", width * 0.85, height - 35 * pixelFactor);
 
         // Position
-        pushMatrix();
+        pushMatrix(); // Move Minimap
         translate(width * 0.15, height - 70 * pixelFactor);
         stroke(255);
         strokeWeight(1 * pixelFactor);
@@ -45,8 +45,27 @@ class Hud extends Layer {
                 point(shipDrawPoint.x, shipDrawPoint.y);
             }
         }
-        popMatrix();
+        popMatrix(); // Move Minimap
+        popMatrix(); // Offset Status Bar
 
-        popMatrix();
+        // Modes
+        Player[] players = {game.player1, game.player2};
+        for (int i = 0; i < 2; i++) {
+            textSize(35 * pixelFactor);
+            textAlign(CENTER);
+            fill(players[i].playerColor);
+            pushMatrix();
+            translate(width / 2, height / 2);
+            rotate(HALF_PI);
+            scale(i == 0 ? 1 : -1);
+            translate(0, width * 0.45);
+            text(players[i].mode.name, 0, 0);
+            fill(players[i].playerColor, 50);
+            textAlign(RIGHT);
+            text(players[i].mode.previous().name, -90, 0);
+            textAlign(LEFT);
+            text(players[i].mode.next().name, 90, 0);
+            popMatrix();
+        }
     }
 }
