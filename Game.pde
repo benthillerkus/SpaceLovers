@@ -2,7 +2,7 @@
 // This is supposed to be opinionated / non-generic
 
 enum State {
-    Menu, Play, Pause, Lost, Won; // TODO: StateMachine??
+    Menu, Play, Pause; // TODO: StateMachine??
 }
 
 // This kinda is a manually managed LayerManager,
@@ -67,6 +67,19 @@ class Game extends LayerManager<Layer> {
 
     void menu() {
         state = State.Menu;
+        menu.hidden = false;
+        menu.frozen = false;
+        world.hidden = false;
+        world.frozen = true;
+        missions.hidden = true;
+        missions.frozen = true;
+        hud.hidden = true;
+        hud.frozen = true;
+    }
+
+    void gameOver() {
+        state = State.Menu;
+        menu.gameOver();
         menu.hidden = false;
         menu.frozen = false;
         world.hidden = false;
