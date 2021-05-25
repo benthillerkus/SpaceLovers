@@ -5,6 +5,7 @@ class GameObject extends Layer {
     float angularSpeed;
     float scale;
     float size; // Used for collision
+    float z; // 2.5D Parallax Effects
     GameObject parent;
     
     GameObject() {
@@ -37,6 +38,7 @@ class GameObject extends Layer {
         angularSpeed = 0.0;
         scale = 1.0;
         size = 1.0;
+        z = 1.0;
     }
 
     GameObject(GameObject parent) {
@@ -59,9 +61,9 @@ class GameObject extends Layer {
     void render() {
         if (hidden) return;
         pushMatrix();
-        translate(position.x, position.y);
+        translate(position.x * z, position.y * z);
         rotate(angle);
-        scale(scale);
+        scale(scale * z);
         super.render();
         popMatrix();
     }
