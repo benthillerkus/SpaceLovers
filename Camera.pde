@@ -1,6 +1,8 @@
 class Camera extends GameObject {
 
-    Camera() {
+    @Override
+    protected void reset() {
+        super.reset();
         this.hidden = true;
     }
 

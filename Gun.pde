@@ -1,29 +1,51 @@
 class Gun extends GameObject {
-    Gun(GameObject parent) {
-        this.parent = parent;
+    float orbitspeed;
+
+    @Override
+    protected void reset() {
+        super.reset();
+        orbitspeed = .09;
     }
 
     @Override
     protected void draw() {
-        image(images.gun, 0, -7, 16, 16);
+        image(images.gun, -8 , 2, 16, 16);
     }
 
     void shoot() {
-        PVector gunOffset = position.copy();
-        gunOffset.rotate(parent.angle);
-        gunOffset.add(parent.position);
-        game.bullets.shoot(gunOffset, parent.speed, parent.scale, parent.angle);
+        game.stats.firedBullets++;
+        game.bullets.shoot(absolutePosition(), parent.speed, parent.scale, absoluteAngle());
+    }
+
+    void input() {
+        if (key == 'f'){
+           angle += - orbitspeed;
+           position.rotate(-orbitspeed);
+        }
+        else if(key == 'g'){
+           angle += orbitspeed;
+            position.rotate(orbitspeed);
+        }
+        angle %= TWO_PI; 
+        
     }
 }
 
 class BulletManager extends LayerManager<Bullet> {
-    int bulletIndex = 0;
+    int bulletIndex;
 
     BulletManager() {
         layers = new ArrayList<Bullet>(256);
         for (int i = 0; i < 256; i++) {
             layers.add(new Bullet());
         }
+        reset();
+    }
+
+    @Override
+    protected void reset() {
+        super.reset();
+        bulletIndex = 0;
     }
 
     void shoot(PVector position, PVector speed, float scale, float angle) {
@@ -41,7 +63,9 @@ class BulletManager extends LayerManager<Bullet> {
 
 class Bullet extends GameObject {
 
-    Bullet() {
+    @Override
+    protected void reset() {
+        super.reset();
         hidden = true;
         frozen = true;
         size = 0;

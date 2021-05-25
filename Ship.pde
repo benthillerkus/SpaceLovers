@@ -1,15 +1,42 @@
+// TODO: Turn into LayerManager for each part
 class Ship extends GameObject {
-    boolean boost = false;
-    Gun gun = new Gun(this);
+    boolean boost;
+    Gun gun;
+    Shield shield;
 
-    Ship() {
-        gun.position = new PVector(0, -24);
+    @Override
+    protected void reset() {
+        super.reset();
         size = 24;
+        boost = false;
+
+        // Initialization of components
+        // this is necessary, because
+        // 1. We cannot create new Objects on reset,
+        // as this would break exisiting pointers (Lists)
+        // 2. Initializing in the constructor
+        // or on the field would be later than this
+        // which would cause null pointers here
+        // 3. Initializing inside of game would be
+        // possible, but annoying, as we'd have to
+        // pass in the pointer to parent later
+        if (gun == null || shield == null) {
+            gun = new Gun();
+            shield = new Shield();
+        } else {
+            gun.reset();
+            shield.reset();
+        }
+
+        gun.parent = this;
+        shield.parent = this;
+        gun.position = new PVector(0, -40);
+        shield.position = new PVector(0, -40);
     }
 
     @Override
     protected void collision(GameObject enemy) {
-        game.state = State.Menu;
+        game.gameOver();
     }
     
     @Override
@@ -25,10 +52,14 @@ class Ship extends GameObject {
         }
         boost = false;
         gun.process();
+        shield.process();
+        game.stats.renderedFrames++;
     }
 
     @Override
     protected void input() {
+        gun.processInput();
+        shield.processInput();
         switch(key) {
             case 'w':
             case 's':
@@ -41,18 +72,17 @@ class Ship extends GameObject {
                 break;
             case ' ':
                 gun.shoot();
-                speed.sub(PVector.fromAngle(angle - PI / 2).mult(0.025));
+                speed.sub(PVector.fromAngle(gun.absoluteAngle() - PI / 2).mult(0.025));
         }
     }
     
     //Schiff
     @Override
     protected void draw() {
-        noStroke();
         gun.render();
-        
-        image( images.ship , -30 , -30 , 60, 60 );
-        
+        shield.render();
+        image(images.thruster , -8, -40 , 16, 16);
+        image(images.ship , -30 , -30 , 60, 60);
     }
     
     //Schub geben in Richtung des Schiffs (angle)
