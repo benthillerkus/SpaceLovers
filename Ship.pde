@@ -53,6 +53,7 @@ class Ship extends GameObject {
         boost = false;
         gun.process();
         shield.process();
+        game.stats.renderedFrames++;
     }
 
     @Override

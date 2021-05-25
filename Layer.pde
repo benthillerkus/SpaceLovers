@@ -61,6 +61,18 @@ class Layer {
 
 class LayerManager<L extends Layer> extends Layer {
     ArrayList<L> layers = new ArrayList<L>();
+
+    void hideAll() {
+        for (L layer : layers) {
+            layer.hidden = true;
+        }
+    }
+
+    void freezeAll() {
+        for (L layer : layers) {
+            layer.frozen = true;
+        }
+    }
     
     @Override
     protected void reset() {
