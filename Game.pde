@@ -83,6 +83,8 @@ class Game extends LayerManager<Layer> {
 
     void gameOver() {
         state = State.Menu;
+        sounds.thrusterHigh.pause();
+        sounds.thrusterLow.pause();
         menu.gameOver();
         menu.hidden = false;
         menu.frozen = false;

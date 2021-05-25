@@ -52,6 +52,7 @@ class Ship extends GameObject {
     protected void update() {
         if (health < 0) {
             game.gameOver();
+            return;
         }
         position.add(speed);
         speed.mult(0.99);
