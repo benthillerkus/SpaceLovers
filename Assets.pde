@@ -24,7 +24,7 @@ public class ImageAssets {
 public class SoundAssets {
     SoundFile thrusterHigh, thrusterLow, menuForward, menuBack, laser, collisionSound, menuMachinery;
     float vol = 1;
-    Sound menuVolume;
+    processing.sound.Sound menuVolume;
 
     SoundAssets(PApplet parent) {
         // TODO: In theory loading could be deferred
@@ -40,7 +40,5 @@ public class SoundAssets {
         menuMachinery = new SoundFile(parent, "data/MenuSound/MachineryMenuSound.mp3");
         menuMachinery.amp(0.3);
         menuVolume = new Sound(parent);
-        
-        
     }
 }

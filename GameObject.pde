@@ -1,20 +1,51 @@
 class GameObject extends Layer {
-    PVector position = new PVector(0, 0);
-    PVector speed = new PVector(0, 0);
-    float angle = 0.0;
-    float scale = 1.0;
-    float size = 1.0; // Used for collision
-    GameObject parent = null;
+    PVector position;
+    PVector speed;
+    float angle;
+    float angularSpeed;
+    float scale;
+    float size; // Used for collision
+    GameObject parent;
     
     GameObject() {
         super();
+        reset();
+    }
+
+    // FIXME: Incorporate scale?
+    PVector absolutePosition() {
+        if (parent == null) {
+            return position;
+        } else {
+            PVector offset = position.copy();
+            offset.rotate(parent.angle);
+            offset.add(parent.absolutePosition());
+            return offset;
+        }
+    }
+
+    float absoluteAngle() {
+        return parent == null ? angle : parent.absoluteAngle() + angle;
+    }
+
+    @Override
+    protected void reset() {
+        super.reset();
+        position = new PVector(0, 0);
+        speed = new PVector(0, 0);
+        angle = 0.0;
+        angularSpeed = 0.0;
+        scale = 1.0;
+        size = 1.0;
     }
 
     GameObject(GameObject parent) {
+        this();
         this.parent = parent;
     }
 
     GameObject(PVector position, float angle, float scale) {
+        this();
         this.position = position;
         this.angle = angle;
         this.scale = scale;
