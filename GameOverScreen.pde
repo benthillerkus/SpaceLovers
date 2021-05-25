@@ -19,7 +19,7 @@ class GameOverScreen extends LayerManager<Layer> {
         textSize(titleSize);
         float offsetY = height / 4;
 
-        textMode(CENTER);
+        textAlign(CENTER);
         text("Game Over", width / 2, offsetY);
         offsetY += titleSize;
 
