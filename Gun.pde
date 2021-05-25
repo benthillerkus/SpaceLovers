@@ -19,7 +19,7 @@ class Gun extends GameObject {
 
     void input() {
         if (key == 'f'){
-           angle += - orbitspeed;
+           angle -= orbitspeed;
            position.rotate(-orbitspeed);
         }
         else if(key == 'g'){
