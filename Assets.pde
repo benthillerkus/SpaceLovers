@@ -1,4 +1,4 @@
-import processing.sound.*;
+import processing.sound.SoundFile;
 
 public class ImageAssets {
     PImage asteroidLarge;
@@ -39,6 +39,6 @@ public class SoundAssets {
         collisionSound.amp(0.3);
         menuMachinery = new SoundFile(parent, "data/MenuSound/MachineryMenuSound.mp3");
         menuMachinery.amp(0.3);
-        menuVolume = new Sound(parent);
+        menuVolume = new processing.sound.Sound(parent);
     }
 }
