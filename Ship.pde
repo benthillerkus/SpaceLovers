@@ -3,12 +3,15 @@ class Ship extends GameObject {
     boolean boost;
     Gun gun;
     Shield shield;
+    int health;
+    final int maxHealth = 500;
 
     @Override
     protected void reset() {
         super.reset();
         size = 24;
         boost = false;
+        health = maxHealth;
 
         // Initialization of components
         // this is necessary, because
@@ -36,11 +39,19 @@ class Ship extends GameObject {
 
     @Override
     protected void collision(GameObject enemy) {
-        game.gameOver();
+        // TODO: Incorporate speed in damage calculation
+        int damage = int(enemy.size);
+
+        health -= damage;
+        game.stats.tankedDamage += damage;
+        // TODO: Hit reaction effects
     }
     
     @Override
     protected void update() {
+        if (health < 0) {
+            game.gameOver();
+        }
         position.add(speed);
         speed.mult(0.99);
         if (!boost) {
