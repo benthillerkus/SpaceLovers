@@ -147,8 +147,9 @@ class MainPage extends LayerManager<Layer> {
         fill(255);
         //Asteroids
         textAlign(CENTER, TOP);
-        textSize(80*pixelFactor);
-        text("ASTEROIDS", width/2, height*0.1);
+        textSize(80 * pixelFactor);
+        textFont(fonts.display);
+        text("ASTEROIDS", width / 2, height * 0.1);
     }
 }
 

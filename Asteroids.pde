@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 Game game;
 LayerManager<Layer> layerManager = new LayerManager<Layer>();
 SoundAssets sounds;
+FontAssets fonts;
 ImageAssets images;
 
 void setup() {
@@ -19,6 +20,7 @@ void setup() {
     
     sounds = new SoundAssets(this);
     images = new ImageAssets(this);
+    fonts = new FontAssets();
 
     game = new Game();
     
@@ -61,6 +63,7 @@ Layer overlay = new Layer() {
     protected void draw() {
         textAlign(RIGHT);
         textSize(size);
+        textFont(fonts.pixel);
         fill(255);
         text(frameRate, width - size, 25);
         text(frameCount, width - size, 25 + size + 5);

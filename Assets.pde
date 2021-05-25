@@ -21,6 +21,11 @@ public class ImageAssets {
     }
 }
 
+public class FontAssets {
+    PFont display = createFont("data/Fonts/good_times_rg.ttf", 100);
+    PFont pixel = createFont("data/Fonts/VT323-Regular.ttf", 25);
+}
+
 public class SoundAssets {
     SoundFile thrusterHigh, thrusterLow, menuForward, menuBack, laser, collisionSound, menuMachinery;
     float vol = 1;
