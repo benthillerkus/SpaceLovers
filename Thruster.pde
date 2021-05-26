@@ -21,6 +21,7 @@ class Thruster extends ShipComponent {
 
     @Override
     protected void draw() {
+        imageMode(CORNER);
         image(images.thruster, -12, 6, 24, -24);
     }
 
