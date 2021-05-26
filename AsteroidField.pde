@@ -69,6 +69,7 @@ class SpaceRock extends GameObject {
     
     @Override
     protected void draw() {
+        imageMode(CORNER);
         image(images.asteroidLarge, -size, -size, size * 2, size * 2);
     }
 
@@ -130,6 +131,7 @@ class Debris extends GameObject {
 
     @Override
     void draw() {
+        imageMode(CORNER);
         image(images.asteroidTiny1, -size / 2, -size / 2, size, size);
     }
 

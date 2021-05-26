@@ -43,6 +43,7 @@ void draw() {
 Layer backdrop = new Layer() {
     @Override
     protected void draw() {
+        imageMode(CORNER);
         for (int x = 0; x < width; x += images.background.width) {
             for (int y = 0; y < height; y += images.background.height) {
                 image(images.background, x, y);
