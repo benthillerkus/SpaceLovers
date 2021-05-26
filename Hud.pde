@@ -51,13 +51,14 @@ class Hud extends Layer {
 
         // Modes
         Player[] players = {game.player1, game.player2};
+        float smallIconSize = 45 * pixelFactor;
         for (int i = 0; i < 2; i++) {
-            float offsetX = width * (i == 0 ? 0.07 : 0.93); 
+            float offsetX = width * (i == 0 ? 0.07 : 0.93);
             imageMode(CENTER);
             image(players[i].getIcon(players[i].mode), offsetX, height / 2, 60 * pixelFactor, 60 * pixelFactor);
-            tint(255, 100);
-            image(players[i].getIcon(players[i].mode.next()), offsetX, height / (2.37 * pixelFactor), 50 * pixelFactor, 50 * pixelFactor);
-            image(players[i].getIcon(players[i].mode.previous()), offsetX, height / (1.73 * pixelFactor), 50 * pixelFactor, 50 * pixelFactor);
+            tint(255, 80);
+            image(players[i].getIcon(players[i].mode.next()), offsetX, height / 2.5, smallIconSize, smallIconSize);
+            image(players[i].getIcon(players[i].mode.previous()), offsetX, height / 1.65, smallIconSize, smallIconSize);
             noTint();
         }
     }
