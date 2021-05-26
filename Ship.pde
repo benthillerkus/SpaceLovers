@@ -130,6 +130,12 @@ class Ship extends GameObject {
         shield.render();
         thruster.render();
         imageMode(CENTER);
+        pushMatrix();
+        // This prevents Processing from
+        // trying to snap the image onto a discrete pixel grid
+        rotate(0.001);
+        // comment the line out and be marvelled by the jitter 🤮
         image(images.ship, 0, 0, size * 2, size * 2);
+        popMatrix();
     }
 }
