@@ -4,7 +4,7 @@ class Gun extends GameObject {
     @Override
     protected void reset() {
         super.reset();
-        orbitspeed = .09;
+        orbitspeed = .05;
     }
 
     @Override

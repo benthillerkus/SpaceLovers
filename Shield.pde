@@ -4,7 +4,7 @@ class Shield extends GameObject {
     @Override
     protected void reset() {
         super.reset();
-        orbitspeed = .09;
+        orbitspeed = .05;
         size = 20;
     }
 
@@ -18,10 +18,6 @@ class Shield extends GameObject {
     @Override
     protected void draw() {
         image(images.shield, -28, -8, 56, 30);
-    }
-
-    void changeOrbitspeed(float orbitspeed){
-        this.orbitspeed = orbitspeed;
     }
 
     void input() {

@@ -3,6 +3,7 @@ class Ship extends GameObject {
     boolean boost;
     Gun gun;
     Shield shield;
+    Thruster thruster;
     int health;
     final int maxHealth = 500;
 
@@ -23,18 +24,22 @@ class Ship extends GameObject {
         // 3. Initializing inside of game would be
         // possible, but annoying, as we'd have to
         // pass in the pointer to parent later
-        if (gun == null || shield == null) {
+        if (gun == null || shield == null || thruster == null) {
             gun = new Gun();
             shield = new Shield();
+            thruster = new Thruster();
         } else {
             gun.reset();
             shield.reset();
+            thruster.reset();
         }
 
         gun.parent = this;
         shield.parent = this;
+        thruster.parent = this;
         gun.position = new PVector(0, -40);
         shield.position = new PVector(0, -40);
+        thruster.position = new PVector(0, -40);
     }
 
     @Override
@@ -66,6 +71,7 @@ class Ship extends GameObject {
         boost = false;
         gun.process();
         shield.process();
+        thruster.process();
         game.stats.renderedFrames++;
     }
 
@@ -92,6 +98,7 @@ class Ship extends GameObject {
         else if (inputType == InputType.Pressed) {
            //Players not have same mode
             if(game.player2.current() != game.player1.current()){
+            // Debug : thruster turns with shield or gun when one player has thruster active, input is related 
             switch(game.player1.current()) {
                 case("Gun"):
                     gun.processInput();
@@ -103,11 +110,8 @@ class Ship extends GameObject {
                     shield.processInput();
                     break;
                 case("Thruster"):
-                    if(key == 'a')
-                        turn(- 0.1);
-                    else if(key == 'd')
-                        turn(0.1);
-                    else if(key == 'w')
+                    thruster.processInput();
+                    if(key == 'w')
                         thrustForward(0.1);
                     else if(key == 's')
                         thrustForward(-0.1);
@@ -124,18 +128,15 @@ class Ship extends GameObject {
                     shield.processInput();
                     break;
                 case("Thruster"):
-                    if(key == 'j')
-                        turn(- 0.1);
-                    else if(key == 'l')
-                        turn(0.1);
-                    else if(key == 'i')
+                    thruster.processInput();
+                    if(key == 'i')
                         thrustForward(0.1);
                     else if(key == 'k')
                         thrustForward(-0.1);
                     break;                  
             }
             }
-            //Players have the same mode
+            //Players have the same mode, powerups could be implemented
             else if(game.player2.current() == game.player1.current()){
                 switch(game.player1.current()) {
                 case("Gun"):
@@ -143,19 +144,18 @@ class Ship extends GameObject {
                     if(key == ' '){
                     gun.shoot();
                     speed.sub(PVector.fromAngle(gun.absoluteAngle() - PI / 2).mult(0.025));}
+                    // TODO: bullets bigger? add secound gun?
                     break;
                 case("Shield"):
                     shield.processInput();
+                    // TODO: make shield wider
                     break;
                 case("Thruster"):
-                    if(key == 'a')
-                        turn(- 0.1);
-                    else if(key == 'd')
-                        turn(0.1);
-                    else if(key == 'w')
+                    thruster.processInput();
+                    if(key == 'w')
                         thrustForward(0.1);
                     else if(key == 's')
-                        thrustForward(-0.1);
+                        thrustForward(-0.1);   
                     break;                    
             }
              switch(game.player2.current()) {
@@ -169,11 +169,8 @@ class Ship extends GameObject {
                     shield.processInput();
                     break;
                 case("Thruster"):
-                    if(key == 'j')
-                        turn(- 0.1);
-                    else if(key == 'l')
-                        turn(0.1);
-                    else if(key == 'i')
+                    thruster.processInput();
+                    if(key == 'i')
                         thrustForward(0.1);
                     else if(key == 'k')
                         thrustForward(-0.1);
@@ -190,7 +187,7 @@ class Ship extends GameObject {
     protected void draw() {
         gun.render();
         shield.render();
-        image(images.thruster , -12, 30 , 24, 24);
+        thruster.render();
         image(images.ship , -40 , -40 , 80, 80);
     }
     
@@ -198,7 +195,7 @@ class Ship extends GameObject {
     //der Parameter "amount" gibt die Größe des Schubs an
     void thrustForward(float amount) {
         PVector thrust = new PVector(0, -amount); // pointing up
-        thrust.rotate(angle);
+        thrust.rotate(thruster.absoluteAngle());
         speed.add(thrust);
         // TODO: Terminal Velocity
     }
