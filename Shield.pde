@@ -17,6 +17,7 @@ class Shield extends GameObject {
 
     @Override
     protected void draw() {
+        imageMode(CORNER);
         image(images.shield, -23, 4, 46, 20);
     }
 

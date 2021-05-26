@@ -4,6 +4,8 @@ public class ImageAssets {
     PImage asteroidLarge;
     PImage ship, gun, thruster, shieldInactive, shieldActive, shield;
     PImage effectProjectileTiny, asteroidTiny1;
+    PImage iconControlBlue, iconGunBlue, iconShieldBlue;
+    PImage iconControlRed, iconGunRed, iconShieldRed;
     PImage background;
 
     ImageAssets(PApplet parent) {
@@ -16,6 +18,14 @@ public class ImageAssets {
 
         effectProjectileTiny = loadImage("data/Art/Effect-Projectile-Tiny.png");
         asteroidTiny1 = loadImage("data/Art/Asteroid-Tiny-1.png");
+
+        iconControlBlue = loadImage("data/Art/Icon-Control-Blue.png");
+        iconGunBlue = loadImage("data/Art/Icon-Gun-Blue.png");
+        iconShieldBlue = loadImage("data/Art/Icon-Shield-Blue.png");
+
+        iconControlRed = loadImage("data/Art/Icon-Control-Red.png");
+        iconGunRed = loadImage("data/Art/Icon-Gun-Red.png");
+        iconShieldRed = loadImage("data/Art/Icon-Shield-Red.png");
 
         this.background = loadImage("data/Art/Background.png");
     }

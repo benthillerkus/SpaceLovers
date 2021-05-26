@@ -105,6 +105,7 @@ class Ship extends GameObject {
     protected void draw() {
         gun.render();
         shield.render();
+        imageMode(CORNER);
         image(images.thruster , -8, -40 , 16, 16);
         image(images.ship , -30 , -30 , 60, 60);
     }
