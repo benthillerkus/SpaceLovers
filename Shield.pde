@@ -20,12 +20,16 @@ class Shield extends GameObject {
         image(images.shield, -23, 4, 46, 20);
     }
 
+    void changeOrbitspeed(float orbitspeed){
+        this.orbitspeed = orbitspeed;
+    }
+
     void input() {
-        if (key == 'r'){
+        if (key == 'a' || key == 'j'){
             angle -= orbitspeed;
             position.rotate(-orbitspeed);
         }
-        else if (key == 't'){
+        else if (key == 'd' || key == 'l'){
             angle += orbitspeed;
             position.rotate(orbitspeed);
         }

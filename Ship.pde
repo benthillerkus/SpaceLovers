@@ -71,34 +71,119 @@ class Ship extends GameObject {
 
     @Override
     protected void input() {
-        gun.processInput();
-        shield.processInput();
-        if (inputType == InputType.Pressed) {
+        
+        
+        if (inputType == InputType.Clicked) {
             switch(key) {
-                case 'w':
-                case 's':
-                    thrustForward((key == 'w' ? 1 : -1) * 0.3);
-                    boost = true;
-                    break;
-                case 'a':
-                case 'd':
-                    turn((key == 'd' ? 1 : -1) * 0.05);
-                    break;
-                case ' ':
-                    gun.shoot();
-                    speed.sub(PVector.fromAngle(gun.absoluteAngle() - PI / 2).mult(0.025));
-            }
-        } else if (inputType == InputType.Clicked) {
-            switch(key) {
-                case 'w':
+                case 'q':
                     game.player1.mode = game.player1.mode.next();
                     break;
-                case 's':
+                case 'e':
                     game.player1.mode = game.player1.mode.previous();
+                    break;
+                case 'u':
+                    game.player2.mode = game.player1.mode.next();
+                    break;
+                case 'o':
+                    game.player2.mode = game.player1.mode.previous();
                     break;
             }
         }
+        else if (inputType == InputType.Pressed) {
+           //Players not have same mode
+            if(game.player2.current() != game.player1.current()){
+            switch(game.player1.current()) {
+                case("Gun"):
+                    gun.processInput();
+                    if(key == ' '){
+                    gun.shoot();
+                    speed.sub(PVector.fromAngle(gun.absoluteAngle() - PI / 2).mult(0.025));}
+                    break;
+                case("Shield"):
+                    shield.processInput();
+                    break;
+                case("Thruster"):
+                    if(key == 'a')
+                        turn(- 0.1);
+                    else if(key == 'd')
+                        turn(0.1);
+                    else if(key == 'w')
+                        thrustForward(0.1);
+                    else if(key == 's')
+                        thrustForward(-0.1);
+                    break;                    
+            }
+             switch(game.player2.current()) {
+                case("Gun"):
+                    gun.processInput();
+                    if(key == ' '){
+                    gun.shoot();
+                    speed.sub(PVector.fromAngle(gun.absoluteAngle() - PI / 2).mult(0.025));}
+                    break;
+                case("Shield"):
+                    shield.processInput();
+                    break;
+                case("Thruster"):
+                    if(key == 'j')
+                        turn(- 0.1);
+                    else if(key == 'l')
+                        turn(0.1);
+                    else if(key == 'i')
+                        thrustForward(0.1);
+                    else if(key == 'k')
+                        thrustForward(-0.1);
+                    break;                  
+            }
+            }
+            //Players have the same mode
+            else if(game.player2.current() == game.player1.current()){
+                switch(game.player1.current()) {
+                case("Gun"):
+                    gun.processInput();
+                    if(key == ' '){
+                    gun.shoot();
+                    speed.sub(PVector.fromAngle(gun.absoluteAngle() - PI / 2).mult(0.025));}
+                    break;
+                case("Shield"):
+                    shield.processInput();
+                    break;
+                case("Thruster"):
+                    if(key == 'a')
+                        turn(- 0.1);
+                    else if(key == 'd')
+                        turn(0.1);
+                    else if(key == 'w')
+                        thrustForward(0.1);
+                    else if(key == 's')
+                        thrustForward(-0.1);
+                    break;                    
+            }
+             switch(game.player2.current()) {
+                case("Gun"):
+                    gun.processInput();
+                    if(key == ' '){
+                    gun.shoot();
+                    speed.sub(PVector.fromAngle(gun.absoluteAngle() - PI / 2).mult(0.025));}
+                    break;
+                case("Shield"):
+                    shield.processInput();
+                    break;
+                case("Thruster"):
+                    if(key == 'j')
+                        turn(- 0.1);
+                    else if(key == 'l')
+                        turn(0.1);
+                    else if(key == 'i')
+                        thrustForward(0.1);
+                    else if(key == 'k')
+                        thrustForward(-0.1);
+                    break;   
+            }
+         
+        }
     }
+    }
+    
     
     //Schiff
     @Override

@@ -36,4 +36,8 @@ class Player {
     }
 
     PlayerMode mode = PlayerMode.Thruster;
+
+    String current(){
+        return mode.name();
+    }
 }
