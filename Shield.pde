@@ -17,10 +17,12 @@ class Shield extends GameObject {
 
     @Override
     protected void draw() {
+        imageMode(CORNER);
         image(images.shield, -28, -8, 56, 30);
     }
 
-    void input() {
+    @Override
+    protected void input() {
         if (key == 'a' || key == 'j'){
             angle -= orbitspeed;
             position.rotate(-orbitspeed);

@@ -35,9 +35,10 @@ class Button extends Layer {
     protected void draw() {
         fill(buttonColor);
         textAlign(CENTER);
+        textFont(fonts.body);
         textSize((boxHeight - padding) * pixelFactor);
-        text(label, position.x, position.y + (boxHeight - padding) / 3 * pixelFactor);
-        actualWidth = max(boxWidth * pixelFactor, textWidth(label)) + padding;
+        text(label, position.x, position.y + ((boxHeight - padding) * pixelFactor) / 3);
+        actualWidth = max(boxWidth * pixelFactor, textWidth(label)) + padding * pixelFactor;
         
         if (textOnly) return;
 

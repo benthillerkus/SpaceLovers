@@ -16,6 +16,7 @@ class GameOverScreen extends LayerManager<Layer> {
         float subtitleSize = 50 * pixelFactor;
         float statSize = 25 * pixelFactor;
 
+        textFont(fonts.display);
         textSize(titleSize);
         float offsetY = height / 4;
 
@@ -23,6 +24,7 @@ class GameOverScreen extends LayerManager<Layer> {
         text("Game Over", width / 2, offsetY);
         offsetY += titleSize;
 
+        textFont(fonts.body);
         textSize(subtitleSize);
         String subtitle = "";
         switch (game.missions.state) {

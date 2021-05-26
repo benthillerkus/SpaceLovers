@@ -12,7 +12,8 @@ class Thruster extends GameObject {
         image(images.thruster , -12, 70 , 24, 24);
     }
 
-    void input() {
+    @Override
+    protected void input() {
         if(key == 'a' || key == 'j'){
             angle -= orbitspeed;
             position.rotate(-orbitspeed);
