@@ -18,7 +18,7 @@ class Ship extends GameObject {
     @Override
     protected void reset() {
         super.reset();
-        size = 24;
+        size = 40;
         health = maxHealth;
 
         // Initialization of components
@@ -44,9 +44,9 @@ class Ship extends GameObject {
         gun.parent = this;
         shield.parent = this;
         thruster.parent = this;
-        gun.position = new PVector(0, -40);
-        shield.position = new PVector(0, -40);
-        thruster.position = new PVector(0, -40);
+        gun.position = new PVector(0, -size - 11);
+        shield.position = new PVector(0, -size);
+        thruster.position = new PVector(0, -size);
     }
 
     @Override
@@ -126,6 +126,6 @@ class Ship extends GameObject {
         shield.render();
         thruster.render();
         imageMode(CENTER);
-        image(images.ship, 0, 0, 80.0, 80.0);
+        image(images.ship, 0, 0, size * 2, size * 2);
     }
 }

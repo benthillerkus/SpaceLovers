@@ -3,7 +3,7 @@ class Gun extends ShipComponent {
     @Override
     protected void draw() {
         imageMode(CORNER);
-        image(images.gun, -12 , -10, 24, 24);
+        image(images.gun, -12, -9, 24, 24);
     }
     
     @Override
