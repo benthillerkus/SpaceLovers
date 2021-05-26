@@ -47,6 +47,10 @@ class Ship extends GameObject {
         gun.position = new PVector(0, -size - 11);
         shield.position = new PVector(0, -size);
         thruster.position = new PVector(0, -size);
+
+        gun.turn(PI / 3);
+        shield.turn(-PI / 3);
+        thruster.turn(PI);
     }
 
     @Override
