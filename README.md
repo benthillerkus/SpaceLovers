@@ -14,7 +14,18 @@ Sonst kann man natürlich auch das Repo klonen / herunterladen und in Processing
 Es müssen dafür vorher folgende Libraries heruntergeladen werden:
 - [processing-sound](https://github.com/processing/processing-sound)
 
+## Spielziel
+Es müssen 3 Missionen abgeschlossen werden um die Position zum Sprungpunkt freizuschalten. Wenn der Sprungpunkt erreicht wird, ist das Spiel gewonnen.
+Wenn das Schiff vorher zu viel Schaden nimmt ist das Spiel verloren.
+
 ## Steuerung
 
-1. Bewegung mit WASD
-2. Leertaste zum Schießen
+### Spieler 1
+1. Drehung mit `a` und `d`
+2. Modi wechseln mit `w` und `s`
+3. Leertaste um Aktionen auszuführen
+
+### Spieler 2
+2. Drehung mit `j` und `l`
+3. Modi wechseln mit `i` und `k`
+4. `.` um Aktionen auszuführen
