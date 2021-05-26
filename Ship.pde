@@ -1,6 +1,5 @@
 // TODO: Turn into LayerManager for each part
 class Ship extends GameObject {
-    boolean boost;
     Gun gun;
     Shield shield;
     Thruster thruster;
@@ -20,7 +19,6 @@ class Ship extends GameObject {
     protected void reset() {
         super.reset();
         size = 24;
-        boost = false;
         health = maxHealth;
 
         // Initialization of components
@@ -68,19 +66,11 @@ class Ship extends GameObject {
             game.gameOver();
             return;
         }
-        position.add(speed);
-        speed.mult(0.99);
-        if (!boost) {
-            if (!sounds.thrusterHigh.isPlaying()) sounds.thrusterHigh.loop();
-            if (sounds.thrusterLow.isPlaying()) sounds.thrusterLow.pause();
-        } else {
-            if (!sounds.thrusterLow.isPlaying()) sounds.thrusterLow.loop();
-            if (sounds.thrusterHigh.isPlaying()) sounds.thrusterHigh.pause();
-        }
-        boost = false;
         gun.process();
         shield.process();
         thruster.process();
+        position.add(speed);
+        speed.mult(0.99);
         game.stats.renderedFrames++;
     }
 
@@ -90,15 +80,19 @@ class Ship extends GameObject {
             switch(key) {
                 case 'w':
                     game.player1.mode = game.player1.mode.next();
+                    sounds.menuForward.play();
                     break;
                 case 's':
                     game.player1.mode = game.player1.mode.previous();
+                    sounds.menuBack.play();
                     break;
                 case 'i':
                     game.player2.mode = game.player2.mode.next();
+                    sounds.menuForward.play();
                     break;
                 case 'k':
                     game.player2.mode = game.player2.mode.previous();
+                    sounds.menuBack.play();
                     break;
             }
         } else if (inputType == InputType.Pressed) {
@@ -131,7 +125,7 @@ class Ship extends GameObject {
         gun.render();
         shield.render();
         thruster.render();
-        imageMode(CORNER);
-        image(images.ship , -40.0, -40.0, 80.0, 80.0);
+        imageMode(CENTER);
+        image(images.ship, 0, 0, 80.0, 80.0);
     }
 }
