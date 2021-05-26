@@ -1,36 +1,21 @@
-class Gun extends GameObject {
-    float orbitspeed;
-
-    @Override
-    protected void reset() {
-        super.reset();
-        orbitspeed = .09;
-    }
-
+class Gun extends ShipComponent {
+    
     @Override
     protected void draw() {
         imageMode(CORNER);
-        image(images.gun, -8 , 2, 16, 16);
+        image(images.gun, -12, -9, 24, 24);
     }
-
-    void shoot() {
+    
+    @Override
+    void action() {
         //sounds.laser.play();
         game.stats.firedBullets++;
         game.bullets.shoot(absolutePosition(), parent.speed, parent.scale, absoluteAngle());
+        parent.speed.sub(PVector.fromAngle(absoluteAngle() - PI / 2).mult(0.025));
     }
-
-    void input() {
-        if (key == 'f'){
-           angle += - orbitspeed;
-           position.rotate(-orbitspeed);
-        }
-        else if(key == 'g'){
-           angle += orbitspeed;
-            position.rotate(orbitspeed);
-        }
-        angle %= TWO_PI; 
-        
-    }
+    
+    @Override
+    void enhancedAction() {}
 }
 
 class BulletManager extends LayerManager<Bullet> {

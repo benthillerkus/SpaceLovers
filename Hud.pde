@@ -19,13 +19,13 @@ class Hud extends Layer {
         textFont(fonts.display);
         textSize(50 * pixelFactor);
         textAlign(CENTER, BOTTOM);
-        text(int(game.ship.speed.mag() * 60), width * 0.89, height - 45 * pixelFactor);
+        text(int(game.ship.speed.mag() * 60), width * 0.88, height - 48 * pixelFactor);
         textSize(20 * pixelFactor);
-        text("m/s", width * 0.93, height - 35 * pixelFactor);
+        text("m/s", width * 0.92, height - 38 * pixelFactor);
 
         // Position
         pushMatrix(); // Move Minimap
-        translate(width * 0.12, height - 70 * pixelFactor);
+        translate(width * 0.14, height - 85 * pixelFactor);
         stroke(255);
         strokeWeight(1 * pixelFactor);
         noFill();
@@ -53,12 +53,13 @@ class Hud extends Layer {
         Player[] players = {game.player1, game.player2};
         float smallIconSize = 45 * pixelFactor;
         for (int i = 0; i < 2; i++) {
-            float offsetX = width * (i == 0 ? 0.07 : 0.93);
+            float offsetX = width * (i == 0 ? 0.06 : 0.94);
+            float offsetXoffset = pixelFactor * 8 * (i == 0 ? 1 : -1);
             imageMode(CENTER);
             image(players[i].getIcon(players[i].mode), offsetX, height / 2, 60 * pixelFactor, 60 * pixelFactor);
             tint(255, 80);
-            image(players[i].getIcon(players[i].mode.next()), offsetX, height / 2.5, smallIconSize, smallIconSize);
-            image(players[i].getIcon(players[i].mode.previous()), offsetX, height / 1.66, smallIconSize, smallIconSize);
+            image(players[i].getIcon(players[i].mode.next()), offsetX + offsetXoffset, height * 0.59, smallIconSize, smallIconSize);
+            image(players[i].getIcon(players[i].mode.previous()), offsetX + offsetXoffset, height * 0.41, smallIconSize, smallIconSize);
             noTint();
         }
     }

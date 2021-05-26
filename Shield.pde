@@ -1,16 +1,13 @@
-class Shield extends GameObject {
-    float orbitspeed;
-
+class Shield extends ShipComponent {
     @Override
     protected void reset() {
         super.reset();
-        orbitspeed = .09;
         size = 20;
     }
 
     @Override
     protected void collision(GameObject enemy) {
-        if (enemy instanceof  Debris) {
+        if (enemy instanceof Debris) {
             game.stats.caughtDebris++;
         }
     }
@@ -18,18 +15,12 @@ class Shield extends GameObject {
     @Override
     protected void draw() {
         imageMode(CORNER);
-        image(images.shield, -23, 4, 46, 20);
+        image(images.shield, -28, -14, 56, 30);
     }
 
-    void input() {
-        if (key == 'r'){
-            angle -= orbitspeed;
-            position.rotate(-orbitspeed);
-        }
-        else if (key == 't'){
-            angle += orbitspeed;
-            position.rotate(orbitspeed);
-        }
-        angle %= TWO_PI; 
-    }
+    @Override
+    void action() {}
+    
+    @Override
+    void enhancedAction() {}
 }

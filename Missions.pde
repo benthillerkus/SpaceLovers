@@ -116,11 +116,14 @@ class Beacon extends GameObject {
 class Arrow extends GameObject {
     PVector target;
     color missionColor;
+    float length;
 
     @Override
     protected void update() {
         position = game.ship.position;
-        angle = PVector.sub(position, target).heading();
+        PVector temp = PVector.sub(position, target);
+        length = smoothstep(0, 3000, temp.mag()) + 0.8;
+        angle = temp.heading();
     }
 
     @Override
@@ -130,11 +133,13 @@ class Arrow extends GameObject {
         fill(missionColor, 60);
         rectMode(CORNERS);
 
-        int arrowLength = int(18 * pixelFactor);
-        int arrowHeight = int(8 * pixelFactor);
-        int distance = int(-game.ship.size - 35 * pixelFactor);
-        int triangleHeight = int(12 * pixelFactor);
-        int triangleWidth = int(16 * pixelFactor);
+        float miniPixelFactor = pixelFactor * 0.4 + 0.6;
+
+        float arrowLength = 18 * length * miniPixelFactor;
+        float arrowHeight = 8 * ((3 - length) * 0.5 + 0.5) * miniPixelFactor;
+        float distance = -game.ship.size - 35 * miniPixelFactor;
+        float triangleHeight = 12 * miniPixelFactor;
+        float triangleWidth = 16 * miniPixelFactor;
 
         rect(distance - arrowLength, -arrowHeight / 2, distance, arrowHeight / 2);
         triangle(distance - arrowLength - triangleWidth, 0, distance - arrowLength, -triangleHeight, distance - arrowLength, triangleHeight);

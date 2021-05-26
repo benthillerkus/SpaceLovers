@@ -1,16 +1,24 @@
 // TODO: Turn into LayerManager for each part
 class Ship extends GameObject {
-    boolean boost;
     Gun gun;
     Shield shield;
+    Thruster thruster;
     int health;
     final int maxHealth = 500;
+
+    private ShipComponent getComponent(PlayerMode mode) {
+        switch(mode) {
+            case Gun: return gun;
+            case Shield: return shield;
+            case Thruster: return thruster;
+        }
+        return null; // Was letzte exhaustive enum matching smh smh
+    }
 
     @Override
     protected void reset() {
         super.reset();
-        size = 24;
-        boost = false;
+        size = 40;
         health = maxHealth;
 
         // Initialization of components
@@ -23,18 +31,26 @@ class Ship extends GameObject {
         // 3. Initializing inside of game would be
         // possible, but annoying, as we'd have to
         // pass in the pointer to parent later
-        if (gun == null || shield == null) {
+        if (gun == null || shield == null || thruster == null) {
             gun = new Gun();
             shield = new Shield();
+            thruster = new Thruster();
         } else {
             gun.reset();
             shield.reset();
+            thruster.reset();
         }
 
         gun.parent = this;
         shield.parent = this;
-        gun.position = new PVector(0, -40);
-        shield.position = new PVector(0, -40);
+        thruster.parent = this;
+        gun.position = new PVector(0, -size - 11);
+        shield.position = new PVector(0, -size);
+        thruster.position = new PVector(0, -size);
+
+        gun.turn(PI / 3);
+        shield.turn(-PI / 3);
+        thruster.turn(PI);
     }
 
     @Override
@@ -54,47 +70,54 @@ class Ship extends GameObject {
             game.gameOver();
             return;
         }
-        position.add(speed);
-        speed.mult(0.99);
-        if (!boost) {
-            if (!sounds.thrusterHigh.isPlaying()) sounds.thrusterHigh.loop();
-            if (sounds.thrusterLow.isPlaying()) sounds.thrusterLow.pause();
-        } else {
-            if (!sounds.thrusterLow.isPlaying()) sounds.thrusterLow.loop();
-            if (sounds.thrusterHigh.isPlaying()) sounds.thrusterHigh.pause();
-        }
-        boost = false;
         gun.process();
         shield.process();
+        thruster.process();
+        position.add(speed);
+        speed.mult(0.99);
         game.stats.renderedFrames++;
     }
 
     @Override
     protected void input() {
-        gun.processInput();
-        shield.processInput();
-        if (inputType == InputType.Pressed) {
-            switch(key) {
-                case 'w':
-                case 's':
-                    thrustForward((key == 'w' ? 1 : -1) * 0.3);
-                    boost = true;
-                    break;
-                case 'a':
-                case 'd':
-                    turn((key == 'd' ? 1 : -1) * 0.05);
-                    break;
-                case ' ':
-                    gun.shoot();
-                    speed.sub(PVector.fromAngle(gun.absoluteAngle() - PI / 2).mult(0.025));
-            }
-        } else if (inputType == InputType.Clicked) {
+        if (inputType == InputType.Clicked) {
             switch(key) {
                 case 'w':
                     game.player1.mode = game.player1.mode.next();
+                    sounds.menuForward.play();
                     break;
                 case 's':
                     game.player1.mode = game.player1.mode.previous();
+                    sounds.menuBack.play();
+                    break;
+                case 'i':
+                    game.player2.mode = game.player2.mode.next();
+                    sounds.menuForward.play();
+                    break;
+                case 'k':
+                    game.player2.mode = game.player2.mode.previous();
+                    sounds.menuBack.play();
+                    break;
+            }
+        } else if (inputType == InputType.Pressed) {
+            switch (key) {
+                case 'a':
+                    getComponent(game.player1.mode).turnLeft();
+                    break;
+                case 'd':
+                    getComponent(game.player1.mode).turnRight();
+                    break;
+                case 'j':
+                    getComponent(game.player2.mode).turnLeft();
+                    break;
+                case 'l':
+                    getComponent(game.player2.mode).turnRight();
+                    break;
+                case ' ':
+                    getComponent(game.player1.mode).action();
+                    break;
+                case '.':
+                    getComponent(game.player2.mode).action();
                     break;
             }
         }
@@ -105,17 +128,14 @@ class Ship extends GameObject {
     protected void draw() {
         gun.render();
         shield.render();
-        imageMode(CORNER);
-        image(images.thruster , -8, -40 , 16, 16);
-        image(images.ship , -30 , -30 , 60, 60);
-    }
-    
-    //Schub geben in Richtung des Schiffs (angle)
-    //der Parameter "amount" gibt die Größe des Schubs an
-    void thrustForward(float amount) {
-        PVector thrust = new PVector(0, -amount); // pointing up
-        thrust.rotate(angle);
-        speed.add(thrust);
-        // TODO: Terminal Velocity
+        thruster.render();
+        imageMode(CENTER);
+        pushMatrix();
+        // This prevents Processing from
+        // trying to snap the image onto a discrete pixel grid
+        rotate(0.001);
+        // comment the line out and be marvelled by the jitter 🤮
+        image(images.ship, 0, 0, size * 2, size * 2);
+        popMatrix();
     }
 }
