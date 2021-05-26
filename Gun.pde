@@ -9,7 +9,7 @@ class Gun extends GameObject {
 
     @Override
     protected void draw() {
-        image(images.gun, -8 , 2, 16, 16);
+        image(images.gun, -12 , -10, 24, 24);
     }
 
     void shoot() {

@@ -17,7 +17,7 @@ class Shield extends GameObject {
 
     @Override
     protected void draw() {
-        image(images.shield, -23, 4, 46, 20);
+        image(images.shield, -28, -8, 56, 30);
     }
 
     void changeOrbitspeed(float orbitspeed){
