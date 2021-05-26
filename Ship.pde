@@ -132,6 +132,6 @@ class Ship extends GameObject {
         shield.render();
         thruster.render();
         imageMode(CORNER);
-        image(images.ship , -40 , -40 , 80, 80);
+        image(images.ship , -40.0, -40.0, 80.0, 80.0);
     }
 }

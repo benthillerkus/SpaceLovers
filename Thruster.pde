@@ -1,7 +1,7 @@
 class Thruster extends ShipComponent {
     @Override
     protected void draw() {
-        image(images.thruster , -12, 70 , 24, 24);
+        image(images.thruster, -12, 70, 24, 24);
     }
 
     @Override
