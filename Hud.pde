@@ -58,7 +58,7 @@ class Hud extends Layer {
             image(players[i].getIcon(players[i].mode), offsetX, height / 2, 60 * pixelFactor, 60 * pixelFactor);
             tint(255, 80);
             image(players[i].getIcon(players[i].mode.next()), offsetX, height / 2.5, smallIconSize, smallIconSize);
-            image(players[i].getIcon(players[i].mode.previous()), offsetX, height / 1.65, smallIconSize, smallIconSize);
+            image(players[i].getIcon(players[i].mode.previous()), offsetX, height / 1.66, smallIconSize, smallIconSize);
             noTint();
         }
     }
