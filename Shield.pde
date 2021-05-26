@@ -1,10 +1,7 @@
-class Shield extends GameObject {
-    float orbitspeed;
-
+class Shield extends ShipComponent {
     @Override
     protected void reset() {
         super.reset();
-        orbitspeed = .05;
         size = 20;
     }
 
@@ -22,15 +19,8 @@ class Shield extends GameObject {
     }
 
     @Override
-    protected void input() {
-        if (key == 'a' || key == 'j'){
-            angle -= orbitspeed;
-            position.rotate(-orbitspeed);
-        }
-        else if (key == 'd' || key == 'l'){
-            angle += orbitspeed;
-            position.rotate(orbitspeed);
-        }
-        angle %= TWO_PI; 
-    }
+    void action() {}
+    
+    @Override
+    void enhancedAction() {}
 }
