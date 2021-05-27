@@ -37,14 +37,20 @@ class Gun extends ShipComponent {
         if (heat <= maxHeat && frameCount % 3 == 0) {
             sounds.laser.play();
             game.stats.firedBullets++;
-            game.bullets.shoot(absolutePosition(), parent.speed, parent.scale, absoluteAngle());
+            game.bullets.shoot(absolutePosition(), parent.speed, parent.scale, absoluteAngle(), true);
             parent.speed.sub(PVector.fromAngle(absoluteAngle() - HALF_PI).mult(0.075));
         }
         heat += 5;
     }
     
     @Override
-    void doEnhancedAction() {}
+    void doEnhancedAction() {
+        if (frameCount % 9 == 0) {
+            game.stats.firedBullets++;
+            game.bullets.shoot(absolutePosition(), parent.speed, parent.scale, absoluteAngle(), false);
+            parent.speed.sub(PVector.fromAngle(absoluteAngle() - HALF_PI).mult(0.250));
+        }
+    }
 }
 
 class BulletManager extends LayerManager<Bullet> {
@@ -64,7 +70,7 @@ class BulletManager extends LayerManager<Bullet> {
         bulletIndex = 0;
     }
 
-    void shoot(PVector position, PVector speed, float scale, float angle) {
+    void shoot(PVector position, PVector speed, float scale, float angle, boolean small) {
         Bullet current = layers.get(bulletIndex);
         current.position = position;
         current.speed = speed.copy();
@@ -73,23 +79,31 @@ class BulletManager extends LayerManager<Bullet> {
         current.scale = scale;
         current.hidden = false;
         current.frozen = false;
+        current.small = small;
+        if (small) current.size = 0; else current.size = 8;
         bulletIndex = (bulletIndex + 1) % layers.size();
     }
 }
 
 class Bullet extends GameObject {
+    boolean small;
 
     @Override
     protected void reset() {
         super.reset();
         hidden = true;
         frozen = true;
+        small = true;
         size = 0;
     }
 
     @Override
     void draw() {
-        image(images.effectMuzzleTiny1, -1.5, -2, 3, 8);
+        if (small) {
+            image(images.effectMuzzleTiny1, -1.5, -2, 3, 8);
+        } else {
+            image(images.effectProjectileTiny, -size, -size, size * 2, size * 2);
+        }
     }
 
     @Override
