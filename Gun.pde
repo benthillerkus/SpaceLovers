@@ -100,9 +100,11 @@ class Bullet extends GameObject {
     @Override
     void draw() {
         if (small) {
+            imageMode(CORNER);
             image(images.effectMuzzleTiny1, -1.5, -2, 3, 8);
         } else {
-            image(images.effectProjectileTiny, -size, -size, size * 2, size * 2);
+            imageMode(CENTER);
+            image(images.effectProjectileTiny, 0, 0, size * 2, size * 2);
         }
     }
 
