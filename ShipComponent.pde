@@ -1,10 +1,29 @@
 abstract class ShipComponent extends GameObject {
     float orbitSpeed;
+    int numCommands;
+    Event doingAction;
 
     @Override
     protected void reset() {
         super.reset();
-        orbitSpeed = .015;
+        if (doingAction == null) {
+            doingAction = new Event();
+        } else {
+            doingAction.reset();
+        }
+        orbitSpeed = .02;
+        numCommands = 0;
+    }
+
+    @Override
+    protected void update() {
+        if (numCommands == 1) {
+            doAction();
+        } else if (numCommands == 2) {
+            doEnhancedAction();
+        }
+        numCommands = 0;
+        doingAction.process();
     }
 
     void turnLeft() {
@@ -21,6 +40,11 @@ abstract class ShipComponent extends GameObject {
         position.rotate(radians);
     }
 
-    abstract void action();
-    abstract void enhancedAction();
+    void action() {
+        numCommands++;
+        doingAction.setEvent();
+    }
+
+    abstract void doAction();
+    abstract void doEnhancedAction();
 }

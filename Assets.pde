@@ -1,15 +1,17 @@
 import processing.sound.SoundFile;
 
 public class ImageAssets {
-    PImage asteroidLarge;
+    PImage asteroidLarge, asteroidTiny1;
     PImage ship, gun, thruster, shieldInactive, shieldActive, shield;
-    PImage effectProjectileTiny, asteroidTiny1;
+    PImage effectProjectileTiny, effectMuzzleMedium, effectMuzzleMedium1, effectMuzzleTiny1;
+    PImage effectExplosion1;
     PImage iconControlBlue, iconGunBlue, iconShieldBlue;
     PImage iconControlRed, iconGunRed, iconShieldRed;
     PImage background;
 
     ImageAssets(PApplet parent) {
         asteroidLarge = loadImage("data/Art/Asteroid-Large.png");
+        asteroidTiny1 = loadImage("data/Art/Asteroid-Tiny-1.png");
 
         ship = loadImage("data/Art/Ship.png");
         gun = loadImage("data/Art/Gun.png");
@@ -17,7 +19,11 @@ public class ImageAssets {
         shield = loadImage("data/Art/Shield.png");
 
         effectProjectileTiny = loadImage("data/Art/Effect-Projectile-Tiny.png");
-        asteroidTiny1 = loadImage("data/Art/Asteroid-Tiny-1.png");
+        effectMuzzleMedium = loadImage("data/Art/Effect-Muzzle-Medium.png");
+        effectMuzzleMedium1 = loadImage("data/Art/Effect-Muzzle-Medium-1.png");
+        effectMuzzleTiny1 = loadImage("data/Art/Effect-Muzzle-Tiny-1.png");
+
+        effectExplosion1 = loadImage("data/Art/Effect-Explosion-1.png");
 
         iconControlBlue = loadImage("data/Art/Icon-Control-Blue.png");
         iconGunBlue = loadImage("data/Art/Icon-Gun-Blue.png");
@@ -51,6 +57,7 @@ public class SoundAssets {
         menuForward = new SoundFile(parent, "data/MenuSound/MenuForwardTines.mp3");
         menuBack = new SoundFile(parent, "data/MenuSound/MenuBackTines.mp3");
         laser = new SoundFile(parent, "data/GameplaySound/bang.mp3");
+        laser.amp(0.6);
         collisionSound = new SoundFile(parent, "data/GameplaySound/asteroidHit.mp3");
         collisionSound.amp(0.3);
         menuMachinery = new SoundFile(parent, "data/MenuSound/MachineryMenuSound.mp3");
