@@ -31,6 +31,8 @@ class AsteroidField extends LayerManager<SpaceRock> {
                 current = layers.get(index);
                 current.position.x = x + offsetX;
                 current.position.y = y + offsetY;
+                current.angle = offsetX;
+                current.angularSpeed = sin(offsetY) / 200;
                 current.x = x;
                 current.y = y;
                 current.angle = offsetX;
@@ -46,11 +48,6 @@ class AsteroidField extends LayerManager<SpaceRock> {
             current.frozen = true;
         }
         super.update();
-    }
-    
-    @Override
-    protected void draw() {
-        super.draw();
     }
 }
 
@@ -69,12 +66,14 @@ class SpaceRock extends GameObject {
     
     @Override
     protected void draw() {
-        imageMode(CORNER);
-        image(images.asteroidLarge, -size, -size, size * 2, size * 2);
+        imageMode(CENTER);
+        rotate(angularSpeed * frameCount + angle);
+        image(images.asteroidLarge, 0, 0, size * 2, size * 2);
     }
 
     @Override
     protected void collision(GameObject enemy) {
+        if (enemy instanceof Shield && !game.ship.shield.doingAction.isNow()) return;
         if (game.asteroids.freedPositions.containsKey(x)) {
             game.asteroids.freedPositions.get(x).add(y);
         } else {

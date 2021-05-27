@@ -17,8 +17,8 @@ class Shield extends ShipComponent {
         strokeWeight(1.3 * pixelFactor);
         stroke(125, 175, 225, 60);
         fill(125, 175, 225, 30);
-        arc(0, 0, size, size, -PI, 0, PIE);
-        float fac = (float(frameCount) % 96 / 96) * size;
+        arc(0, 0, size - 1, size - 1, -PI, 0, PIE);
+        float fac = (float(frameCount) % 96 / 96) * size - 1;
         noStroke();
         arc(0, 0, fac, fac, -PI, 0, PIE);
         imageMode(CORNER);
