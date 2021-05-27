@@ -126,8 +126,8 @@ class Ship extends GameObject {
     //Schiff
     @Override
     protected void draw() {
-        gun.render();
         shield.render();
+        gun.render();
         thruster.render();
         imageMode(CENTER);
         pushMatrix();

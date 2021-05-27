@@ -1,15 +1,16 @@
 import processing.sound.SoundFile;
 
 public class ImageAssets {
-    PImage asteroidLarge;
+    PImage asteroidLarge, asteroidTiny1;
     PImage ship, gun, thruster, shieldInactive, shieldActive, shield;
-    PImage effectProjectileTiny, asteroidTiny1;
+    PImage effectProjectileTiny, effectMuzzleMedium;
     PImage iconControlBlue, iconGunBlue, iconShieldBlue;
     PImage iconControlRed, iconGunRed, iconShieldRed;
     PImage background;
 
     ImageAssets(PApplet parent) {
         asteroidLarge = loadImage("data/Art/Asteroid-Large.png");
+        asteroidTiny1 = loadImage("data/Art/Asteroid-Tiny-1.png");
 
         ship = loadImage("data/Art/Ship.png");
         gun = loadImage("data/Art/Gun.png");
@@ -17,7 +18,7 @@ public class ImageAssets {
         shield = loadImage("data/Art/Shield.png");
 
         effectProjectileTiny = loadImage("data/Art/Effect-Projectile-Tiny.png");
-        asteroidTiny1 = loadImage("data/Art/Asteroid-Tiny-1.png");
+        effectMuzzleMedium = loadImage("data/Art/Effect-Muzzle-Medium.png");
 
         iconControlBlue = loadImage("data/Art/Icon-Control-Blue.png");
         iconGunBlue = loadImage("data/Art/Icon-Gun-Blue.png");

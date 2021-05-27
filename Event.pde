@@ -2,8 +2,9 @@ enum EventStatus {
     Before, OnEvent, After;
 }
 
-abstract class Event extends Layer {
+class Event extends Layer {
     EventStatus status;
+    int eventStart;
 
     Event() {
         super();
@@ -13,6 +14,7 @@ abstract class Event extends Layer {
     @Override
     protected void reset() {
         status = EventStatus.Before;
+        eventStart = -1;
     }
 
     @Override
@@ -25,18 +27,27 @@ abstract class Event extends Layer {
                 afterEvent();
                 break;
             case OnEvent:
-                status = EventStatus.After;
+                if (eventStart != frameCount)
+                    status = EventStatus.After;
         }
 
         if (status != EventStatus.After && eventCondition()) {
-            status = EventStatus.OnEvent;
-            onEvent();
+            setEvent();
         }
     }
 
-    abstract protected boolean eventCondition();
+    boolean isNow() {
+        return status == EventStatus.OnEvent;
+    }
 
-    abstract protected void beforeEvent();
-    abstract protected void onEvent();
-    abstract protected void afterEvent();
+    void setEvent() {
+        status = EventStatus.OnEvent;
+        eventStart = frameCount;
+    }
+
+    protected boolean eventCondition() { return false; };
+
+    protected void beforeEvent() {};
+    protected void onEvent() {};
+    protected void afterEvent() {};
 }
