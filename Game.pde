@@ -67,6 +67,7 @@ class Game extends LayerManager<Layer> {
         missions.generate();
         missions.generate();
         sounds.menuMachinery.stop();
+        if(!sounds.mainMusic.isPlaying()) sounds.mainMusic.loop();
     }
 
     void menu() {
@@ -84,8 +85,15 @@ class Game extends LayerManager<Layer> {
 
     void gameOver() {
         state = State.Menu;
-        sounds.thrusterHigh.pause();
-        sounds.thrusterLow.pause();
+        if(sounds.mainMusic.isPlaying()) sounds.mainMusic.stop();
+        if(sounds.thrusterHigh.isPlaying()) sounds.thrusterHigh.stop();
+        if(sounds.thrusterLow.isPlaying()) sounds.thrusterLow.stop();
+        if(sounds.lowHealthMusic.isPlaying()) sounds.lowHealthMusic.stop();
+        if(game.missions.state != MissionState.Finished) {
+            sounds.lose.play();
+        } else {
+            sounds.win.play();
+        }
         menu.gameOver();
         menu.hidden = false;
         menu.frozen = false;

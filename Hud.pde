@@ -6,12 +6,16 @@ class Hud extends Layer {
 
         // Health
         noFill();
-        stroke(125, 235, 125, 80);
+        if (game.ship.health > game.ship.maxHealth * 0.15) stroke(125, 235, 125, 80); else stroke(235, 125, 125, 80);
         strokeWeight(1 * pixelFactor);
         rectMode(CENTER);
         rect(width / 2, height - 70 * pixelFactor, width / 2.75, 20 * pixelFactor, 25 * pixelFactor);
         noStroke();
-        fill(75, 255, 75, 50);
+        if (game.ship.health > game.ship.maxHealth * 0.15) {
+            fill(75, 255, 75, ((sin(frameCount * 0.03) + 1) * 0.25 + 0.5) * 50);
+        } else {
+            fill(255, 75, 75, (sin(frameCount * 0.2) + 1) * 35);
+        }
         rect(width / 2, height - 70 * pixelFactor, (width / 2.75) * game.ship.health / game.ship.maxHealth, 20 * pixelFactor, 25 * pixelFactor);
 
         // Speed

@@ -44,24 +44,32 @@ public class FontAssets {
 }
 
 public class SoundAssets {
-    SoundFile thrusterHigh, thrusterLow, menuForward, menuBack, laser, collisionSound, menuMachinery;
+    SoundFile thrusterHigh, thrusterLow, menuForward, menuBack, laser, collisionSound, menuMachinery, mainMusic, lowHealthMusic, win, lose;
     float vol = 1;
     processing.sound.Sound menuVolume;
 
     SoundAssets(PApplet parent) {
         // TODO: In theory loading could be deferred
         thrusterHigh = new SoundFile(parent, "data/GameplaySound/thrusterHigh.mp3");
-        thrusterHigh.amp(0.6 * 1.5);
+        thrusterHigh.amp(0.8);
         thrusterLow = new SoundFile(parent, "data/GameplaySound/thrusterLow.mp3");
-        thrusterLow.amp(0.6 * 1.5);
+        thrusterLow.amp(0.8);
         menuForward = new SoundFile(parent, "data/MenuSound/MenuForwardTines.mp3");
         menuBack = new SoundFile(parent, "data/MenuSound/MenuBackTines.mp3");
         laser = new SoundFile(parent, "data/GameplaySound/bang.mp3");
         laser.amp(0.6);
         collisionSound = new SoundFile(parent, "data/GameplaySound/asteroidHit.mp3");
-        collisionSound.amp(0.3);
+        collisionSound.amp(0.1);
         menuMachinery = new SoundFile(parent, "data/MenuSound/MachineryMenuSound.mp3");
         menuMachinery.amp(0.3);
+        mainMusic = new SoundFile(parent, "data/GameplaySound/AsteroidsBackgroundFinal.mp3");
+        mainMusic.amp(0.3);
+        lowHealthMusic = new SoundFile(parent, "data/GameplaySound/stress2.mp3");
+        lowHealthMusic.amp(0.4);
+        win = new SoundFile(parent, "data/GameplaySound/win.mp3");
+        win.amp(0.3);
+        lose = new SoundFile(parent, "data/GameplaySound/lose.mp3");
+        lose.amp(0.3);
         menuVolume = new processing.sound.Sound(parent);
     }
 }
