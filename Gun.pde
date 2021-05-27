@@ -7,7 +7,7 @@ class Gun extends ShipComponent {
     }
     
     @Override
-    void action() {
+    void doAction() {
         //sounds.laser.play();
         game.stats.firedBullets++;
         game.bullets.shoot(absolutePosition(), parent.speed, parent.scale, absoluteAngle());
@@ -15,7 +15,7 @@ class Gun extends ShipComponent {
     }
     
     @Override
-    void enhancedAction() {}
+    void doEnhancedAction() {}
 }
 
 class BulletManager extends LayerManager<Bullet> {

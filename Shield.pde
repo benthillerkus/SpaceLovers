@@ -19,8 +19,8 @@ class Shield extends ShipComponent {
     }
 
     @Override
-    void action() {}
+    void doAction() {}
     
     @Override
-    void enhancedAction() {}
+    void doEnhancedAction() {}
 }

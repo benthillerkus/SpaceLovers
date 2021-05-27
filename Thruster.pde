@@ -13,6 +13,7 @@ class Thruster extends ShipComponent {
 
     @Override
     protected void update() {
+        super.update();
         if (boost.isNow()) {
             if (!sounds.thrusterLow.isPlaying()) sounds.thrusterLow.loop();
             if (sounds.thrusterHigh.isPlaying()) sounds.thrusterHigh.pause();
@@ -34,7 +35,7 @@ class Thruster extends ShipComponent {
     }
 
     @Override
-    void action() {
+    void doAction() {
         PVector thrust = new PVector(0, 0.1); // pointing up
         thrust.rotate(absoluteAngle());
         parent.speed.add(thrust);
@@ -43,5 +44,9 @@ class Thruster extends ShipComponent {
     }
     
     @Override
-    void enhancedAction() {}
+    void doEnhancedAction() {
+        doAction();
+        doAction();
+        doAction();
+    }
 }
