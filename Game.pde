@@ -40,6 +40,7 @@ class Game extends LayerManager<Layer> {
         collisions.b = (ArrayList<GameObject>) (ArrayList<?>) bullets.layers.clone();
         collisions.b.add(ship);
         collisions.b.add(ship.shield);
+        collisions.b.add(ship.thruster);
 
         layers.add(world);
         layers.add(missions);

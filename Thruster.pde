@@ -6,9 +6,11 @@ class Thruster extends ShipComponent {
         if (doingAction.isNow()) {
             if (!sounds.thrusterLow.isPlaying()) sounds.thrusterLow.loop();
             if (sounds.thrusterHigh.isPlaying()) sounds.thrusterHigh.pause();
+            size = 20;
         } else {
             if (!sounds.thrusterHigh.isPlaying()) sounds.thrusterHigh.loop();
             if (sounds.thrusterLow.isPlaying()) sounds.thrusterLow.pause();
+            size = 0;
         }
     }
 
