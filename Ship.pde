@@ -1,7 +1,7 @@
 // TODO: Turn into LayerManager for each part
 class Ship extends GameObject {
     
-    final int maxHealth = 50000;
+    final int maxHealth = 500;
     final int maxPause = 4;
     int health;
     int pause;
@@ -81,6 +81,9 @@ class Ship extends GameObject {
         if (health < 0) {
             game.gameOver();
             return;
+        } else if (!sounds.lowHealthMusic.isPlaying() && health < maxHealth * 0.15) {
+            sounds.mainMusic.stop();
+            sounds.lowHealthMusic.loop();
         }
         if (pause > 0) return;
         gun.process();

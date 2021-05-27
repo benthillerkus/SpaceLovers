@@ -65,7 +65,7 @@ public class SoundAssets {
         mainMusic = new SoundFile(parent, "data/GameplaySound/AsteroidsBackgroundFinal.mp3");
         mainMusic.amp(0.3);
         lowHealthMusic = new SoundFile(parent, "data/GameplaySound/stress2.mp3");
-        lowHealthMusic.amp(0.3);
+        lowHealthMusic.amp(0.4);
         win = new SoundFile(parent, "data/GameplaySound/win.mp3");
         win.amp(0.3);
         lose = new SoundFile(parent, "data/GameplaySound/lose.mp3");
