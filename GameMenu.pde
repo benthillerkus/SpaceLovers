@@ -126,6 +126,15 @@ class MainPage extends LayerManager<Layer> {
         }
 
         @Override
+        protected void input() {
+            switch(key) {
+                case ' ':
+                case '.':
+                    onClick();
+            }
+        }
+
+        @Override
         protected void onClick() {
             sounds.menuForward.play();
             game.start();

@@ -1,7 +1,7 @@
 // TODO: Turn into LayerManager for each part
 class Ship extends GameObject {
     
-    final int maxHealth = 500;
+    final int maxHealth = 50000;
     final int maxPause = 4;
     int health;
     int pause;
@@ -68,7 +68,7 @@ class Ship extends GameObject {
         sounds.collisionSound.play();
         // TODO: Incorporate speed in damage calculation
         int damage = int(enemy.size);
-
+        angularSpeed += random(-.01, .01);
         health -= damage;
         game.stats.tankedDamage += damage;
         // TODO: Hit reaction effects
@@ -87,7 +87,9 @@ class Ship extends GameObject {
         shield.process();
         thruster.process();
         position.add(speed);
-        speed.mult(0.99);
+        speed.mult(0.992);
+        angle += angularSpeed;
+        angularSpeed /= 1.1;
         game.stats.renderedFrames++;
     }
 
