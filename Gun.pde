@@ -3,6 +3,13 @@ class Gun extends ShipComponent {
     @Override
     protected void draw() {
         imageMode(CORNER);
+        if (doingAction.isNow() && random(0, 1) > 0.3) {
+            pushMatrix();
+            scale(random(0, 1) >= 0.5 ? 1 : -1, 1);
+            rotate(random(-0.08, 0.08));
+            image(images.effectMuzzleMedium1, -8, 0, 18, -18 * random(0.8, 1.2));
+            popMatrix();
+        }
         image(images.gun, -12, -9, 24, 24);
     }
     
