@@ -9,7 +9,7 @@ ImageAssets images;
 
 void setup() {
     size(1000, 800, P2D);
-    surface.setResizable(true);
+    // surface.setResizable(true);
     smooth(2);
     
     // https://stackoverflow.com/a/20552347/5964129

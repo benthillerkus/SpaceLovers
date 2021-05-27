@@ -89,6 +89,11 @@ class Game extends LayerManager<Layer> {
         if(sounds.thrusterHigh.isPlaying()) sounds.thrusterHigh.stop();
         if(sounds.thrusterLow.isPlaying()) sounds.thrusterLow.stop();
         if(sounds.lowHealthMusic.isPlaying()) sounds.lowHealthMusic.stop();
+        if(game.missions.state != MissionState.Finished) {
+            sounds.lose.play();
+        } else {
+            sounds.win.play();
+        }
         menu.gameOver();
         menu.hidden = false;
         menu.frozen = false;
