@@ -117,5 +117,6 @@ class Bullet extends GameObject {
     void collision(GameObject enemy) {
         this.hidden = true;
         this.frozen = true;
+        game.effects.boom(position);
     }
 }

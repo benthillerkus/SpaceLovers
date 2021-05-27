@@ -14,6 +14,7 @@ class Game extends LayerManager<Layer> {
     AsteroidField asteroids = new AsteroidField();
     DebrisManager debris = new DebrisManager();
     BulletManager bullets = new BulletManager();
+    EffectManager effects = new EffectManager();
     Ship ship = new Ship();
     Hud hud  = new Hud();
     GameMenu menu = new GameMenu();
@@ -30,6 +31,7 @@ class Game extends LayerManager<Layer> {
         world.layers.add(debris);
         world.layers.add(bullets);
         world.layers.add(ship);
+        world.layers.add(effects);
         // world.layers.add(debugUpperLeft);
         world.layers.add(camera);
 
