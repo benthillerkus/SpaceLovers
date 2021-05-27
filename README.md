@@ -15,7 +15,7 @@ Es müssen dafür vorher folgende Libraries heruntergeladen werden:
 - [processing-sound](https://github.com/processing/processing-sound)
 
 ## Spielziel
-Es müssen 3 Missionen abgeschlossen werden um die Position zum Sprungpunkt freizuschalten. Wenn der Sprungpunkt erreicht wird, ist das Spiel gewonnen.
+Es müssen 3 Missionen abgeschlossen werden um die Position des Sprungpunktes freizuschalten. Wenn der Sprungpunkt erreicht wird, ist das Spiel gewonnen.
 Wenn das Schiff vorher zu viel Schaden nimmt ist das Spiel verloren.
 
 ## Steuerung
