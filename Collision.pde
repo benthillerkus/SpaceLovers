@@ -98,8 +98,8 @@ public class CollisionLayer extends Layer {
 
                     float d = PVector.sub(posA, bObj.absolutePosition()).mag();
                     if (d < (aObj.size * aObj.scale + bObj.size * bObj.scale)) {
-                        aObj.collision(bObj);
                         bObj.collision(aObj);
+                        aObj.collision(bObj);
                     }
                     
                     if (aObj.frozen) break;

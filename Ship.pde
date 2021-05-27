@@ -1,10 +1,15 @@
 // TODO: Turn into LayerManager for each part
 class Ship extends GameObject {
+    
+    final int maxHealth = 50000;
+    final int maxPause = 4;
+    int health;
+    int pause;
+
     Gun gun;
     Shield shield;
     Thruster thruster;
-    int health;
-    final int maxHealth = 500;
+    Event hit;
 
     private ShipComponent getComponent(PlayerMode mode) {
         switch(mode) {
@@ -19,6 +24,7 @@ class Ship extends GameObject {
     protected void reset() {
         super.reset();
         size = 40;
+        pause = maxPause;
         health = maxHealth;
 
         // Initialization of components
@@ -31,14 +37,16 @@ class Ship extends GameObject {
         // 3. Initializing inside of game would be
         // possible, but annoying, as we'd have to
         // pass in the pointer to parent later
-        if (gun == null || shield == null || thruster == null) {
+        if (gun == null || shield == null || thruster == null || hit == null) {
             gun = new Gun();
             shield = new Shield();
             thruster = new Thruster();
+            hit = new Event();
         } else {
             gun.reset();
             shield.reset();
             thruster.reset();
+            hit.reset();
         }
 
         gun.parent = this;
@@ -55,10 +63,12 @@ class Ship extends GameObject {
 
     @Override
     protected void collision(GameObject enemy) {
+        hit.setEvent();
+        pause = maxPause;
         sounds.collisionSound.play();
         // TODO: Incorporate speed in damage calculation
         int damage = int(enemy.size);
-
+        angularSpeed += random(-.01, .01);
         health -= damage;
         game.stats.tankedDamage += damage;
         // TODO: Hit reaction effects
@@ -66,15 +76,20 @@ class Ship extends GameObject {
     
     @Override
     protected void update() {
+        hit.process();
+        pause = max(0, pause - 1);
         if (health < 0) {
             game.gameOver();
             return;
         }
+        if (pause > 0) return;
         gun.process();
         shield.process();
         thruster.process();
         position.add(speed);
-        speed.mult(0.99);
+        speed.mult(0.992);
+        angle += angularSpeed;
+        angularSpeed /= 1.1;
         game.stats.renderedFrames++;
     }
 
@@ -126,9 +141,12 @@ class Ship extends GameObject {
     //Schiff
     @Override
     protected void draw() {
+        if (hit.isNow()) tint(255, 0, 0);
         shield.render();
         gun.render();
+        if (hit.isNow()) tint(255, 0, 0);
         thruster.render();
+        if (hit.isNow()) tint(255, 0, 0);
         imageMode(CENTER);
         pushMatrix();
         // This prevents Processing from
@@ -136,6 +154,7 @@ class Ship extends GameObject {
         rotate(0.001);
         // comment the line out and be marvelled by the jitter 🤮
         image(images.ship, 0, 0, size * 2, size * 2);
+        noTint();
         popMatrix();
     }
 }
