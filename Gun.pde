@@ -1,26 +1,46 @@
 class Gun extends ShipComponent {
+    int heat;
+    final int maxHeat = 255;
+
+    @Override
+    protected void reset() {
+        super.reset();
+        heat = 0;
+    }
+
+    @Override
+    protected void update() {
+        super.update();
+        heat = min(max(0, heat - 3), int(maxHeat * 1.2));
+    }
     
     @Override
     protected void draw() {
         imageMode(CORNER);
-        if (doingAction.isNow() && random(0, 1) > 0.3) {
+        if (doingAction.isNow() && heat <= 255 && random(0, 1) > 0.3) {
             pushMatrix();
             scale(random(0, 1) >= 0.5 ? 1 : -1, 1);
             rotate(random(-0.13, 0.13));
             image(images.effectMuzzleMedium1, -8, 16, 18, -18 * random(0.8, 1.2));
             popMatrix();
         }
-        image(images.gun, -12, 8, 24, 24);
+        tint(255, max(255 - heat, 0), max(255 - heat, 0));
+        image(images.gun,
+            -12 + ((random(-1, 1) * (float(heat) / float(maxHeat)))),
+            8 + ((random(-1, 1) * (float(heat) / float(maxHeat)))),
+            24, 24);
+        noTint();
     }
     
     @Override
     void doAction() {
-        if (frameCount % 3 == 0) {
+        if (heat <= maxHeat && frameCount % 3 == 0) {
             sounds.laser.play();
             game.stats.firedBullets++;
             game.bullets.shoot(absolutePosition(), parent.speed, parent.scale, absoluteAngle());
             parent.speed.sub(PVector.fromAngle(absoluteAngle() - HALF_PI).mult(0.075));
         }
+        heat += 5;
     }
     
     @Override
@@ -48,7 +68,7 @@ class BulletManager extends LayerManager<Bullet> {
         Bullet current = layers.get(bulletIndex);
         current.position = position;
         current.speed = speed.copy();
-        current.speed.add(PVector.fromAngle(angle - PI / 2).mult(4.0));
+        current.speed.add(PVector.fromAngle(angle - PI / 2).mult(5.0));
         current.angle = angle;
         current.scale = scale;
         current.hidden = false;
