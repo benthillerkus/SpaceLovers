@@ -11,7 +11,7 @@ abstract class ShipComponent extends GameObject {
         } else {
             doingAction.reset();
         }
-        orbitSpeed = .015;
+        orbitSpeed = .02;
         numCommands = 0;
     }
 
