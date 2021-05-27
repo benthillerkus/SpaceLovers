@@ -67,6 +67,11 @@ class Game extends LayerManager<Layer> {
         missions.generate();
         missions.generate();
         sounds.menuMachinery.stop();
+        if(!sounds.mainMusic.isPlaying()) sounds.mainMusic.loop();
+        if(!sounds.lowHealthMusic.isPlaying() & ship.health < 20){
+            sounds.mainMusic.stop();
+            sounds.lowHealthMusic.loop();
+        }
     }
 
     void menu() {
@@ -80,6 +85,8 @@ class Game extends LayerManager<Layer> {
         hud.hidden = true;
         hud.frozen = true;
         if(!sounds.menuMachinery.isPlaying()) sounds.menuMachinery.loop();
+        if(sounds.mainMusic.isPlaying()) sounds.mainMusic.stop();
+        if(sounds.lowHealthMusic.isPlaying()) sounds.lowHealthMusic.stop();
     }
 
     void gameOver() {
