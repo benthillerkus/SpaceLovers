@@ -1,10 +1,14 @@
 // TODO: Turn into LayerManager for each part
 class Ship extends GameObject {
+    
+    final int maxHealth = 500;
+    final int maxPause = 4;
+    int health;
+    int pause;
+
     Gun gun;
     Shield shield;
     Thruster thruster;
-    int health;
-    final int maxHealth = 500;
     Event hit;
 
     private ShipComponent getComponent(PlayerMode mode) {
@@ -20,6 +24,7 @@ class Ship extends GameObject {
     protected void reset() {
         super.reset();
         size = 40;
+        pause = maxPause;
         health = maxHealth;
 
         // Initialization of components
@@ -59,6 +64,7 @@ class Ship extends GameObject {
     @Override
     protected void collision(GameObject enemy) {
         hit.setEvent();
+        pause = maxPause;
         sounds.collisionSound.play();
         // TODO: Incorporate speed in damage calculation
         int damage = int(enemy.size);
@@ -71,10 +77,12 @@ class Ship extends GameObject {
     @Override
     protected void update() {
         hit.process();
+        pause = max(0, pause - 1);
         if (health < 0) {
             game.gameOver();
             return;
         }
+        if (pause > 0) return;
         gun.process();
         shield.process();
         thruster.process();
