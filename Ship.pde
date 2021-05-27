@@ -44,7 +44,7 @@ class Ship extends GameObject {
         gun.parent = this;
         shield.parent = this;
         thruster.parent = this;
-        gun.position = new PVector(0, -size - 11);
+        gun.position = new PVector(0, -size - 30);
         shield.position = new PVector(0, -size);
         thruster.position = new PVector(0, -size);
 

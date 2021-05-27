@@ -6,19 +6,21 @@ class Gun extends ShipComponent {
         if (doingAction.isNow() && random(0, 1) > 0.3) {
             pushMatrix();
             scale(random(0, 1) >= 0.5 ? 1 : -1, 1);
-            rotate(random(-0.08, 0.08));
-            image(images.effectMuzzleMedium1, -8, 0, 18, -18 * random(0.8, 1.2));
+            rotate(random(-0.13, 0.13));
+            image(images.effectMuzzleMedium1, -8, 16, 18, -18 * random(0.8, 1.2));
             popMatrix();
         }
-        image(images.gun, -12, -9, 24, 24);
+        image(images.gun, -12, 8, 24, 24);
     }
     
     @Override
     void doAction() {
-        //sounds.laser.play();
-        game.stats.firedBullets++;
-        game.bullets.shoot(absolutePosition(), parent.speed, parent.scale, absoluteAngle());
-        parent.speed.sub(PVector.fromAngle(absoluteAngle() - PI / 2).mult(0.025));
+        if (frameCount % 3 == 0) {
+            sounds.laser.play();
+            game.stats.firedBullets++;
+            game.bullets.shoot(absolutePosition(), parent.speed, parent.scale, absoluteAngle());
+            parent.speed.sub(PVector.fromAngle(absoluteAngle() - HALF_PI).mult(0.075));
+        }
     }
     
     @Override
@@ -67,7 +69,7 @@ class Bullet extends GameObject {
 
     @Override
     void draw() {
-        image(images.effectProjectileTiny, -2, -2, 4, 4);
+        image(images.effectMuzzleTiny1, -1.5, -2, 3, 8);
     }
 
     @Override
