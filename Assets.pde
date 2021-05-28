@@ -57,7 +57,7 @@ public class SoundAssets {
         thrusterLow.amp(0.8);
         menuForward = new SoundFile(parent, "data/MenuSound/MenuForwardTines.mp3");
         menuBack = new SoundFile(parent, "data/MenuSound/MenuBackTines.mp3");
-        laser = new SoundFile(parent, "data/GameplaySound/bang.mp3");
+        laser = new SoundFile(parent, "data/GameplaySound/bang-short.mp3");
         laser.amp(0.6);
         collisionSound = new SoundFile(parent, "data/GameplaySound/asteroidHit.mp3");
         collisionSound.amp(0.1);
