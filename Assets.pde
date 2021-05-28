@@ -1,4 +1,5 @@
 import processing.sound.SoundFile;
+import ddf.minim.*;
 
 public class ImageAssets {
     PImage asteroidLarge, asteroidTiny1;
@@ -45,7 +46,8 @@ public class FontAssets {
 }
 
 public class SoundAssets {
-    SoundFile thrusterHigh, thrusterLow, menuForward, menuBack, laser, collisionSound, menuMachinery, mainMusic, lowHealthMusic, win, lose;
+    SoundFile thrusterHigh, thrusterLow, menuForward, menuBack, collisionSound, menuMachinery, mainMusic, lowHealthMusic, win, lose;
+    AudioSample laser;
     float vol = 1;
     processing.sound.Sound menuVolume;
 
@@ -57,8 +59,7 @@ public class SoundAssets {
         thrusterLow.amp(0.8);
         menuForward = new SoundFile(parent, "data/MenuSound/MenuForwardTines.mp3");
         menuBack = new SoundFile(parent, "data/MenuSound/MenuBackTines.mp3");
-        laser = new SoundFile(parent, "data/GameplaySound/bang-short.mp3");
-        laser.amp(0.6);
+        laser = minim.loadSample("data/GameplaySound/bang-short.mp3", 512);
         collisionSound = new SoundFile(parent, "data/GameplaySound/asteroidHit.mp3");
         collisionSound.amp(0.1);
         menuMachinery = new SoundFile(parent, "data/MenuSound/MachineryMenuSound.mp3");

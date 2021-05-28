@@ -35,12 +35,12 @@ class Gun extends ShipComponent {
     @Override
     void doAction() {
         if (heat <= maxHeat && frameCount % 3 == 0) {
-            sounds.laser.play();
+            sounds.laser.trigger();
             game.stats.firedBullets++;
             game.bullets.shoot(absolutePosition(), parent.speed, parent.scale, absoluteAngle(), true);
             parent.speed.sub(PVector.fromAngle(absoluteAngle() - HALF_PI).mult(0.075));
         }
-        heat += 4;
+        heat += 6;
     }
     
     @Override
