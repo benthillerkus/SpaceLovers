@@ -156,9 +156,9 @@ class MainPage extends LayerManager<Layer> {
         fill(255);
         //Asteroids
         textAlign(CENTER, TOP);
-        textFont(fonts.display);
+        textFont(fonts.title);
         textSize(80 * pixelFactor);
-        text("ASTEROIDS", width / 2, height * 0.1);
+        text("SPACELOVERS", width / 2, height * 0.1);       
     }
 }
 
@@ -217,11 +217,13 @@ class OptionsPage extends LayerManager<Layer> {
         fill(255);
 
         // menuVolume
+        textFont(fonts.display);
         textAlign(CENTER);
         textSize(40 * pixelFactor);
         text("Volume Control", width / 2, height * 0.275);
 
         //Volume
+        textFont(fonts.display);
         text("Volume: " + int(sounds.vol * 100), width / 2, height / 2);
     }
 }
@@ -239,7 +241,7 @@ class CreditsPage extends LayerManager<Layer> {
         super.draw();
         stroke(255);
         fill(255);
-
+        textFont(fonts.display);
         textSize(35 * pixelFactor);
         textAlign(CENTER);
         //Bent Hillerkus
