@@ -40,7 +40,7 @@ class Gun extends ShipComponent {
             game.bullets.shoot(absolutePosition(), parent.speed, parent.scale, absoluteAngle(), true);
             parent.speed.sub(PVector.fromAngle(absoluteAngle() - HALF_PI).mult(0.075));
         }
-        heat += 5;
+        // heat += 5;
     }
     
     @Override
