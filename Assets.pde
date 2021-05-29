@@ -1,5 +1,5 @@
 import processing.sound.SoundFile;
-import ddf.minim.*;
+import ddf.minim.AudioSample;
 
 public class ImageAssets {
     PImage asteroidLarge, asteroidTiny1;
