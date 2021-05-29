@@ -6,6 +6,7 @@ LayerManager<Layer> layerManager = new LayerManager<Layer>();
 SoundAssets sounds;
 FontAssets fonts;
 ImageAssets images;
+Minim minim;
 
 void setup() {
     size(1000, 800, P2D);
@@ -19,6 +20,7 @@ void setup() {
     // pgl.gl.setSwapInterval(1);
     // endPGL();
     
+    minim = new Minim(this);
     sounds = new SoundAssets(this);
     images = new ImageAssets(this);
     fonts = new FontAssets();
