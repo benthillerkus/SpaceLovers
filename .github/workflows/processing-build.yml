@@ -53,6 +53,11 @@ jobs:
           Copy-Item -Path "${{ github.workspace }}\Minim\README.md" -Destination "${{ github.workspace }}\licenses\minim"
           cd ${{ github.workspace }}
 
+      - name: Copy Font Licenses
+        # https://superuser.com/a/1263489
+        run: |
+          Get-ChildItem -Path "${{ github.workspace }}\data\Fonts\*" -Include *txt -Recurse | Copy-Item -Destination "${{ github.workspace }}\licenses"
+
       - name: List Directory
         run: ls -R ${{ github.workspace }}
 
