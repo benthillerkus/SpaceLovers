@@ -14,10 +14,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/checkout@v2
-        with:
-          repository: ddf/Minim
-          path: 'code/minim'
       - name: Setup Processing
         uses: carlosperate/download-file-action@v1.0.3
         with:
@@ -41,6 +37,20 @@ jobs:
           cd sound
           7z e -y ${{ github.workspace }}\code\sound.zip sound/LICENSE sound/README.md
           cd ${{ github.workspace }}
+
+      - name: Download minim
+      - uses: actions/checkout@v2
+        with:
+          repository: ddf/Minim
+          path: 'Minim'
+      - name: Unpack Minim
+        run: |
+          cd ${{ github.workspace }}
+          Copy-Item -Path "${{ github.workspace }}\Minim\library\*" -Destination "${{ github.workspace }}\code"
+          cd licenses
+          mkdir minim
+          Copy-Item -Path "${{ github.workspace }}\Minim\license.txt" -Destination "${{ github.workspace }}\licenses\minim"
+          Copy-Item -Path "${{ github.workspace }}\Minim\README.md" -Destination "${{ github.workspace }}\licenses\minim"
 
       - name: List Directory
         run: ls -R ${{ github.workspace }}
