@@ -51,6 +51,7 @@ jobs:
           mkdir minim
           Copy-Item -Path "${{ github.workspace }}\Minim\license.txt" -Destination "${{ github.workspace }}\licenses\minim"
           Copy-Item -Path "${{ github.workspace }}\Minim\README.md" -Destination "${{ github.workspace }}\licenses\minim"
+          cd ${{ github.workspace }}
 
       - name: List Directory
         run: ls -R ${{ github.workspace }}
