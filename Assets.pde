@@ -67,8 +67,8 @@ public class SoundAssets {
         menuForward = new SoundFile(parent, "data/MenuSound/MenuForwardTines.mp3");
         menuBack = new SoundFile(parent, "data/MenuSound/MenuBackTines.mp3");
         
-        laser = minim.loadSample("data/GameplaySound/bang-short.mp3", 512);
-        collisionSound = minim.loadSample("data/GameplaySound/asteroidHit.mp3", 512);
+        laser = minim.loadSample("data/GameplaySound/bang_short_quiet.mp3", 512);
+        collisionSound = minim.loadSample("data/GameplaySound/asteroidHit_quiet.mp3", 512);
         
         menuMachinery = new SoundFile(parent, "data/MenuSound/MachineryMenuSound.mp3");
         menuMachinery.amp(0.3);
