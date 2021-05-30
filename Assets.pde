@@ -49,6 +49,7 @@ public class FontAssets {
 public class SoundAssets {
     SoundFile thrusterHigh, thrusterLow, menuForward, menuBack, menuMachinery, mainMusic, lowHealthMusic, win, lose;
     AudioSample laser, collisionSound;
+
     float vol = 1;
     processing.sound.Sound menuVolume;
     Minim minim;
