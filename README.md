@@ -13,6 +13,7 @@ Es gibt fertige Binaries für Windows bei den [Releases](https://github.com/bent
 Sonst kann man natürlich auch das Repo klonen / herunterladen und in Processing öffnen.
 Es müssen dafür vorher folgende Libraries heruntergeladen werden:
 - [processing-sound](https://github.com/processing/processing-sound)
+- [minim](https://github.com/ddf/minim)
 
 ## Spielziel
 Es müssen 3 Missionen abgeschlossen werden um die Position des Sprungpunktes freizuschalten. Wenn der Sprungpunkt erreicht wird, ist das Spiel gewonnen.
@@ -29,3 +30,11 @@ Wenn das Schiff vorher zu viel Schaden nimmt ist das Spiel verloren.
 2. Drehung mit `j` und `l`
 3. Modi wechseln mit `i` und `k`
 4. `.` um Aktionen auszuführen
+
+# Lizensierung
+Der Code im Repository steht unter der GNU GPL v3 bereit.
+Fertige Builds beinhalten die [Minim-Library](https://github.com/ddf/minim) und die [Processing-Sound-Library](//github.com/processing/processing-sound), welche unter der LGPL stehen.
+
+Alle Fonts in [data/Art/Fonts](data/Fonts) stehen unter der OFL.
+
+[Musik](data/Sounds) und [Bilder](data/Art) stehen unter keiner freien Lizenz.
