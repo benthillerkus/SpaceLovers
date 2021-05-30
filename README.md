@@ -37,4 +37,4 @@ Fertige Builds beinhalten die [Minim-Library](https://github.com/ddf/minim) und 
 
 Alle Fonts in [data/Art/Fonts](data/Fonts) stehen unter der OFL.
 
-[Musik](data/Sounds) und [Bilder](data/Art) stehen unter keiner freien Lizenz.
+Die Audiodateien in [data/GameplaySound](data/Art/GameplaySound) und [data/MenuSound](data/GameplaySound) sowie die Grafiken in [data/Art](data/Art) stehen unter keiner freien Lizenz.
