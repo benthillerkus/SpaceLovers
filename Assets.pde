@@ -1,5 +1,6 @@
 import processing.sound.SoundFile;
 import ddf.minim.AudioSample;
+import ddf.minim.Minim;
 
 public class ImageAssets {
     PImage asteroidLarge, asteroidTiny1;
@@ -46,32 +47,41 @@ public class FontAssets {
 }
 
 public class SoundAssets {
-    SoundFile thrusterHigh, thrusterLow, menuForward, menuBack, collisionSound, menuMachinery, mainMusic, lowHealthMusic, win, lose;
-    AudioSample laser;
+    SoundFile thrusterHigh, thrusterLow, menuForward, menuBack, menuMachinery, mainMusic, lowHealthMusic, win, lose;
+    AudioSample laser, collisionSound;
+
     float vol = 1;
     processing.sound.Sound menuVolume;
+    Minim minim;
 
     SoundAssets(PApplet parent) {
         // TODO: In theory loading could be deferred
+        minim = new Minim(parent);
+        menuVolume = new processing.sound.Sound(parent);
+        
         thrusterHigh = new SoundFile(parent, "data/GameplaySound/thrusterHigh.mp3");
         thrusterHigh.amp(0.8);
         thrusterLow = new SoundFile(parent, "data/GameplaySound/thrusterLow.mp3");
         thrusterLow.amp(0.8);
+        
         menuForward = new SoundFile(parent, "data/MenuSound/MenuForwardTines.mp3");
         menuBack = new SoundFile(parent, "data/MenuSound/MenuBackTines.mp3");
+        
         laser = minim.loadSample("data/GameplaySound/bang-short.mp3", 512);
-        collisionSound = new SoundFile(parent, "data/GameplaySound/asteroidHit.mp3");
-        collisionSound.amp(0.1);
+        collisionSound = minim.loadSample("data/GameplaySound/asteroidHit.mp3", 512);
+        
         menuMachinery = new SoundFile(parent, "data/MenuSound/MachineryMenuSound.mp3");
         menuMachinery.amp(0.3);
+        
         mainMusic = new SoundFile(parent, "data/GameplaySound/AsteroidsBackgroundFinal.mp3");
         mainMusic.amp(0.3);
+        
         lowHealthMusic = new SoundFile(parent, "data/GameplaySound/stress2.mp3");
         lowHealthMusic.amp(0.4);
+        
         win = new SoundFile(parent, "data/GameplaySound/win.mp3");
         win.amp(0.3);
         lose = new SoundFile(parent, "data/GameplaySound/lose.mp3");
         lose.amp(0.3);
-        menuVolume = new processing.sound.Sound(parent);
     }
 }
