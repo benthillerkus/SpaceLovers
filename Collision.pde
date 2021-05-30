@@ -34,6 +34,13 @@ public class CollisionLayer extends Layer {
             tilesA.add(new ArrayList<GameObject>(loadPerTileA));
             tilesB.add(new ArrayList<GameObject>(loadPerTileB));
         }
+        reset();
+    }
+    
+    @Override
+    protected void reset() {
+      super.reset();
+      hidden = true;
     }
 
     // For reference: update() in AsteroidField.pde
@@ -95,14 +102,14 @@ public class CollisionLayer extends Layer {
                 posA = aObj.absolutePosition();
                 for (GameObject bObj : bTile) {
                     if (bObj.frozen) continue;
+                    if (aObj == bObj) continue;
 
                     float d = PVector.sub(posA, bObj.absolutePosition()).mag();
                     if (d < (aObj.size * aObj.scale + bObj.size * bObj.scale)) {
                         bObj.collision(aObj);
                         aObj.collision(bObj);
-                    }
-                    
-                    if (aObj.frozen) break;
+                        if (aObj.frozen) break;
+                    }                    
                 }
             }
         }

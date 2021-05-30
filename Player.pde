@@ -5,7 +5,7 @@ enum PlayerMode {
     final int ordinal;
     static int length = 3;
     
-    PlayerMode(String name, int ordinal) {
+    private PlayerMode(String name, int ordinal) {
         this.name = name;
         this.ordinal = ordinal;
     }

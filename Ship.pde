@@ -65,7 +65,7 @@ class Ship extends GameObject {
     protected void collision(GameObject enemy) {
         hit.setEvent();
         pause = maxPause;
-        sounds.collisionSound.play();
+        sounds.collisionSound.trigger();
         // TODO: Incorporate speed in damage calculation
         int damage = int(enemy.size);
         angularSpeed += random(-.01, .01);
