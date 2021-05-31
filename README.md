@@ -33,16 +33,8 @@ Wenn das Schiff vorher zu viel Schaden nimmt ist das Spiel verloren.
 
 # Lizensierung
 Der Code im Repository steht unter der [GNU GPL v3](https://www.gnu.org/licenses/gpl-3.0.en.html) bereit.
-Fertige Builds beinhalten die [Minim-Library](https://github.com/ddf/minim) unter der [LGPL v3.0](https://www.gnu.org/licenses/lgpl-3.0.en.html) und die [Processing-Sound-Library](https://github.com/processing/processing-sound) unter der [LGPL v2.1](https://www.gnu.org/licenses/lgpl-3.0.en.html). Zusätzlich dazu ist noch eine Java SE Runtime Environment dabei; deren Lizenz ist unter [http://java.com/license](http://java.com/license) ersichtlich.
+Fertige Builds beinhalten die [Minim-Library](https://github.com/ddf/minim) unter der [LGPL v3.0](https://www.gnu.org/licenses/lgpl-3.0.en.html) und die [Processing-Sound-Library](https://github.com/processing/processing-sound) unter der [LGPL v2.1](https://www.gnu.org/licenses/lgpl-3.0.en.html). Zusätzlich dazu ist noch eine Java SE Runtime Environment dabei; deren Lizenzen sind im Unterordner `java` zu finden.
 
 Alle Fonts in [data/Art/Fonts](data/Fonts) stehen unter der [OFL](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL).
 
 Die Audiodateien in [data/GameplaySound](data/Art/GameplaySound) und [data/MenuSound](data/GameplaySound) sowie die Grafiken in [data/Art](data/Art) stehen unter der [Creative Commons BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc/4.0/).
-
-# Licensing
-The code in this repository is licensed under the [GNU GPL v3](https://www.gnu.org/licenses/gpl-3.0.en.html).
-Builds distributed in the [_releases_](https://github.com/benthillerkus/SpaceLovers/releases) section also include binaries of the [Minim-Library](https://github.com/ddf/minim) under the [LGPL v3.0](https://www.gnu.org/licenses/lgpl-3.0.en.html) and the [Processing-Sound-Library](https://github.com/processing/processing-sound) under the [LGPL v2.1](https://www.gnu.org/licenses/lgpl-3.0.en.html). Additionally a Java SE Runtime Environment is included, for its license, please refer to [http://java.com/license](http://java.com/license).
-
-The Fonts in [data/Art/Fonts](data/Fonts) are licensed under the [OFL](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL).
-
-The audios in [data/GameplaySound](data/Art/GameplaySound) and [data/MenuSound](data/GameplaySound) aswell as the image assets in [data/Art](data/Art) are licensed under the [Creative Commons BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc/4.0/) license.
