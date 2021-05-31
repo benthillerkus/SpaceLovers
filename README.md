@@ -8,7 +8,7 @@
 
 ## Installation
 
-Es gibt fertige Binaries für Windows bei den [Releases](https://github.com/benthillerkus/Asteroids/releases).
+Es gibt fertige Binaries für Windows bei den [Releases](https://github.com/benthillerkus/SpaceLovers/releases).
 
 Sonst kann man natürlich auch das Repo klonen / herunterladen und in Processing öffnen.
 Es müssen dafür vorher folgende Libraries heruntergeladen werden:
@@ -32,9 +32,9 @@ Wenn das Schiff vorher zu viel Schaden nimmt ist das Spiel verloren.
 4. `.` um Aktionen auszuführen
 
 # Lizensierung
-Der Code im Repository steht unter der GNU GPL v3 bereit.
-Fertige Builds beinhalten die [Minim-Library](https://github.com/ddf/minim) und die [Processing-Sound-Library](//github.com/processing/processing-sound), welche unter der LGPL stehen.
+Der Code im Repository steht unter der [GNU GPL v3](https://www.gnu.org/licenses/gpl-3.0.en.html) bereit.
+Fertige Builds beinhalten die [Minim-Library](https://github.com/ddf/minim) unter der [LGPL v3.0](https://www.gnu.org/licenses/lgpl-3.0.en.html) und die [Processing-Sound-Library](https://github.com/processing/processing-sound) unter der [LGPL v2.1](https://www.gnu.org/licenses/lgpl-3.0.en.html).
 
-Alle Fonts in [data/Art/Fonts](data/Fonts) stehen unter der OFL.
+Alle Fonts in [data/Art/Fonts](data/Fonts) stehen unter der [OFL](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL).
 
-Die Audiodateien in [data/GameplaySound](data/Art/GameplaySound) und [data/MenuSound](data/GameplaySound) sowie die Grafiken in [data/Art](data/Art) stehen unter keiner freien Lizenz.
+Die Audiodateien in [data/GameplaySound](data/Art/GameplaySound) und [data/MenuSound](data/GameplaySound) sowie die Grafiken in [data/Art](data/Art) stehen unter der [Creative Commons BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc/4.0/).
