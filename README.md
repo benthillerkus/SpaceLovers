@@ -1,8 +1,8 @@
-[![Make Release](https://github.com/benthillerkus/Asteroids/actions/workflows/make-release.yml/badge.svg)](https://github.com/benthillerkus/Asteroids/actions/workflows/make-release.yml)
-![GitHub top language](https://img.shields.io/github/languages/top/benthillerkus/Asteroids?logo=java)
-![Lines of code](https://img.shields.io/tokei/lines/github/benthillerkus/Asteroids?color=orange)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/benthillerkus/Asteroids?color=purple)
-![GitHub all releases](https://img.shields.io/github/downloads/benthillerkus/Asteroids/total)
+[![Make Release](https://github.com/benthillerkus/SpaceLovers/actions/workflows/make-release.yml/badge.svg)](https://github.com/benthillerkus/SpaceLovers/actions/workflows/make-release.yml)
+![GitHub top language](https://img.shields.io/github/languages/top/benthillerkus/SpaceLovers?logo=java)
+![Lines of code](https://img.shields.io/tokei/lines/github/benthillerkus/SpaceLovers?color=orange)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/benthillerkus/SpaceLovers?color=purple)
+![GitHub all releases](https://img.shields.io/github/downloads/benthillerkus/SpaceLovers/total)
 ![Badge not Found](https://img.shields.io/badge/404-badge%20not%20found-red)
 
 # Anleitung
