@@ -38,3 +38,11 @@ Fertige Builds beinhalten die [Minim-Library](https://github.com/ddf/minim) unte
 Alle Fonts in [data/Art/Fonts](data/Fonts) stehen unter der [OFL](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL).
 
 Die Audiodateien in [data/GameplaySound](data/Art/GameplaySound) und [data/MenuSound](data/GameplaySound) sowie die Grafiken in [data/Art](data/Art) stehen unter der [Creative Commons BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc/4.0/).
+
+# Licensing
+The code in this repository is licensed under the [GNU GPL v3](https://www.gnu.org/licenses/gpl-3.0.en.html).
+Builds distributed in the [_releases_](https://github.com/benthillerkus/SpaceLovers/releases) section also include binaries of the [Minim-Library](https://github.com/ddf/minim) under the [LGPL v3.0](https://www.gnu.org/licenses/lgpl-3.0.en.html) and the [Processing-Sound-Library](https://github.com/processing/processing-sound) under the [LGPL v2.1](https://www.gnu.org/licenses/lgpl-3.0.en.html).
+
+The Fonts in [data/Art/Fonts](data/Fonts) are licensed under the [OFL](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL).
+
+The audios in [data/GameplaySound](data/Art/GameplaySound) and [data/MenuSound](data/GameplaySound) aswell as the image assets in [data/Art](data/Art) are licensed under the [Creative Commons BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc/4.0/) license.
