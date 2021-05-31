@@ -13,6 +13,7 @@ Es gibt fertige Binaries für Windows bei den [Releases](https://github.com/bent
 Sonst kann man natürlich auch das Repo klonen / herunterladen und in Processing öffnen.
 Es müssen dafür vorher folgende Libraries heruntergeladen werden:
 - [processing-sound](https://github.com/processing/processing-sound)
+- [Minim](https://github.com/ddf/Minim/releases/tag/v2.2.2)
 
 ## Spielziel
 Es müssen 3 Missionen abgeschlossen werden um die Position des Sprungpunktes freizuschalten. Wenn der Sprungpunkt erreicht wird, ist das Spiel gewonnen.
