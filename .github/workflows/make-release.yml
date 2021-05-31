@@ -77,5 +77,5 @@ jobs:
           prerelease: true
           automatic_release_tag: latest
           files: |
-            Asteroids-Win.zip
+            SpaceLovers-Win.zip
             Licenses.zip
