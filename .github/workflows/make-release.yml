@@ -68,7 +68,7 @@ jobs:
           cd ${{ github.workspace }}
           mkdir build\licenses
           XCopy /E /I ${{ github.workspace }}\licenses ${{ github.workspace }}\build\licenses
-          7z a Asteroids-Win.zip ./build/*
+          7z a SpaceLovers-Win.zip ./build/*
           7z a Licenses.zip ./licenses/*
 
       - uses: "marvinpinto/action-automatic-releases@latest"
