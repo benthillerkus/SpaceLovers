@@ -35,7 +35,7 @@ class Game extends LayerManager<Layer> {
         // world.layers.add(debugUpperLeft);
         world.layers.add(camera);
 
-        collisions.a = (ArrayList<GameObject>) (ArrayList<?>) debris.layers.clone();
+        collisions.a = (ArrayList<GameObject>) (ArrayList<?>) debris.layers.clone(); // lol https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)
         for (SpaceRock asteroid : asteroids.layers) {
             collisions.a.add(asteroid);
         }
