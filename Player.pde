@@ -37,7 +37,7 @@ abstract class Player {
 
 class BluePlayer extends Player {
     BluePlayer() {
-        this.playerColor = color(200, 200, 255);
+        this.playerColor = color(165, 150, 255);
     }
 
     PImage getIcon() {
@@ -56,7 +56,7 @@ class BluePlayer extends Player {
 
 class RedPlayer extends Player {
     RedPlayer() {
-        this.playerColor = color(255, 200, 200);
+        this.playerColor = color(255, 125, 125);
     }
 
     PImage getIcon() {

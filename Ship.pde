@@ -140,15 +140,29 @@ class Ship extends GameObject {
             }
         }
     }
+
+    void renderComponent(ShipComponent component) {
+        if (hit.isNow()) {
+            tint(255, 0, 0);
+        } else if (getComponent(game.player1.mode) == component) {
+            if (getComponent(game.player2.mode) == component) {
+                tint(lerpColor(game.player1.playerColor, game.player2.playerColor, 0.5));
+            } else {
+                tint(game.player1.playerColor);
+            }
+        } else if (getComponent(game.player2.mode) == component) {
+            tint(game.player2.playerColor);
+        };
+        component.render();
+        noTint();
+    }
     
     //Schiff
     @Override
     protected void draw() {
-        if (hit.isNow()) tint(255, 0, 0);
-        shield.render();
-        gun.render();
-        if (hit.isNow()) tint(255, 0, 0);
-        thruster.render();
+        renderComponent(shield);
+        renderComponent(gun);
+        renderComponent(thruster);
         if (hit.isNow()) tint(255, 0, 0);
         imageMode(CENTER);
         pushMatrix();
