@@ -1,4 +1,5 @@
-// https://en.wikipedia.org/wiki/Smoothstep
+// Copied from https://en.wikipedia.org/wiki/Smoothstep
+// just in case we might want to use these
 static float smoothstep(float edge0, float edge1, float x) {
     //Scale, bias and saturate x to 0..1 range
     x = clamp((x - edge0) / (edge1 - edge0), 0.0, 1.0); 
