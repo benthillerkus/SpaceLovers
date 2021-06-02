@@ -57,6 +57,7 @@ class Game extends LayerManager<Layer> {
         missions.reset();
         stats.reset();
         state = State.Play;
+        noCursor();
         menu.hidden = true;
         menu.frozen = true;
         missions.hidden = false;
@@ -74,6 +75,7 @@ class Game extends LayerManager<Layer> {
 
     void menu() {
         state = State.Menu;
+        cursor();
         menu.hidden = false;
         menu.frozen = false;
         world.hidden = false;
@@ -87,6 +89,7 @@ class Game extends LayerManager<Layer> {
 
     void gameOver() {
         state = State.Menu;
+        cursor();
         if(sounds.mainMusic.isPlaying()) sounds.mainMusic.stop();
         if(sounds.thrusterHigh.isPlaying()) sounds.thrusterHigh.stop();
         if(sounds.thrusterLow.isPlaying()) sounds.thrusterLow.stop();
