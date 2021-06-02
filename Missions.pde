@@ -2,11 +2,19 @@ enum MissionState {
     NotDone, Done, Finished;
 }
 
+// The mission manager can not only generate new missions
+// but also render their hud elements such as beacons
+// (marked positions in the world) and arrows.
+// For this the mission manager has its own game world
+// using the same camera as the main game.
+// Currently there are only two types of missions, but adding more
+// like time trials or similar should be easy.
 class MissionManager extends LayerManager<Mission> {
     GameWorld overlay = null;
     boolean revealedEndPosition = false;
     MissionState state;
     
+    // Generate a new mission
     void generate() {
         boolean hasDebris = false;
         for (Mission mission : layers) {
@@ -40,6 +48,7 @@ class MissionManager extends LayerManager<Mission> {
         super.update();
         overlay.process();
 
+        // Update the completed missions statistic
         game.stats.completedMissions = 0;
         // lol java 7 lol kein filter
         boolean allMissionsDone = true;
@@ -51,6 +60,7 @@ class MissionManager extends LayerManager<Mission> {
             game.stats.completedMissions++;
         }
 
+        // Check if the game has been won
         if (allMissionsDone && !revealedEndPosition) {
             layers.add(new GoToLocationMission(overlay));
             revealedEndPosition = true;
