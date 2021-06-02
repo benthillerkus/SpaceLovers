@@ -20,6 +20,7 @@ class Thruster extends ShipComponent {
         rotate(0.001);
         image(images.thruster, -12, 6, 24, -24);
         if (doingAction.isNow()) {
+            noTint();
             scale((random(0, 1) >= 0.5 ? 1 : -1), 1);
             image(images.effectMuzzleMedium, -8 * random(0.95, 1.05), -40 * random(0.95, 1.05), 16 * random(0.95, 1.05), 36 * random(0.9, 1.1));
         }

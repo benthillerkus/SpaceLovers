@@ -39,7 +39,7 @@ class Shield extends ShipComponent {
 
     @Override
     void doAction() {
-        size += 0.65;
+        size += 0.5;
     }
     
     @Override

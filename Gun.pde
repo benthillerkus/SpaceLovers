@@ -24,7 +24,8 @@ class Gun extends ShipComponent {
             image(images.effectMuzzleMedium1, -8, 16, 18, -18 * random(0.8, 1.2));
             popMatrix();
         }
-        tint(255, max(255 - heat, 0), max(255 - heat, 0));
+        if (heat > 0)
+            tint(255, max(255 - heat, 0), max(255 - heat, 0));
         image(images.gun,
             -12 + ((random(-1, 1) * (float(heat) / float(maxHeat)))),
             8 + ((random(-1, 1) * (float(heat) / float(maxHeat)))),
