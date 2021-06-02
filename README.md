@@ -5,6 +5,8 @@
 ![GitHub all releases](https://img.shields.io/github/downloads/benthillerkus/SpaceLovers/total)
 ![Badge not Found](https://img.shields.io/badge/404-badge%20not%20found-red)
 
+![2021-06-02_20-26-47](https://user-images.githubusercontent.com/29630575/120533642-3dfd4b00-c3e1-11eb-9a35-3afd604c1a94.gif)
+
 # Anleitung
 
 ## Installation
