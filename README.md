@@ -34,6 +34,10 @@ Wenn das Schiff vorher zu viel Schaden nimmt ist das Spiel verloren.
 3. Modi wechseln mit `i` und `k`
 4. `.` um Aktionen auszuführen
 
+# Entwicklung
+
+Mehr zur Architektur, Entstehung und zum Code generell steht im [Wiki](https://github.com/benthillerkus/SpaceLovers/wiki).
+
 # Lizensierung
 Der Code im Repository steht unter der [GNU GPL v3](https://www.gnu.org/licenses/gpl-3.0.en.html) bereit.
 
